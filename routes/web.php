@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PenyediaController;
 use App\Http\Controllers\AgendaMasukController;
+use App\Http\Controllers\AgendaMasukDetailController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,3 +23,4 @@ Route::get('/', function () {
 Route::resource('/penyedias', \App\Http\Controllers\PenyediaController::class);
 Route::resource('/agendas', \App\Http\Controllers\AgendaMasukController::class);
 Route::resource('/agendadtls', \App\Http\Controllers\AgendaMasukDetailController::class);
+Route::get('/agendadtls/create/{id_agenda}', [AgendaMasukDetailController::class, 'create'])->name('agendadtls.create');

@@ -9,6 +9,12 @@ class AgendaMasukDetail extends Model
 {
     use HasFactory;
 
+    public function agendamasuk()
+    {
+        return $this->belongsTo(AgendaMasuk::class, 'id_agenda');
+    }
+
+
         /**
      * fillable
      *

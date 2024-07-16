@@ -59,137 +59,65 @@
                 <div class="content-wrapper">
                     <div class="container-xxl flex-grow-1 container-p-y">
 
-                        <!-- Pencarian -->
-                        <div class="row mb-3">
-                            <div class="col">
-                                <input type="text" id="search" class="form-control"
-                                    placeholder="Cari berdasarkan nama atau ID barang...">
-                            </div>
-                            <div class="col text-end">
-                                <button type="button" class="btn btn-secondary" data-bs-toggle="modal"
-                                    data-bs-target="#modalImport">Impor Data</button>
-                                <a href="../../controller/export.php" class="btn btn-success">Export Data</a>
-                                <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                    data-bs-target="#modalTambahBarang">Tambah Agenda Masuk</button>
-                            </div>
-                        </div>
-
-                        <!-- Modal import data -->
-                        <div class="modal fade" id="modalImport" tabindex="-1" aria-labelledby="modalImportLabel"
-                            aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="modalImportLabel">Import Data</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                            aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <form action="" method="POST" enctype="multipart/form-data">
-                                            <input class="form-control" type="file" name="file_excel"
-                                                accept=".xlsx,.xls">
-                                            <button type="submit" class="btn btn-primary mt-3"
-                                                name="Import">Import</button>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
                         <!-- Modal Tambah Barang -->
-                        <div class="modal fade" id="modalTambahBarang" tabindex="-1"
-                            aria-labelledby="modalTambahBarangLabel" aria-hidden="true">
+                        <div tabindex="-1" aria-labelledby="modalTambahBarangLabel" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered">
                                 <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="modalTambahBarangLabel">Tambah Agenda Masuk</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                            aria-label="Close"></button>
+                                    @if ($errors->any())
+                                    <div class="alert alert-danger">
+                                        <ul>
+                                            @foreach ($errors->all() as $error)
+                                                <li>{{ $error }}</li>
+                                            @endforeach
+                                        </ul>
                                     </div>
+                                @endif
                                     <div class="modal-body">
                                         <form action="{{ route('agendadtls.store') }}" method="POST">
                                             @csrf
                                             <!-- Input untuk nama barang -->
-                                            <div class="mb-3">
-                                                <label for="namaBarang" class="form-label">Nama Agenda</label>
-                                                <input type="text" class="form-control" id="namaBarang"
-                                                    name="nama_agenda" placeholder="Nama Penyedia" required>
-                                            </div>
+                                            <input type="hidden" class="form-control" id="id_agenda" name="id_agenda"
+                                                value="{{ $id_agenda }}" required>
                                             <!-- Input untuk Lokasi -->
                                             <div class="mb-3">
-                                                <div class="row">
-                                                    <div class="col">
-                                                            <label for="penyedia" class="form-label">Penyedia</label>
-                                                            <select class="form-control" id="penyedia" name="id_penyedia" required>
-                                                                @foreach($penyediaList as $penyedia)
-                                                                    <option value="{{ $penyedia->id }}">
-                                                                        {{ $penyedia->nama }}
-                                                                    </option>
-                                                                @endforeach
-                                                            </select>
-                                                    </div>
-                                                    <div class="col">
-                                                        <label for="lokasi" class="form-label">Nilai Kontrak</label>
-                                                        <input type="number" class="form-control" id="lokasi"
-                                                            name="nilai_kontrak" placeholder="Nilai Kontrak" required>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="mb-3">
-                                                <label for="lokasi" class="form-label">Klasifikasi Aset</label>
-                                                <input type="text" class="form-control" id="lokasi" name="klas_aset"
-                                                    placeholder="Klasifikasi Aset" required>
-                                            </div>
-                                            <div class="mb-3">
-                                                <label for="lokasi" class="form-label">Tanggal Masuk</label>
-                                                <input type="date" class="form-control" id="lokasi" name="tgl_masuk"
-                                                    placeholder="Tanggal Masuk" required>
-                                            </div>
-                                            <div class="mb-3">
-                                                <label for="lokasi" class="form-label">No SKP/SP</label>
-                                                <input type="text" class="form-control" id="lokasi" name="skp"
-                                                    placeholder="No SKP/SP" required>
+                                                <label for="nama_barang" class="form-label">Nama Barang</label>
+                                                <input type="text" class="form-control" id="nama_barang"
+                                                    name="nama_barang" placeholder="Nama Barang" required>
                                             </div>
                                             <div class="mb-3">
                                                 <div class="row">
                                                     <div class="col">
-                                                        <label for="lokasi" class="form-label">No BAHP/BAPPHP</label>
-                                                        <input type="text" class="form-control" id="lokasi" name="bahp"
-                                                            placeholder="No BAPH/BAPPHP" required>
+                                                        <label for="merk" class="form-label">Merk</label>
+                                                        <input type="text" class="form-control" id="merk" name="merk"
+                                                            placeholder="Merk">
                                                     </div>
                                                     <div class="col">
-                                                        <label for="lokasi" class="form-label">Tanggal BAPH/BAPPHP</label>
-                                                        <input type="date" class="form-control" id="lokasi"
-                                                            name="tgl_bahp" placeholder="Tanggal BAHP/BAPPHP" required>
+                                                        <label for="tipe" class="form-label">Tipe</label>
+                                                        <input type="text" class="form-control" id="tipe" name="tipe"
+                                                            placeholder="Tipe">
                                                     </div>
                                                 </div>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="satuan" class="form-label">Jumlah Barang</label>
+                                                <input type="text" class="form-control" id="satuan" name="satuan"
+                                                    placeholder="Jumlah Barang" required>
                                             </div>
                                             <div class="mb-3">
                                                 <div class="row">
                                                     <div class="col">
-                                                        <label for="lokasi" class="form-label">No BAST</label>
-                                                        <input type="text" class="form-control" id="lokasi" name="bast"
-                                                            placeholder="No BAST" required>
+                                                        <label for="harga_satuan" class="form-label">Harga
+                                                            Satuan</label>
+                                                        <input type="number" class="form-control" id="harga_satuan"
+                                                            name="harga_satuan" placeholder="Harga Satuan" required>
                                                     </div>
                                                     <div class="col">
-                                                        <label for="lokasi" class="form-label">Tanggal BAST</label>
-                                                        <input type="date" class="form-control" id="lokasi"
-                                                            name="tgl_bast" placeholder="Tanggal BAST" required>
+                                                        <label for="biaya_atribusi" class="form-label">Biaya
+                                                            Atribusi</label>
+                                                        <input type="number" class="form-control" id="biaya_atribusi"
+                                                            name="biaya_atribusi" placeholder="Biaya Atribusi">
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="mb-3">
-                                                <label for="lokasi" class="form-label">Dokumen</label>
-                                                <select class="form-control" id="lokasi" name="dokumen">
-                                                    <option value="">Pilih Dokumen</option>
-                                                    <option value="Lengkap">Lengkap</option>
-                                                    <option value="Tidak Lengkap">Tidak Lengkap</option>
-                                                </select>
-                                            </div>                                            
-                                            <div class="mb-3">
-                                                <label for="lokasi" class="form-label">Keterangan</label>
-                                                <input type="text" class="form-control" id="lokasi" name="Keterangan"
-                                                    placeholder="Keterangan">
                                             </div>
                                             <!-- Tombol untuk menyimpan data -->
                                             <button type="submit" class="btn btn-primary">Simpan</button>
@@ -199,139 +127,30 @@
                             </div>
                         </div>
 
-                        <!-- Tabel Barang -->
-                        <div class="card">
-                            <div class="table-responsive text-nowrap">
-                                <table class="table table-striped">
-                                    <thead>
-                                        <tr>
-                                            <th>Nama Agenda</th>
-                                            <th>Nama Barang</th>
-                                            <th>Merk</th>
-                                            <th>Tipe</th>
-                                            <th>Satuan</th>
-                                            <th>Actions</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody class="table-border-bottom-0" id="table-body">
-                                        @forelse ($agendadtls as $agendadtl)
-                                        <tr>
-                                            <td>{{ $agendadtl->agendamasuk->nama_agenda }}</td>
-                                            <td>{{ $agendadtl->nama_barang }}</td>
-                                            <td>{{ $agendadtl->merk }}</td>
-                                            <td>{{ $agendadtl->tipe }}</td>
-                                            <td>{{ $agendadtl->satuan }}</td>
-                                            <td>
-                                                <form onsubmit="return confirm('Apakah Anda Yakin ?');"
-                                                    action="" method="POST">
-                                                    <a href=""
-                                                        class="btn btn-sm btn-dark">SHOW</a>
-                                                    <a href=""
-                                                        class="btn btn-sm btn-primary">EDIT</a>
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn btn-sm btn-danger">HAPUS</button>
-                                                </form>
-                                            </td>
-                                        </tr>
-                                        @empty
-                                        <tr>
-                                            <td colspan="13" class="text-center">Data Barang Belum Tersedia.</td>
-                                        </tr>
-                                        @endforelse
-                                    </tbody>
-                                </table>
-                                {{ $agendadtl->links() }}
-                            </div>
-                        </div>
+                        <div class="content-backdrop fade"></div>
                     </div>
-
-                    <!-- Modal Edit Barang -->
-                    <div class="modal fade" id="modalEditBarang" tabindex="-1" aria-labelledby="modalEditBarangLabel"
-                        aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="modalEditBarangLabel">Edit Barang</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                        aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                    <form id="editBarangForm" action="" method="POST">
-                                        <input type="hidden" id="edit_id_barang" name="id_barang">
-                                        <div class="mb-3">
-                                            <label for="edit_namaBarang" class="form-label">Nama Barang</label>
-                                            <input type="text" class="form-control" id="edit_namaBarang"
-                                                name="nama_barang" placeholder="Nama Barang" required>
-                                        </div>
-                                        <div class="row mb-3">
-                                            <div class="col">
-                                                <label for="edit_kategori" class="form-label">Kategori</label>
-                                                <input type="text" class="form-control" id="edit_kategori"
-                                                    name="kategori" placeholder="Kategori" required>
-                                            </div>
-                                            <div class="col">
-                                                <label for="edit_lokasi" class="form-label">Lokasi</label>
-                                                <input type="text" class="form-control" id="edit_lokasi" name="lokasi"
-                                                    placeholder="Lokasi" required>
-                                            </div>
-                                        </div>
-                                        <button type="submit" class="btn btn-primary">Simpan</button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Modal Hapus Barang -->
-                    <div class="modal fade" id="modalHapusBarang" tabindex="-1" aria-labelledby="modalHapusBarangLabel"
-                        aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="modalHapusBarangLabel">Hapus Barang</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                        aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                    <p>Apakah anda yakin? Semua data yang berhubungan akan ikut terhapus</p>
-                                </div>
-                                <div class="modal-footer">
-                                    <form id="formHapusBarang" action="../../controller/hapus_barang.php" method="POST">
-                                        <input type="hidden" id="hapus_id_barang" name="id_barang">
-                                        <button type="submit" class="btn btn-danger">Konfirmasi Hapus</button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- / Content -->
-
-                    <div class="content-backdrop fade"></div>
+                    <!-- Content wrapper -->
                 </div>
-                <!-- Content wrapper -->
+                <!-- / Layout page -->
             </div>
-            <!-- / Layout page -->
+
+            <!-- Overlay -->
+            <div class="layout-overlay layout-menu-toggle"></div>
         </div>
+        <!-- / Layout wrapper -->
 
-        <!-- Overlay -->
-        <div class="layout-overlay layout-menu-toggle"></div>
-    </div>
-    <!-- / Layout wrapper -->
+        <!-- Core JS -->
+        <script src="{{ asset('assets/vendor/libs/jquery/jquery.js') }}"></script>
+        <script src="{{ asset('assets/vendor/libs/popper/popper.js') }}"></script>
+        <script src="{{ asset('assets/vendor/js/bootstrap.js') }}"></script>
+        <script src="{{ asset('assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js') }}"></script>
+        <script src="{{ asset('assets/vendor/js/menu.js') }}"></script>
 
-    <!-- Core JS -->
-    <script src="{{ asset('assets/vendor/libs/jquery/jquery.js') }}"></script>
-    <script src="{{ asset('assets/vendor/libs/popper/popper.js') }}"></script>
-    <script src="{{ asset('assets/vendor/js/bootstrap.js') }}"></script>
-    <script src="{{ asset('assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js') }}"></script>
-    <script src="{{ asset('assets/vendor/js/menu.js') }}"></script>
+        <!-- Vendors JS -->
+        <script src="{{ asset('assets/vendor/libs/apex-charts/apexcharts.js') }}"></script>
 
-    <!-- Vendors JS -->
-    <script src="{{ asset('assets/vendor/libs/apex-charts/apexcharts.js') }}"></script>
+        <!-- Main JS -->
+        <script src="{{ asset('assets/js/main.js') }}"></script>
 
-    <!-- Main JS -->
-    <script src="{{ asset('assets/js/main.js') }}"></script>
-
-    <!-- Page JS -->
-    <script src="{{ asset('assets/js/dashboards-analytics.js') }}"></script>
+        <!-- Page JS -->
+        <script src="{{ asset('assets/js/dashboards-analytics.js') }}"></script>

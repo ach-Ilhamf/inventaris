@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AgendaMasuk;
 use App\Models\AgendaMasukDetail;
 
 //return type View
@@ -29,9 +30,9 @@ class AgendaMasukDetailController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create(): view
+    public function create($id_agenda): view
     {
-        return view('kantor.agenda masuk.tambah_agenda_detail');
+        return view('kantor.agenda masuk.tambah_agenda_detail', compact('id_agenda'));
     }
 
     /**
@@ -44,7 +45,7 @@ class AgendaMasukDetailController extends Controller
             'id_agenda'     => 'required',
             'nama_barang'   => 'required',
             'satuan'        => 'required',
-            'harga-atribusi'=> 'required',
+            'harga_satuan'  => 'required',
         ]);
 
         //create post
@@ -55,27 +56,25 @@ class AgendaMasukDetailController extends Controller
             'tipe'          => $request->tipe,
             'satuan'        => $request->satuan,
             'harga_satuan'  => $request->harga_satuan,
-            'biaya_atribusi'=> $request->biaya_atribusi,
-            'tgl_bahp'      => $request->tgl_bahp,
-            'bast'          => $request->bast,
-            'tgl_bast'      => $request->tgl_bast,
-            'dokumen'       => $request->dokumen,
-            'Keterangan'    => $request->Keterangan
+            'biaya_atribusi'=> $request->biaya_atribusi
         ]);
 
         //redirect to index
-        return redirect()->route('agendadtls.index')->with(['success' => 'Data Berhasil Disimpan!']);
+        return redirect()->route('agendas.index')->with(['success' => 'Data Berhasil Disimpan!']);
 
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show($id): View
     {
-        //
+        $agenda = AgendaMasuk::findOrFail($id);
+        $agendadtls = AgendaMasukDetail::where('id_agenda', $id)->get();
+    
+        return view('.kantor.agenda masuk.agenda_masuk_detail', compact('agenda', 'agendadtls'));
     }
-
+    
     /**
      * Show the form for editing the specified resource.
      */

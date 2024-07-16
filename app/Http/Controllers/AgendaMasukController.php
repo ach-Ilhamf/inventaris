@@ -62,7 +62,7 @@ class AgendaMasukController extends Controller
         ]);
 
         //create post
-        AgendaMasuk::create([
+        $agenda = AgendaMasuk::create([
             'id_penyedia'   => $request->id_penyedia,
             'nama_agenda'   => $request->nama_agenda,
             'nilai_kontrak' => $request->nilai_kontrak,
@@ -78,7 +78,7 @@ class AgendaMasukController extends Controller
         ]);
 
         //redirect to index
-        return redirect()->route('agendas.index')->with(['success' => 'Data Berhasil Disimpan!']);
+        return redirect()->route('agendadtls.create', ['id_agenda' => $agenda->id]);
     }
 
     /**

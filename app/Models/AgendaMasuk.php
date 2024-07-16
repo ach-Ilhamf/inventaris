@@ -14,6 +14,11 @@ class AgendaMasuk extends Model
         return $this->belongsTo(Penyedia::class, 'id_penyedia');
     }
 
+    public function agendadetail()
+    {
+        return $this->hasMany(AgendaMasukDetail::class, 'id_penyedia');
+    }
+
     /**
      * fillable
      *

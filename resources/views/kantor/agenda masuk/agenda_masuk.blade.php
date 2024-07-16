@@ -236,7 +236,7 @@
                                             <td>
                                                 <form onsubmit="return confirm('Apakah Anda Yakin ?');"
                                                     action="" method="POST">
-                                                    <a href=""
+                                                    <a href="{{ route('agendadtls.show', $agenda->id) }}"
                                                         class="btn btn-sm btn-dark">SHOW</a>
                                                     <a href=""
                                                         class="btn btn-sm btn-primary">EDIT</a>

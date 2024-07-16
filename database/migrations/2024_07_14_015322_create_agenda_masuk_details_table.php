@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('tipe')->nullable();
             $table->integer('satuan');
             $table->decimal('harga_satuan', 15,2);
-            $table->decimal('biaya_atribusi', 15,2);
+            $table->decimal('biaya_atribusi', 15,2)->nullable();
             $table->timestamps();
 
             $table->foreign('id_agenda')->references('id')->on('agenda_masuks');
