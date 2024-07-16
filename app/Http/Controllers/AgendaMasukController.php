@@ -27,7 +27,7 @@ class AgendaMasukController extends Controller
         $agendas = AgendaMasuk::oldest()->paginate();
         $penyediaList = Penyedia::all();
 
-        return view('kantor.agenda_masuk', compact('agendas', 'penyediaList'));
+        return view('kantor.agenda masuk.agenda_masuk', compact('agendas', 'penyediaList'));
     }
 
     /**

@@ -21,3 +21,4 @@ Route::get('/', function () {
 
 Route::resource('/penyedias', \App\Http\Controllers\PenyediaController::class);
 Route::resource('/agendas', \App\Http\Controllers\AgendaMasukController::class);
+Route::resource('/agendadtls', \App\Http\Controllers\AgendaMasukDetailController::class);

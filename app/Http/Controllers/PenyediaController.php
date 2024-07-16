@@ -26,7 +26,7 @@ class PenyediaController extends Controller
     {
         $penyedias = Penyedia::oldest()->paginate();
 
-        return view('kantor.penyedia', compact('penyedias'));
+        return view('kantor.agenda masuk.penyedia', compact('penyedias'));
     }
 
     /**
