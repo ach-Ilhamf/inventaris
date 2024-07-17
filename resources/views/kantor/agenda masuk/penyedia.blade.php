@@ -146,7 +146,6 @@
                                       <td>{{ $penyedia->alamat }}</td>
                                       <td>
                                           <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{ route('penyedias.destroy', $penyedia->id) }}" method="POST">
-                                              <a href="{{ route('penyedias.show', $penyedia->id) }}" class="btn btn-sm btn-dark">SHOW</a>
                                               <a href="{{ route('penyedias.edit', $penyedia->id) }}" class="btn btn-sm btn-primary">EDIT</a>
                                               @csrf
                                               @method('DELETE')

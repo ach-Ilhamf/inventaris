@@ -21,31 +21,36 @@
                 </a>
                 <ul class="menu-sub">
                     <li class="menu-item">
-                        <a href="kantor.php" class="menu-link">
-                            <div data-i18n="Account">Data Barang</div>
+                        <a href="agendas" class="menu-link">
+                            <div data-i18n="Account">Agenda Masuk</div>
                         </a>
                     </li>
                     <li class="menu-item">
                         <a href="barang_keluar.php" class="menu-link">
-                            <div data-i18n="Notifications">Barang Keluar</div>
+                            <div data-i18n="Notifications">Data Memorial</div>
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="penyedias" class="menu-link">
+                            <div data-i18n="Notifications">Penyedia</div>
                         </a>
                     </li>
                 </ul>
             </li>
 
       <!-- Components -->
-      <li class="menu-header small text-uppercase"><span class="menu-header-text">Components</span></li>      
+      <li class="menu-header small text-uppercase"><span class="menu-header-text">Fitur</span></li>      
           <li class="menu-item">
               <a href="peminjaman.php" class="menu-link">
                   <i class="menu-icon tf-icons bx bx-collection"></i>
-                  <div data-i18n="Basic">Peminjaman</div>
+                  <div data-i18n="Basic">Barang KIP-B</div>
               </a>
           </li>
 
           <li class="menu-item">
               <a href="maintenance.php" class="menu-link">
                   <i class="menu-icon tf-icons bx bx-collection"></i>
-                  <div data-i18n="Basic">Maintenance</div>
+                  <div data-i18n="Basic">Barang Pakai Habis</div>
               </a>
           <a href="" class="menu-link">
               <i class="menu-icon tf-icons bx bx-collection"></i>
