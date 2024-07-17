@@ -80,15 +80,35 @@ class AgendaMasukDetailController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $agendadtl = AgendaMasukDetail::findOrFail($id);
+
+        return view('kantor.agenda masuk.edit_agenda_dtl', compact('agendadtl'));
+
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id): RedirectResponse
     {
-        //
+        $this->validate($request, [
+            'nama_barang'   => 'required',
+            'satuan'        => 'required',
+            'harga_satuan'  => 'required',
+        ]);
+
+        $agenda = AgendaMasukDetail::findOrFail($id);
+
+        $agenda->update([
+            'nama_barang'   => $request->nama_barang,
+            'merk'          => $request->merk,
+            'tipe'          => $request->tipe,
+            'satuan'        => $request->satuan,
+            'harga_satuan'  => $request->harga_satuan,
+            'biaya_atribusi'=> $request->biaya_atribusi
+        ]);
+
+        return redirect()->route('agendadtls.index', ['id_agenda' => $agenda->id_agenda])->with(['success' => 'Data Berhasil Diubah!']);
     }
 
     /**

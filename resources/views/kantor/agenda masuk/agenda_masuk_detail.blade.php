@@ -66,7 +66,7 @@
                                     placeholder="Cari berdasarkan nama atau ID barang...">
                             </div>
                             <div class="col text-end">
-                                <a href="">
+                                <a href="{{ route('agendadtls.create', $agenda->id) }}">
                                 <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                                     data-bs-target="#modalTambahBarang">Tambah Agenda Masuk</button></a>
                             </div>
@@ -95,16 +95,8 @@
                                             <td>{{ $agendadtl->tipe }}</td>
                                             <td>{{ $agendadtl->satuan }}</td>
                                             <td>
-                                                <form onsubmit="return confirm('Apakah Anda Yakin ?');"
-                                                    action="" method="POST">
-                                                    <a href=""
-                                                        class="btn btn-sm btn-dark">SHOW</a>
-                                                    <a href=""
-                                                        class="btn btn-sm btn-primary">EDIT</a>
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn btn-sm btn-danger">HAPUS</button>
-                                                </form>
+                                                <a href="{{ route('agendadtls.edit', $agendadtl->id) }}"
+                                                    class="btn btn-sm btn-primary">EDIT</a>
                                             </td>
                                         </tr>
                                         @empty
