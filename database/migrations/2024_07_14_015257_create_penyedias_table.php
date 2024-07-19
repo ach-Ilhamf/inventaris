@@ -15,6 +15,7 @@ return new class extends Migration
             $table->bigIncrements('id');
             $table->string('nama');
             $table->text('alamat');
+            $table->string('npwp');
             $table->timestamps();
         });
     }

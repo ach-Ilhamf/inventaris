@@ -24,5 +24,6 @@ class Penyedia extends Model
     protected $fillable = [
         'nama',
         'alamat',
+        'npwp'
     ];
 }

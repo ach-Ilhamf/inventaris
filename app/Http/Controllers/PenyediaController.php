@@ -47,14 +47,16 @@ class PenyediaController extends Controller
     {
         //validate form
         $this->validate($request, [
-            'nama'     => 'required',
-            'alamat'   => 'required'
+            'nama'      => 'required',
+            'alamat'    => 'required',
+            'npwp'      => 'required'
         ]);
 
         //create post
         Penyedia::create([
-            'nama'     => $request->nama,
-            'alamat'   => $request->alamat
+            'nama'      => $request->nama,
+            'alamat'    => $request->alamat,
+            'npwp'      => $request->npwp
         ]);
 
         //redirect to index
@@ -72,24 +74,51 @@ class PenyediaController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(string $id): View
     {
-        //
+        $penyedia = Penyedia::findOrFail($id);
+
+        return view('kantor.agenda masuk.edit_penyedia', compact('penyedia'));
+
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id): RedirectResponse
     {
-        //
+        $this->validate($request, [
+            'nama'      => 'required',
+            'alamat'    => 'required',
+            'npwp'      => 'required'
+        ]);
+
+        $penyedia = Penyedia::findOrFail($id);
+
+        $penyedia->update([
+            'nama'      => $request->nama,
+            'alamat'    => $request->alamat,
+            'npwp'       => $request->npwp,
+        ]);
+
+        return redirect()->route('penyedias.index')->with(['success' => 'Data Berhasil Diubah!']);
     }
 
     /**
-     * Remove the specified resource from storage.
+     * destroy
+     *
+     * @param  mixed $post
+     * @return void
      */
-    public function destroy(string $id)
+    public function destroy($id): RedirectResponse
     {
-        //
+        //get post by ID
+        $penyedia = Penyedia::findOrFail($id);
+
+        //delete post
+        $penyedia->delete();
+
+        //redirect to index
+        return redirect()->route('penyedias.index')->with(['success' => 'Data Berhasil Dihapus!']);
     }
 }

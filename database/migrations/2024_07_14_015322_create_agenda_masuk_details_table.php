@@ -17,9 +17,12 @@ return new class extends Migration
             $table->string('nama_barang');
             $table->string('merk')->nullable();
             $table->string('tipe')->nullable();
+            $table->string('no_rangka')->nullable();
+            $table->string('no_mesin')->nullable();
+            $table->string('no_polisi')->nullable();
+            $table->string('no_bpkb')->nullable();
             $table->integer('satuan');
             $table->decimal('harga_satuan', 15,2);
-            $table->decimal('biaya_atribusi', 15,2)->nullable();
             $table->timestamps();
 
             $table->foreign('id_agenda')->references('id')->on('agenda_masuks');
