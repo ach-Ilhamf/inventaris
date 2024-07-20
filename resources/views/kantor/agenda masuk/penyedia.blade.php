@@ -57,111 +57,109 @@
 
                 <!-- Content wrapper -->
                 <div class="content-wrapper">
-                  <div class="container-xxl flex-grow-1 container-p-y">
-
-                    <!-- Pencarian -->
-                    <div class="row mb-3">
-                        <div class="col">
-                            <input type="text" id="search" class="form-control"
-                                placeholder="Cari berdasarkan nama atau ID barang...">
+                    <div class="container-xxl flex-grow-1 container-p-y">
+                        <h3>Penyedia</h3>
+                        <!-- Pencarian -->
+                        <div class="row mb-3">
+                            <div class="col text-end">
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                    data-bs-target="#modalTambahBarang">Tambah Penyedia</button>
+                            </div>
                         </div>
-                        <div class="col text-end">
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                data-bs-target="#modalTambahBarang">Tambah Penyedia</button>
-                        </div>
-                    </div>
 
-                    <!-- Modal Tambah Barang -->
-                    <div class="modal fade" id="modalTambahBarang" tabindex="-1"
-                        aria-labelledby="modalTambahBarangLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="modalTambahBarangLabel">Tambah Penyedia</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                        aria-label="Close"></button>
+                        <!-- Modal Tambah Barang -->
+                        <div class="modal fade" id="modalTambahBarang" tabindex="-1"
+                            aria-labelledby="modalTambahBarangLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="modalTambahBarangLabel">Tambah Penyedia</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form action="{{ route('penyedias.store') }}" method="POST">
+                                            @csrf
+                                            <!-- Input untuk nama barang -->
+                                            <div class="mb-3">
+                                                <label for="namaBarang" class="form-label">Nama Penyedia</label>
+                                                <input type="text" class="form-control" id="namaBarang" name="nama"
+                                                    placeholder="Nama Penyedia" required>
+                                            </div>
+                                            <!-- Input untuk Lokasi -->
+                                            <div class="mb-3">
+                                                <label for="lokasi" class="form-label">Alamat</label>
+                                                <input type="text" class="form-control" id="lokasi" name="alamat"
+                                                    placeholder="Alamat" required>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="lokasi" class="form-label">NPWP</label>
+                                                <input type="text" class="form-control" id="lokasi" name="npwp"
+                                                    placeholder="NPWP" required>
+                                            </div>
+                                            <!-- Tombol untuk menyimpan data -->
+                                            <button type="submit" class="btn btn-primary">Simpan</button>
+                                        </form>
+                                    </div>
                                 </div>
-                                <div class="modal-body">
-                                    <form action="{{ route('penyedias.store') }}" method="POST">
-                                      @csrf
-                                        <!-- Input untuk nama barang -->
-                                        <div class="mb-3">
-                                            <label for="namaBarang" class="form-label">Nama Penyedia</label>
-                                            <input type="text" class="form-control" id="namaBarang" name="nama"
-                                                placeholder="Nama Penyedia" required>
-                                        </div>
-                                        <!-- Input untuk Lokasi -->
-                                        <div class="mb-3">
-                                            <label for="lokasi" class="form-label">Alamat</label>
-                                            <input type="text" class="form-control" id="lokasi" name="alamat"
-                                                placeholder="Alamat" required>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="lokasi" class="form-label">NPWP</label>
-                                            <input type="text" class="form-control" id="lokasi" name="npwp"
-                                                placeholder="NPWP" required>
-                                        </div>
-                                        <!-- Tombol untuk menyimpan data -->
-                                        <button type="submit" class="btn btn-primary">Simpan</button>
-                                    </form>
-                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Tabel Barang -->
+                        <div class="card">
+                            <div class="table-responsive text-nowrap">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr class="text-center">
+                                            <th>Nama Penyedia</th>
+                                            <th>Alamat</th>
+                                            <th>NPWP</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="table-border-bottom-0" id="table-body">
+                                        @forelse ($penyedias as $penyedia)
+                                        <tr>
+                                            <td>{{ $penyedia->nama }}</td>
+                                            <td>{{ $penyedia->alamat }}</td>
+                                            <td>{{ $penyedia->npwp }}</td>
+                                            <td class="text-center">
+                                                <form onsubmit="return confirm('Apakah Anda Yakin ?');"
+                                                    action="{{ route('penyedias.destroy', $penyedia->id) }}"
+                                                    method="POST">
+                                                    <a href="{{ route('penyedias.edit', $penyedia->id) }}"
+                                                        class="btn btn-sm btn-primary">EDIT</a>
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-sm btn-danger">HAPUS</button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                        @empty
+                                        <tr>
+                                            <td colspan="4" class="text-center">Data Penyedia belum Tersedia.</td>
+                                        </tr>
+                                        @endforelse
+                                    </tbody>
+                                </table>
+                                {{ $penyedias->links() }}
                             </div>
                         </div>
                     </div>
 
-                    <!-- Tabel Barang -->
-                    <div class="card">
-                        <div class="table-responsive text-nowrap">
-                            <table class="table table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>Nama Penyedia</th>
-                                        <th>Alamat</th>
-                                        <th>NPWP</th>
-                                        <th>Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="table-border-bottom-0" id="table-body">
-                                  @forelse ($penyedias as $penyedia)
-                                  <tr>
-                                      <td>{{ $penyedia->nama }}</td>
-                                      <td>{{ $penyedia->alamat }}</td>
-                                      <td>{{ $penyedia->npwp }}</td>
-                                      <td>
-                                        <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{ route('penyedias.destroy', $penyedia->id) }}" method="POST">                                                    
-                                            <a href="{{ route('penyedias.edit', $penyedia->id) }}" 
-                                                class="btn btn-sm btn-primary">EDIT</a>                                                        
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-sm btn-danger">HAPUS</button>
-                                        </form>
-                                    </td>
-                                  </tr>
-                                @empty
-                                    <tr>
-                                        <td colspan="4" class="text-center">Data Penyedia belum Tersedia.</td>
-                                    </tr>
-                                @endforelse
-                              </tbody>
-                            </table>
-                            {{ $penyedias->links() }}
-                        </div>
-                    </div>
+
+
+                    <!-- / Content -->
+
+                    <div class="content-backdrop fade"></div>
                 </div>
-
-
-
-                <!-- / Content -->
-
-                <div class="content-backdrop fade"></div>
+                <!-- Content wrapper -->
             </div>
-            <!-- Content wrapper -->
+            <!-- / Layout page -->
         </div>
-        <!-- / Layout page -->
-    </div>
 
-    <!-- Overlay -->
-    <div class="layout-overlay layout-menu-toggle"></div>
+        <!-- Overlay -->
+        <div class="layout-overlay layout-menu-toggle"></div>
     </div>
     <!-- / Layout wrapper -->
 
@@ -180,4 +178,3 @@
 
     <!-- Page JS -->
     <script src="{{ asset('assets/js/dashboards-analytics.js') }}"></script>
-

@@ -58,7 +58,7 @@
                 <!-- Content wrapper -->
                 <div class="content-wrapper">
                     <div class="container-xxl flex-grow-1 container-p-y">
-
+                        <h3>Kegiatan Masuk</h3>
                         <!-- Pencarian -->
                         <div class="row mb-3">
                             <div class="col">
@@ -70,7 +70,7 @@
                                     data-bs-target="#modalImport">Impor Data</button>
                                 <a href="../../controller/export.php" class="btn btn-success">Export Data</a>
                                 <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                    data-bs-target="#modalTambahBarang">Tambah Agenda Masuk</button>
+                                    data-bs-target="#modalTambahBarang">Tambah Kegiatan Masuk</button>
                             </div>
                         </div>
 
@@ -102,16 +102,25 @@
                             <div class="modal-dialog modal-dialog-centered">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="modalTambahBarangLabel">Tambah Agenda Masuk</h5>
+                                        <h5 class="modal-title" id="modalTambahBarangLabel">Tambah Kegiatan Masuk</h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="Close"></button>
                                     </div>
+                                    @if ($errors->any())
+                                    <div class="alert alert-danger">
+                                        <ul>
+                                            @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                    @endif
                                     <div class="modal-body">
                                         <form action="{{ route('agendas.store') }}" method="POST">
                                             @csrf
                                             <!-- Input untuk nama barang -->
                                             <div class="mb-3">
-                                                <label for="namaBarang" class="form-label">Nama Agenda</label>
+                                                <label for="namaBarang" class="form-label">Nama Kegiatan</label>
                                                 <input type="text" class="form-control" id="namaBarang"
                                                     name="nama_agenda" placeholder="Nama Penyedia" required>
                                             </div>
@@ -119,14 +128,15 @@
                                             <div class="mb-3">
                                                 <div class="row">
                                                     <div class="col">
-                                                            <label for="penyedia" class="form-label">Penyedia</label>
-                                                            <select class="form-control" id="penyedia" name="id_penyedia" required>
-                                                                @foreach($penyediaList as $penyedia)
-                                                                    <option value="{{ $penyedia->id }}">
-                                                                        {{ $penyedia->nama }}
-                                                                    </option>
-                                                                @endforeach
-                                                            </select>
+                                                        <label for="penyedia" class="form-label">Penyedia</label>
+                                                        <select class="form-control" id="penyedia" name="id_penyedia"
+                                                            required>
+                                                            @foreach($penyediaList as $penyedia)
+                                                            <option value="{{ $penyedia->id }}">
+                                                                {{ $penyedia->nama }}
+                                                            </option>
+                                                            @endforeach
+                                                        </select>
                                                     </div>
                                                     <div class="col">
                                                         <label for="lokasi" class="form-label">Nilai Kontrak</label>
@@ -158,7 +168,8 @@
                                                             placeholder="No BAPH/BAPPHP" required>
                                                     </div>
                                                     <div class="col">
-                                                        <label for="lokasi" class="form-label">Tanggal BAPH/BAPPHP</label>
+                                                        <label for="lokasi" class="form-label">Tanggal
+                                                            BAPH/BAPPHP</label>
                                                         <input type="date" class="form-control" id="lokasi"
                                                             name="tgl_bahp" placeholder="Tanggal BAHP/BAPPHP" required>
                                                     </div>
@@ -185,7 +196,7 @@
                                                     <option value="Lengkap">Lengkap</option>
                                                     <option value="Tidak Lengkap">Tidak Lengkap</option>
                                                 </select>
-                                            </div>                                            
+                                            </div>
                                             <div class="mb-3">
                                                 <label for="lokasi" class="form-label">Keterangan</label>
                                                 <input type="text" class="form-control" id="lokasi" name="Keterangan"
@@ -204,7 +215,7 @@
                             <div class="table-responsive text-nowrap">
                                 <table class="table table-striped">
                                     <thead>
-                                        <tr>
+                                        <tr class="text-center">
                                             <th>Nama Agenda</th>
                                             <th>Penyedia</th>
                                             <th>Nilai Kontrak</th>
@@ -233,11 +244,13 @@
                                             <td>{{ $agenda->tgl_bast }}</td>
                                             <td>{{ $agenda->dokumen }}</td>
                                             <td>{{ $agenda->Keterangan }}</td>
-                                            <td>
-                                                <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{ route('agendas.destroy', $agenda->id) }}" method="POST">                                                    
-                                                    <a href="{{ route('agendadtls.index', ['id_agenda' => $agenda->id]) }}" class="btn btn-sm btn-dark">Data Barang</a>
-                                                    <a href="{{ route('agendas.edit', $agenda->id) }}" 
-                                                        class="btn btn-sm btn-primary">EDIT</a>                                                        
+                                            <td class="text-center">
+                                                <form onsubmit="return confirm('Apakah Anda Yakin ?');"
+                                                    action="{{ route('agendas.destroy', $agenda->id) }}" method="POST">
+                                                    <a href="{{ route('agendadtls.index', ['id_agenda' => $agenda->id]) }}"
+                                                        class="btn btn-sm btn-dark">Data Barang</a>
+                                                    <a href="{{ route('agendas.edit', $agenda->id) }}"
+                                                        class="btn btn-sm btn-primary">EDIT</a>
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-sm btn-danger">HAPUS</button>
@@ -252,66 +265,6 @@
                                     </tbody>
                                 </table>
                                 {{ $agendas->links() }}
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Modal Edit Barang -->
-                    <div class="modal fade" id="modalEditBarang" tabindex="-1" aria-labelledby="modalEditBarangLabel"
-                        aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="modalEditBarangLabel">Edit Barang</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                        aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                    <form id="editBarangForm" action="" method="POST">
-                                        <input type="hidden" id="edit_id_barang" name="id_barang">
-                                        <div class="mb-3">
-                                            <label for="edit_namaBarang" class="form-label">Nama Barang</label>
-                                            <input type="text" class="form-control" id="edit_namaBarang"
-                                                name="nama_barang" placeholder="Nama Barang" required>
-                                        </div>
-                                        <div class="row mb-3">
-                                            <div class="col">
-                                                <label for="edit_kategori" class="form-label">Kategori</label>
-                                                <input type="text" class="form-control" id="edit_kategori"
-                                                    name="kategori" placeholder="Kategori" required>
-                                            </div>
-                                            <div class="col">
-                                                <label for="edit_lokasi" class="form-label">Lokasi</label>
-                                                <input type="text" class="form-control" id="edit_lokasi" name="lokasi"
-                                                    placeholder="Lokasi" required>
-                                            </div>
-                                        </div>
-                                        <button type="submit" class="btn btn-primary">Simpan</button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Modal Hapus Barang -->
-                    <div class="modal fade" id="modalHapusBarang" tabindex="-1" aria-labelledby="modalHapusBarangLabel"
-                        aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="modalHapusBarangLabel">Hapus Barang</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                        aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                    <p>Apakah anda yakin? Semua data yang berhubungan akan ikut terhapus</p>
-                                </div>
-                                <div class="modal-footer">
-                                    <form id="formHapusBarang" action="../../controller/hapus_barang.php" method="POST">
-                                        <input type="hidden" id="hapus_id_barang" name="id_barang">
-                                        <button type="submit" class="btn btn-danger">Konfirmasi Hapus</button>
-                                    </form>
-                                </div>
                             </div>
                         </div>
                     </div>

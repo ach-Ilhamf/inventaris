@@ -58,16 +58,20 @@
                 <!-- Content wrapper -->
                 <div class="content-wrapper">
                     <div class="container-xxl flex-grow-1 container-p-y">
-
                         <!-- Modal Tambah Barang -->
                         <div tabindex="-1" aria-labelledby="modalTambahBarangLabel" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered">
                                 <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="modalTambahBarangLabel">Edit Kegiatan Masuk</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
                                     @if ($errors->any())
                                     <div class="alert alert-danger">
                                         <ul>
                                             @foreach ($errors->all() as $error)
-                                                <li>{{ $error }}</li>
+                                            <li>{{ $error }}</li>
                                             @endforeach
                                         </ul>
                                     </div>
@@ -78,56 +82,67 @@
                                             @method('PUT')
                                             <!-- Input untuk nama barang -->
                                             <div class="mb-3">
-                                                <label for="namaBarang" class="form-label">Nama Agenda</label>
+                                                <label for="namaBarang" class="form-label">Nama Kegiatan</label>
                                                 <input type="text" class="form-control" id="namaBarang"
-                                                    name="nama_agenda" placeholder="Nama Penyedia" value="{{ old('agenda_masuk', $agenda->nama_agenda) }}" required>
+                                                    name="nama_agenda" placeholder="Nama Penyedia"
+                                                    value="{{ old('agenda_masuk', $agenda->nama_agenda) }}" required>
                                             </div>
                                             <!-- Input untuk Lokasi -->
                                             <div class="mb-3">
                                                 <div class="row">
                                                     <div class="col">
-                                                            <label for="penyedia" class="form-label">Penyedia</label>
-                                                            <select class="form-control" id="penyedia" name="id_penyedia" required>
-                                                                @foreach($penyediaList as $penyedia)
-                                                                    <option value="{{ $penyedia->id }}">
-                                                                        {{ $penyedia->nama }}
-                                                                    </option>
-                                                                @endforeach
-                                                            </select>
+                                                        <label for="penyedia" class="form-label">Penyedia</label>
+                                                        <select class="form-control" id="penyedia" name="id_penyedia"
+                                                            required>
+                                                            @foreach($penyediaList as $penyedia)
+                                                            <option value="{{ $penyedia->id }}">
+                                                                {{ $penyedia->nama }}
+                                                            </option>
+                                                            @endforeach
+                                                        </select>
                                                     </div>
                                                     <div class="col">
                                                         <label for="lokasi" class="form-label">Nilai Kontrak</label>
                                                         <input type="number" class="form-control" id="lokasi"
-                                                            name="nilai_kontrak" placeholder="Nilai Kontrak" value="{{ old('agenda_masuk', $agenda->nilai_kontrak) }}" required>
+                                                            name="nilai_kontrak" placeholder="Nilai Kontrak"
+                                                            value="{{ old('agenda_masuk', $agenda->nilai_kontrak) }}"
+                                                            required>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="mb-3">
                                                 <label for="lokasi" class="form-label">Klasifikasi Aset</label>
                                                 <input type="text" class="form-control" id="lokasi" name="klas_aset"
-                                                    placeholder="Klasifikasi Aset" value="{{ old('agenda_masuk', $agenda->klas_aset) }}" required>
+                                                    placeholder="Klasifikasi Aset"
+                                                    value="{{ old('agenda_masuk', $agenda->klas_aset) }}" required>
                                             </div>
                                             <div class="mb-3">
                                                 <label for="lokasi" class="form-label">Tanggal Masuk</label>
                                                 <input type="date" class="form-control" id="lokasi" name="tgl_masuk"
-                                                    placeholder="Tanggal Masuk" value="{{ old('agenda_masuk', $agenda->tgl_masuk) }}" required> 
+                                                    placeholder="Tanggal Masuk"
+                                                    value="{{ old('agenda_masuk', $agenda->tgl_masuk) }}" required>
                                             </div>
                                             <div class="mb-3">
                                                 <label for="lokasi" class="form-label">No SKP/SP</label>
                                                 <input type="text" class="form-control" id="lokasi" name="skp"
-                                                    placeholder="No SKP/SP" value="{{ old('agenda_masuk', $agenda->skp) }}" required>
+                                                    placeholder="No SKP/SP"
+                                                    value="{{ old('agenda_masuk', $agenda->skp) }}" required>
                                             </div>
                                             <div class="mb-3">
                                                 <div class="row">
                                                     <div class="col">
                                                         <label for="lokasi" class="form-label">No BAHP/BAPPHP</label>
                                                         <input type="text" class="form-control" id="lokasi" name="bahp"
-                                                            placeholder="No BAPH/BAPPHP" value="{{ old('agenda_masuk', $agenda->bahp) }}" required>
+                                                            placeholder="No BAPH/BAPPHP"
+                                                            value="{{ old('agenda_masuk', $agenda->bahp) }}" required>
                                                     </div>
                                                     <div class="col">
-                                                        <label for="lokasi" class="form-label">Tanggal BAPH/BAPPHP</label>
+                                                        <label for="lokasi" class="form-label">Tanggal
+                                                            BAPH/BAPPHP</label>
                                                         <input type="date" class="form-control" id="lokasi"
-                                                            name="tgl_bahp" placeholder="Tanggal BAHP/BAPPHP" value="{{ old('agenda_masuk', $agenda->tgl_bahp) }}" required>
+                                                            name="tgl_bahp" placeholder="Tanggal BAHP/BAPPHP"
+                                                            value="{{ old('agenda_masuk', $agenda->tgl_bahp) }}"
+                                                            required>
                                                     </div>
                                                 </div>
                                             </div>
@@ -136,12 +151,15 @@
                                                     <div class="col">
                                                         <label for="lokasi" class="form-label">No BAST</label>
                                                         <input type="text" class="form-control" id="lokasi" name="bast"
-                                                            placeholder="No BAST" value="{{ old('agenda_masuk', $agenda->bast) }}" required>
+                                                            placeholder="No BAST"
+                                                            value="{{ old('agenda_masuk', $agenda->bast) }}" required>
                                                     </div>
                                                     <div class="col">
                                                         <label for="lokasi" class="form-label">Tanggal BAST</label>
                                                         <input type="date" class="form-control" id="lokasi"
-                                                            name="tgl_bast" placeholder="Tanggal BAST" value="{{ old('agenda_masuk', $agenda->tgl_bast) }}" required>
+                                                            name="tgl_bast" placeholder="Tanggal BAST"
+                                                            value="{{ old('agenda_masuk', $agenda->tgl_bast) }}"
+                                                            required>
                                                     </div>
                                                 </div>
                                             </div>
@@ -152,11 +170,12 @@
                                                     <option value="Lengkap">Lengkap</option>
                                                     <option value="Tidak Lengkap">Tidak Lengkap</option>
                                                 </select>
-                                            </div>                                            
+                                            </div>
                                             <div class="mb-3">
                                                 <label for="lokasi" class="form-label">Keterangan</label>
                                                 <input type="text" class="form-control" id="lokasi" name="Keterangan"
-                                                  value="{{ old('agenda_masuk', $agenda->Keterangan) }}"  placeholder="Keterangan">
+                                                    value="{{ old('agenda_masuk', $agenda->Keterangan) }}"
+                                                    placeholder="Keterangan">
                                             </div>
                                             <!-- Tombol untuk menyimpan data -->
                                             <button type="submit" class="btn btn-primary">Simpan</button>

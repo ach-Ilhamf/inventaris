@@ -58,17 +58,13 @@
                 <!-- Content wrapper -->
                 <div class="content-wrapper">
                     <div class="container-xxl flex-grow-1 container-p-y">
-
+                        <h3> Barang Kegiatan Masuk </h3>
                         <!-- Pencarian -->
                         <div class="row mb-3">
-                            <div class="col">
-                                <input type="text" id="search" class="form-control"
-                                    placeholder="Cari berdasarkan nama atau ID barang...">
-                            </div>
                             <div class="col text-end">
                                 <a href="{{ route('agendadtls.create', $agenda->id) }}">
                                 <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                    data-bs-target="#modalTambahBarang">Tambah Agenda Masuk</button></a>
+                                    data-bs-target="#modalTambahBarang">Tambah Barang</button></a>
                             </div>
                         </div>
 
@@ -77,7 +73,7 @@
                             <div class="table-responsive text-nowrap">
                                 <table class="table table-striped">
                                     <thead>
-                                        <tr>
+                                        <tr class="text-center">
                                             <th>Nama Agenda</th>
                                             <th>Gambar</th>
                                             <th>Nama Barang</th>
@@ -96,7 +92,7 @@
                                             <td>{{ $agendadtl->merk }}</td>
                                             <td>{{ $agendadtl->tipe }}</td>
                                             <td>{{ $agendadtl->satuan }}</td>
-                                            <td>
+                                            <td class="text-center">
                                                 <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{ route('agendadtls.destroy', $agendadtl->id) }}" method="POST">                                                    
                                                     <a href="{{ route('agendadtls.edit', $agendadtl->id) }}" 
                                                         class="btn btn-sm btn-primary">EDIT</a>                                                        
