@@ -15,6 +15,7 @@ return new class extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('id_agenda');
             $table->string('nama_barang');
+            $table->string('gambar');
             $table->string('merk')->nullable();
             $table->string('tipe')->nullable();
             $table->string('no_rangka')->nullable();

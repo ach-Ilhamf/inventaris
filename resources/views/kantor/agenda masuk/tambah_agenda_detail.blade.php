@@ -71,9 +71,9 @@
                                             @endforeach
                                         </ul>
                                     </div>
-                                @endif
+                                    @endif
                                     <div class="modal-body">
-                                        <form action="{{ route('agendadtls.store') }}" method="POST">
+                                        <form action="{{ route('agendadtls.store') }}" method="POST" enctype="multipart/form-data">
                                             @csrf
                                             <!-- Input untuk nama barang -->
                                             <input type="hidden" class="form-control" id="id_agenda" name="id_agenda"
@@ -83,6 +83,11 @@
                                                 <label for="nama_barang" class="form-label">Nama Barang</label>
                                                 <input type="text" class="form-control" id="nama_barang"
                                                     name="nama_barang" placeholder="Nama Barang" required>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="nama_barang" class="form-label">Gambar Barang</label>
+                                                <input type="file" class="form-control" id="nama_barang"
+                                                    name="gambar" placeholder="Gambar Barang">
                                             </div>
                                             <div class="mb-3">
                                                 <div class="row">
@@ -99,23 +104,44 @@
                                                 </div>
                                             </div>
                                             <div class="mb-3">
-                                                <label for="satuan" class="form-label">Jumlah Barang</label>
-                                                <input type="text" class="form-control" id="satuan" name="satuan"
-                                                    placeholder="Jumlah Barang" required>
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <label for="merk" class="form-label">No Rangka</label>
+                                                        <input type="text" class="form-control" id="merk" name="no_rangka"
+                                                            placeholder="No Rangka">
+                                                    </div>
+                                                    <div class="col">
+                                                        <label for="tipe" class="form-label">No Mesin</label>
+                                                        <input type="text" class="form-control" id="tipe" name="no_mesin"
+                                                            placeholder="No Mesin">
+                                                    </div>
+                                                </div>
                                             </div>
                                             <div class="mb-3">
                                                 <div class="row">
                                                     <div class="col">
-                                                        <label for="harga_satuan" class="form-label">Harga
-                                                            Satuan</label>
-                                                        <input type="number" class="form-control" id="harga_satuan"
-                                                            name="harga_satuan" placeholder="Harga Satuan" required>
+                                                        <label for="merk" class="form-label">No Polisi</label>
+                                                        <input type="text" class="form-control" id="merk" name="no_polisi"
+                                                            placeholder="No Polisi">
                                                     </div>
                                                     <div class="col">
-                                                        <label for="biaya_atribusi" class="form-label">Biaya
-                                                            Atribusi</label>
-                                                        <input type="number" class="form-control" id="biaya_atribusi"
-                                                            name="biaya_atribusi" placeholder="Biaya Atribusi">
+                                                        <label for="tipe" class="form-label">No BPKB</label>
+                                                        <input type="text" class="form-control" id="tipe" name="no_bpkb"
+                                                            placeholder="No BPKB">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="mb-3">
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <label for="satuan" class="form-label">Jumlah Barang</label>
+                                                        <input type="number" class="form-control" id="satuan" name="satuan"
+                                                            placeholder="Jumlah Barang" required>
+                                                    </div>
+                                                    <div class="col">
+                                                        <label for="harga_satuan" class="form-label">Harga Satuan</label>
+                                                        <input type="number" class="form-control" id="harga_satuan"
+                                                            name="harga_satuan" placeholder="Harga Satuan" required>
                                                     </div>
                                                 </div>
                                             </div>

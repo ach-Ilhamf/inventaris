@@ -23,11 +23,15 @@ class AgendaMasukDetail extends Model
     protected $fillable = [
         'id_agenda',
         'nama_barang',
+        'gambar',
         'merk',
         'tipe',
+        'no_rangka',
+        'no_mesin',
+        'no_polisi',
+        'no_bpkb',
         'satuan',
         'harga_satuan',
-        'biaya_atribusi'
     ];
 
 }

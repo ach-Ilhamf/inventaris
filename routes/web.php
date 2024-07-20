@@ -23,4 +23,5 @@ Route::get('/', function () {
 Route::resource('/penyedias', \App\Http\Controllers\PenyediaController::class);
 Route::resource('/agendas', \App\Http\Controllers\AgendaMasukController::class);
 Route::resource('/agendadtls', \App\Http\Controllers\AgendaMasukDetailController::class);
+Route::get('agendadtls/{id_agenda}', [AgendaMasukDetailController::class, 'index'])->name('agendadtls.index');
 Route::get('/agendadtls/create/{id_agenda}', [AgendaMasukDetailController::class, 'create'])->name('agendadtls.create');

@@ -79,6 +79,7 @@
                                     <thead>
                                         <tr>
                                             <th>Nama Agenda</th>
+                                            <th>Gambar</th>
                                             <th>Nama Barang</th>
                                             <th>Merk</th>
                                             <th>Tipe</th>
@@ -91,12 +92,18 @@
                                         <tr>
                                             <td>{{ $agendadtl->agendamasuk->nama_agenda }}</td>
                                             <td>{{ $agendadtl->nama_barang }}</td>
+                                            <td><img src="{{ asset('/storage/gambar/'.$agendadtl->gambar) }}" class="rounded" style="width: 150px"></td>
                                             <td>{{ $agendadtl->merk }}</td>
                                             <td>{{ $agendadtl->tipe }}</td>
                                             <td>{{ $agendadtl->satuan }}</td>
                                             <td>
-                                                <a href="{{ route('agendadtls.edit', $agendadtl->id) }}"
-                                                    class="btn btn-sm btn-primary">EDIT</a>
+                                                <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{ route('agendadtls.destroy', $agendadtl->id) }}" method="POST">                                                    
+                                                    <a href="{{ route('agendadtls.edit', $agendadtl->id) }}" 
+                                                        class="btn btn-sm btn-primary">EDIT</a>                                                        
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-sm btn-danger">HAPUS</button>
+                                                </form>
                                             </td>
                                         </tr>
                                         @empty

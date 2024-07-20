@@ -73,55 +73,82 @@
                                     </div>
                                     @endif
                                     <div class="modal-body">
-                                        <form action="{{ route('agendadtls.update', $agendadtl->id ) }}" method="POST">
+                                        <form action="{{ route('agendadtls.update', $agendadtl->id) }}" method="POST" enctype="multipart/form-data">
                                             @csrf
                                             @method('PUT')
-                                            <!-- Input untuk nama barang -->
-                                            <input type="hidden" name="id_agenda" id="" value="{{ old('id_agenda')">
-                                            <!-- Input untuk Lokasi -->
+                                            <input type="hidden" name="id_agenda" value="{{ $agendadtl->id_agenda }}">
                                             <div class="mb-3">
                                                 <label for="nama_barang" class="form-label">Nama Barang</label>
-                                                <input type="text" class="form-control" id="nama_barang" name="nama_barang" 
-                                                        placeholder="Nama Barang" value="{{ old('agenda_masuk_detail', $agendadtl->nama_barang) }}" required>
+                                                <input type="text" class="form-control" id="nama_barang" name="nama_barang" value="{{ old('nama_barang', $agendadtl->nama_barang) }}" required>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="gambar" class="form-label">Gambar Barang</label>
+                                                @if($agendadtl->gambar)
+                                                    <div class="mb-2">
+                                                        <img src="{{ asset('storage/gambar/' . $agendadtl->gambar) }}" class="rounded" style="width: 150px">
+                                                    </div>
+                                                @endif
+                                                <input type="file" class="form-control" id="gambar" name="gambar">
+                                                <small class="text-muted">Kosongkan jika tidak ingin mengubah gambar.</small>
                                             </div>
                                             <div class="mb-3">
                                                 <div class="row">
                                                     <div class="col">
                                                         <label for="merk" class="form-label">Merk</label>
                                                         <input type="text" class="form-control" id="merk" name="merk"
-                                                            placeholder="Merk" value="{{ old('agenda_masuk_detail', $agendadtl->merk) }}">
+                                                            value="{{ old('nama_barang', $agendadtl->merk) }}" placeholder="Merk">
                                                     </div>
                                                     <div class="col">
                                                         <label for="tipe" class="form-label">Tipe</label>
                                                         <input type="text" class="form-control" id="tipe" name="tipe"
-                                                            placeholder="Tipe" value="{{ old('agenda_masuk_detail', $agendadtl->tipe) }}">
+                                                            value="{{ old('nama_barang', $agendadtl->tipe) }}" placeholder="Tipe">
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="mb-3">
-                                                <label for="satuan" class="form-label">Jumlah Barang</label>
-                                                <input type="text" class="form-control" id="satuan" name="satuan"
-                                                    placeholder="Jumlah Barang" value="{{ old('agenda_masuk_detail', $agendadtl->satuan) }}" required>
                                             </div>
                                             <div class="mb-3">
                                                 <div class="row">
                                                     <div class="col">
-                                                        <label for="harga_satuan" class="form-label">Harga
-                                                            Satuan</label>
-                                                        <input type="number" class="form-control" id="harga_satuan" name="harga_satuan" 
-                                                                placeholder="Harga Satuan" value="{{ old('agenda_masuk_detail', $agendadtl->harga_satuan) }}" required>
+                                                        <label for="merk" class="form-label">No Rangka</label>
+                                                        <input type="text" class="form-control" id="merk" name="no_rangka"
+                                                           value="{{ old('nama_barang', $agendadtl->no_rangka) }}" placeholder="No Rangka">
                                                     </div>
                                                     <div class="col">
-                                                        <label for="biaya_atribusi" class="form-label">Biaya
-                                                            Atribusi</label>
-                                                        <input type="number" class="form-control" id="biaya_atribusi" name="biaya_atribusi" 
-                                                                placeholder="Biaya Atribusi" value="{{ old('agenda_masuk_detail', $agendadtl->biaya_atribusi) }}">
+                                                        <label for="tipe" class="form-label">No Mesin</label>
+                                                        <input type="text" class="form-control" id="tipe" name="no_mesin"
+                                                            value="{{ old('nama_barang', $agendadtl->no_mesin) }}" placeholder="No Mesin">
                                                     </div>
                                                 </div>
                                             </div>
-                                            <!-- Tombol untuk menyimpan data -->
+                                            <div class="mb-3">
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <label for="merk" class="form-label">No Polisi</label>
+                                                        <input type="text" class="form-control" id="merk" name="no_polisi"
+                                                            value="{{ old('nama_barang', $agendadtl->no_polisi) }}" placeholder="No Polisi">
+                                                    </div>
+                                                    <div class="col">
+                                                        <label for="tipe" class="form-label">No BPKB</label>
+                                                        <input type="text" class="form-control" id="tipe" name="no_bpkb"
+                                                            value="{{ old('nama_barang', $agendadtl->no_bpkb) }}" placeholder="No BPKB">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="mb-3">
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <label for="satuan" class="form-label">Jumlah Barang</label>
+                                                        <input type="number" class="form-control" id="satuan" name="satuan"
+                                                            value="{{ old('nama_barang', $agendadtl->satuan) }}" placeholder="Jumlah Barang" required>
+                                                    </div>
+                                                    <div class="col">
+                                                        <label for="harga_satuan" class="form-label">Harga Satuan</label>
+                                                        <input type="number" class="form-control" id="harga_satuan"
+                                                            value="{{ old('nama_barang', $agendadtl->harga_satuan) }}" name="harga_satuan" placeholder="Harga Satuan" required>
+                                                    </div>
+                                                </div>
+                                            </div>
                                             <button type="submit" class="btn btn-primary">Simpan</button>
-                                        </form>
+                                        </form>                                    
                                     </div>
                                 </div>
                             </div>

@@ -235,8 +235,7 @@
                                             <td>{{ $agenda->Keterangan }}</td>
                                             <td>
                                                 <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{ route('agendas.destroy', $agenda->id) }}" method="POST">                                                    
-                                                    <a href="{{ route('agendadtls.show', $agenda->id) }}"
-                                                        class="btn btn-sm btn-dark">SHOW</a>
+                                                    <a href="{{ route('agendadtls.index', ['id_agenda' => $agenda->id]) }}" class="btn btn-sm btn-dark">Data Barang</a>
                                                     <a href="{{ route('agendas.edit', $agenda->id) }}" 
                                                         class="btn btn-sm btn-primary">EDIT</a>                                                        
                                                     @csrf

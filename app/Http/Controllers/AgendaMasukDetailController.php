@@ -11,6 +11,7 @@ use Illuminate\View\View;
 //return type redirectResponse
 use Illuminate\Http\RedirectResponse;
 
+use Illuminate\Support\Facades\Storage;
 
 use Illuminate\Http\Request;
 
@@ -19,12 +20,12 @@ class AgendaMasukDetailController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(): view
+    public function index($id_agenda): view
     {
-        $agendadtls = AgendaMasukDetail::oldest()->paginate();
-
-        return view('kantor.agenda masuk.agenda_masuk_detail', compact('agendadtls'));
-
+        $agenda = AgendaMasuk::findOrFail($id_agenda);
+        $agendadtls = AgendaMasukDetail::where('id_agenda', $id_agenda)->paginate();
+    
+        return view('kantor.agenda masuk.agenda_masuk_detail', compact('agenda', 'agendadtls'));
     }
 
     /**
@@ -44,24 +45,35 @@ class AgendaMasukDetailController extends Controller
         $this->validate($request, [
             'id_agenda'     => 'required',
             'nama_barang'   => 'required',
+            'gambar'        => 'required|image|mimes:jpeg,jpg,png|max:2048',
             'satuan'        => 'required',
             'harga_satuan'  => 'required',
         ]);
 
-        //create post
+        $request->hasFile('gambar');
+        $gambar = $request->file('gambar');
+        $gambarName = $gambar->hashName();
+        $gambar->storeAs('public/gambar', $gambarName);
+        
+
+            //create post
         AgendaMasukDetail::create([
             'id_agenda'     => $request->id_agenda,
             'nama_barang'   => $request->nama_barang,
+            'gambar'        => $gambarName,
             'merk'          => $request->merk,
             'tipe'          => $request->tipe,
+            'no_rangka'     => $request->no_rangka,
+            'no_mesin'      => $request->no_mesin,
+            'no_polisi'     => $request->no_polisi,
+            'no_bpkb'       => $request->no_bpkb,
             'satuan'        => $request->satuan,
-            'harga_satuan'  => $request->harga_satuan,
-            'biaya_atribusi'=> $request->biaya_atribusi
+            'harga_satuan'  => $request->harga_satuan
         ]);
 
         //redirect to index
-        return redirect()->route('agendas.index')->with(['success' => 'Data Berhasil Disimpan!']);
-
+        return redirect()->route('agendadtls.index', ['id_agenda' => $request->id_agenda])
+                        ->with(['success' => 'Data Berhasil Disimpan!']);
     }
 
     /**
@@ -91,31 +103,69 @@ class AgendaMasukDetailController extends Controller
      */
     public function update(Request $request, $id): RedirectResponse
     {
-        $this->validate($request, [
-            'nama_barang'   => 'required',
-            'satuan'        => 'required',
-            'harga_satuan'  => 'required',
-        ]);
 
-        $agenda = AgendaMasukDetail::findOrFail($id);
+    // Validasi form
+    $this->validate($request, [
+        'nama_barang'   => 'required',
+        'gambar'        => 'nullable|image|mimes:jpeg,jpg,png|max:2048',
+        'satuan'        => 'required',
+        'harga_satuan'  => 'required',
+    ]);
 
-        $agenda->update([
-            'nama_barang'   => $request->nama_barang,
-            'merk'          => $request->merk,
-            'tipe'          => $request->tipe,
-            'satuan'        => $request->satuan,
-            'harga_satuan'  => $request->harga_satuan,
-            'biaya_atribusi'=> $request->biaya_atribusi
-        ]);
+    // Temukan model berdasarkan ID
+    $agendadtl = AgendaMasukDetail::findOrFail($id);
 
-        return redirect()->route('agendadtls.index', ['id_agenda' => $agenda->id_agenda])->with(['success' => 'Data Berhasil Diubah!']);
+    // Data yang akan diupdate
+    $updateData = [
+        'nama_barang'   => $request->nama_barang,
+        'merk'          => $request->merk,
+        'tipe'          => $request->tipe,
+        'no_rangka'     => $request->no_rangka,
+        'no_mesin'      => $request->no_mesin,
+        'no_polisi'     => $request->no_polisi,
+        'no_bpkb'       => $request->no_bpkb,
+        'satuan'        => $request->satuan,
+        'harga_satuan'  => $request->harga_satuan,
+    ];
+
+    // Jika ada gambar baru yang diunggah
+    if ($request->hasFile('gambar')) {
+        $gambar = $request->file('gambar');
+        $gambarName = $gambar->hashName();
+        $gambar->storeAs('public/gambar', $gambarName);
+
+        // Hapus gambar lama dari storage jika ada
+        if ($agendadtl->gambar) {
+            Storage::delete('public/gambar/' . $agendadtl->gambar);
+        }
+
+        // Update nama gambar pada data
+        $updateData['gambar'] = $gambarName;
     }
+
+    // Update data pada model
+    $agendadtl->update($updateData);
+
+    // Redirect ke halaman index dengan pesan sukses
+    return redirect()->route('agendadtls.index', ['id_agenda' => $request->id_agenda])
+                ->with(['success' => 'Data Berhasil Diperbarui!']);
+}
 
     /**
-     * Remove the specified resource from storage.
+     * destroy
+     *
+     * @param  mixed $post
+     * @return void
      */
-    public function destroy(string $id)
+    public function destroy($id): RedirectResponse
     {
-        //
-    }
+        //get post by ID
+        $agendadtl = AgendaMasukDetail::findOrFail($id);
+
+        //delete post
+        $agendadtl->delete();
+
+        //redirect to index
+        return redirect()->route('agendadtls.index', ['id_agenda' => $agendadtl->id_agenda])
+        ->with(['success' => 'Data Berhasil Dihapus!']);    }
 }
