@@ -32,6 +32,7 @@ class AgendaMasukDetail extends Model
         'no_bpkb',
         'satuan',
         'harga_satuan',
+        'lokasi'
     ];
 
 }

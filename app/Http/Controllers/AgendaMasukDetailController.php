@@ -68,7 +68,8 @@ class AgendaMasukDetailController extends Controller
             'no_polisi'     => $request->no_polisi,
             'no_bpkb'       => $request->no_bpkb,
             'satuan'        => $request->satuan,
-            'harga_satuan'  => $request->harga_satuan
+            'harga_satuan'  => $request->harga_satuan,
+            'lokasi'        => $request->lokasi
         ]);
 
         //redirect to index
@@ -126,6 +127,7 @@ class AgendaMasukDetailController extends Controller
         'no_bpkb'       => $request->no_bpkb,
         'satuan'        => $request->satuan,
         'harga_satuan'  => $request->harga_satuan,
+        'lokasi'  => $request->lokasi,
     ];
 
     // Jika ada gambar baru yang diunggah

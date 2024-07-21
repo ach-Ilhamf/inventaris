@@ -13,8 +13,9 @@ return new class extends Migration
     {
         Schema::create('kip_b_s', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->foreignId('id_kip_b');
-            $table->string('no_register');
+            $table->string('kode_barang')->nullable();
+            $table->string('jenis_barang');
+            $table->string('no_register')->nullable();
             $table->string('merk')->nullable();
             $table->string('type')->nullable();
             $table->string('ukuran')->nullable();
@@ -27,12 +28,13 @@ return new class extends Migration
             $table->string('no_bpkb')->nullable();
             $table->string('asal_usul')->nullable();
             $table->decimal('harga', 15, 2);
-            $table->decimal('beban_susut', 15, 2);
-            $table->decimal('nilai_buku', 15 ,2);
+            $table->decimal('beban_susut', 15, 2)->nullable();
+            $table->decimal('nilai_buku', 15 ,2)->nullable();
             $table->enum('kondisi', ['RUSAK BERAT', 'KURANG BAIK', 'BAIK'])->default('BAIK');
+            $table->enum('lokasi', ['Kepala Dinas', 'Sekretariat', 'Sekretaris', 'Bidang TI', 'Bidang SIB',
+            'Bidang SPBE', 'Ruang Rapat', 'Radio', 'Call Center', 'Server Kominfo']);
             $table->timestamps();
 
-            $table->foreign('id_kip_b')->references('id')->on('kode_kip_b_s');
         });
     }
 

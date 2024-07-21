@@ -152,6 +152,22 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            <div class="mb-3">
+                                                <label for="lokasi" class="form-label">Lokasi</label>
+                                                <select class="form-control" id="lokasi" name="lokasi">
+                                                    <option value="">Pilih Lokasi</option>
+                                                    <option value="Kepala Dinas">Kepala Dinas</option>
+                                                    <option value="Sekretariat">Sekretariat</option>
+                                                    <option value="Sekretaris">Sekretaris</option>
+                                                    <option value="Bidang TI">Bidang TI</option>
+                                                    <option value="Bidang SIB">Bidang SIB</option>
+                                                    <option value="Bidang SPBE">Bidang SPBE</option>
+                                                    <option value="Ruang Rapat">Ruang Rapat</option>
+                                                    <option value="Radio">Radio</option>
+                                                    <option value="Call Center">Call Center</option>
+                                                    <option value="Server Kominfo">Server Kominfo</option>
+                                                </select>
+                                            </div>
                                             <button type="submit" class="btn btn-primary">Simpan</button>
                                         </form>                                    
                                     </div>

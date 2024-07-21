@@ -74,12 +74,18 @@
                                 <table class="table table-striped">
                                     <thead>
                                         <tr class="text-center">
-                                            <th>Nama Agenda</th>
-                                            <th>Gambar</th>
+                                            <th>Nama Kegiatan</th>
                                             <th>Nama Barang</th>
+                                            <th>Gambar</th>
                                             <th>Merk</th>
                                             <th>Tipe</th>
+                                            <th>No Rangka</th>
+                                            <th>No Mesin</th>
+                                            <th>No Polisi</th>
+                                            <th>No BPKB</th>
                                             <th>Satuan</th>
+                                            <th>Harga</th>
+                                            <th>Lokasi</th>
                                             <th>Actions</th>
                                         </tr>
                                     </thead>
@@ -91,7 +97,13 @@
                                             <td><img src="{{ asset('/storage/gambar/'.$agendadtl->gambar) }}" class="rounded" style="width: 150px"></td>
                                             <td>{{ $agendadtl->merk }}</td>
                                             <td>{{ $agendadtl->tipe }}</td>
+                                            <td>{{ $agendadtl->no_rangka }}</td>
+                                            <td>{{ $agendadtl->no_mesin }}</td>
+                                            <td>{{ $agendadtl->no_polisi }}</td>
+                                            <td>{{ $agendadtl->no_bpkb }}</td>
                                             <td>{{ $agendadtl->satuan }}</td>
+                                            <td>{{ $agendadtl->harga_satuan }}</td>
+                                            <td>{{ $agendadtl->lokasi }}</td>
                                             <td class="text-center">
                                                 <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{ route('agendadtls.destroy', $agendadtl->id) }}" method="POST">                                                    
                                                     <a href="{{ route('agendadtls.edit', $agendadtl->id) }}" 

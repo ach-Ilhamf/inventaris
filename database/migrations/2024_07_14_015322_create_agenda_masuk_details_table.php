@@ -15,7 +15,7 @@ return new class extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('id_agenda');
             $table->string('nama_barang');
-            $table->string('gambar');
+            $table->string('gambar')->nullable();
             $table->string('merk')->nullable();
             $table->string('tipe')->nullable();
             $table->string('no_rangka')->nullable();
@@ -24,6 +24,8 @@ return new class extends Migration
             $table->string('no_bpkb')->nullable();
             $table->integer('satuan');
             $table->decimal('harga_satuan', 15,2);
+            $table->enum('lokasi', ['Kepala Dinas', 'Sekretariat', 'Sekretaris', 'Bidang TI', 'Bidang SIB',
+            'Bidang SPBE', 'Ruang Rapat', 'Radio', 'Call Center', 'Server Kominfo']);
             $table->timestamps();
 
             $table->foreign('id_agenda')->references('id')->on('agenda_masuks');
