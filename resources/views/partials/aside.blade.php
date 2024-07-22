@@ -41,7 +41,7 @@
       <!-- Components -->
       <li class="menu-header small text-uppercase"><span class="menu-header-text">Fitur</span></li>      
       <li class="menu-item">
-          <a href="" class="menu-link">
+          <a href="{{ route('kipbs.index') }}" class="menu-link">
               <i class="menu-icon tf-icons bx bx-collection"></i>
               <div data-i18n="Basic">Barang KIP-B</div>
           </a>

@@ -32,6 +32,7 @@
     <link rel="stylesheet" href="{{ asset('assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/vendor/libs/apex-charts/apex-charts.css') }}" />
 
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}" />
 
     <!-- Page CSS -->
@@ -213,7 +214,7 @@
                         <!-- Tabel Barang -->
                         <div class="card">
                             <div class="table-responsive text-nowrap">
-                                <table class="table table-striped">
+                                <table class="table table-striped" id='agenda_table'>
                                     <thead>
                                         <tr class="text-center">
                                             <th>Nama Agenda</th>
@@ -230,41 +231,8 @@
                                             <th>Actions</th>
                                         </tr>
                                     </thead>
-                                    <tbody class="table-border-bottom-0" id="table-body">
-                                        @forelse ($agendas as $agenda)
-                                        <tr>
-                                            <td>{{ $agenda->nama_agenda }}</td>
-                                            <td>{{ $agenda->penyedia->nama }}</td>
-                                            <td>Rp. {{ number_format($agenda->nilai_kontrak, 2, ',', '.') }}</td>
-                                            <td>{{ $agenda->tgl_masuk }}</td>
-                                            <td>{{ $agenda->skp }}</td>
-                                            <td>{{ $agenda->bahp }}</td>
-                                            <td>{{ $agenda->tgl_bahp }}</td>
-                                            <td>{{ $agenda->bast }}</td>
-                                            <td>{{ $agenda->tgl_bast }}</td>
-                                            <td>{{ $agenda->dokumen }}</td>
-                                            <td>{{ $agenda->Keterangan }}</td>
-                                            <td class="text-center">
-                                                <form onsubmit="return confirm('Apakah Anda Yakin ?');"
-                                                    action="{{ route('agendas.destroy', $agenda->id) }}" method="POST">
-                                                    <a href="{{ route('agendadtls.index', ['id_agenda' => $agenda->id]) }}"
-                                                        class="btn btn-sm btn-dark">Data Barang</a>
-                                                    <a href="{{ route('agendas.edit', $agenda->id) }}"
-                                                        class="btn btn-sm btn-primary">EDIT</a>
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn btn-sm btn-danger">HAPUS</button>
-                                                </form>
-                                            </td>
-                                        </tr>
-                                        @empty
-                                        <tr>
-                                            <td colspan="13" class="text-center">Data Agenda Masuk belum Tersedia.</td>
-                                        </tr>
-                                        @endforelse
-                                    </tbody>
+
                                 </table>
-                                {{ $agendas->links() }}
                             </div>
                         </div>
                     </div>
@@ -298,3 +266,31 @@
 
     <!-- Page JS -->
     <script src="{{ asset('assets/js/dashboards-analytics.js') }}"></script>
+
+    <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#agenda_table').DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: {
+                    url: '{{ route('agendas.data') }}',
+                    type: 'GET'
+                },
+                columns: [
+                    { data: 'nama_agenda', name: 'nama_agenda' },
+                    { data: 'penyedia.nama', name: 'penyedia.nama' },
+                    { data: 'nilai_kontrak', name: 'nilai_kontrak' },
+                    { data: 'tgl_masuk', name: 'tgl_masuk' },
+                    { data: 'skp', name: 'skp' },
+                    { data: 'bahp', name: 'bahp' },
+                    { data: 'tgl_bahp', name: 'tgl_bahp' },
+                    { data: 'bast', name: 'bast' },
+                    { data: 'tgl_bast', name: 'tgl_bast' },
+                    { data: 'dokumen', name: 'dokumen' },
+                    { data: 'Keterangan', name: 'Keterangan' },
+                    { data: 'action', name: 'action', orderable: false, searchable: false }
+                ]
+            });
+        });
+    </script>

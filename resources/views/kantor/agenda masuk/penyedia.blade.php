@@ -32,7 +32,7 @@
     <link rel="stylesheet" href="{{ asset('assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/vendor/libs/apex-charts/apex-charts.css') }}" />
 
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
 
     <!-- Page CSS -->
     <!-- Helpers -->
@@ -105,10 +105,10 @@
                             </div>
                         </div>
 
-                        <!-- Tabel Barang -->
+                        <!-- Tabel Penyedia -->
                         <div class="card">
                             <div class="table-responsive text-nowrap">
-                                <table class="table table-striped">
+                                <table id="penyedia_table" class="table table-striped">
                                     <thead>
                                         <tr class="text-center">
                                             <th>Nama Penyedia</th>
@@ -117,37 +117,11 @@
                                             <th>Actions</th>
                                         </tr>
                                     </thead>
-                                    <tbody class="table-border-bottom-0" id="table-body">
-                                        @forelse ($penyedias as $penyedia)
-                                        <tr>
-                                            <td>{{ $penyedia->nama }}</td>
-                                            <td>{{ $penyedia->alamat }}</td>
-                                            <td>{{ $penyedia->npwp }}</td>
-                                            <td class="text-center">
-                                                <form onsubmit="return confirm('Apakah Anda Yakin ?');"
-                                                    action="{{ route('penyedias.destroy', $penyedia->id) }}"
-                                                    method="POST">
-                                                    <a href="{{ route('penyedias.edit', $penyedia->id) }}"
-                                                        class="btn btn-sm btn-primary">EDIT</a>
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn btn-sm btn-danger">HAPUS</button>
-                                                </form>
-                                            </td>
-                                        </tr>
-                                        @empty
-                                        <tr>
-                                            <td colspan="4" class="text-center">Data Penyedia belum Tersedia.</td>
-                                        </tr>
-                                        @endforelse
-                                    </tbody>
+                                    
                                 </table>
-                                {{ $penyedias->links() }}
                             </div>
                         </div>
                     </div>
-
-
 
                     <!-- / Content -->
 
@@ -178,3 +152,22 @@
 
     <!-- Page JS -->
     <script src="{{ asset('assets/js/dashboards-analytics.js') }}"></script>
+
+    <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#penyedia_table').DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: '{{ route('penyedias.data') }}',
+                columns: [
+                    { data: 'nama', name: 'nama' },
+                    { data: 'alamat', name: 'alamat' },
+                    { data: 'npwp', name: 'npwp' },
+                    { data: 'action', name: 'action', orderable: false, searchable: false }
+                ]
+            });
+        });
+    </script>
+</body>
+</html>

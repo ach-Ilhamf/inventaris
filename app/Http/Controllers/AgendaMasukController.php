@@ -14,6 +14,8 @@ use Illuminate\Http\RedirectResponse;
 
 use Illuminate\Http\Request;
 
+use Yajra\DataTables\Facades\DataTables;
+
 use Illuminate\Support\Facades\Storage;
 
 class AgendaMasukController extends Controller
@@ -26,10 +28,32 @@ class AgendaMasukController extends Controller
      */
     public function index(): view
     {
-        $agendas = AgendaMasuk::oldest()->paginate();
         $penyediaList = Penyedia::all();
 
-        return view('kantor.agenda masuk.agenda_masuk', compact('agendas', 'penyediaList'));
+        return view('kantor.agenda masuk.agenda_masuk', compact('penyediaList'));
+    }
+
+    public function getData(Request $request)
+    {
+        if ($request->ajax()) {
+            $data = AgendaMasuk::with('penyedia')->select('agenda_masuks.*');
+            return DataTables::of($data)
+                ->addColumn('action', function($row) {
+                    $showUrl = route('agendadtls.index', ['id_agenda' => $row->id]);
+                    $editUrl = route('agendas.edit', $row->id);
+                    $deleteUrl = route('agendas.destroy', $row->id);
+                    return '<a href="' . $showUrl . '" class="btn btn-sm btn-dark">DATA BARANG</a>
+                            <a href="' . $editUrl . '" class="btn btn-sm btn-primary">EDIT</a>
+                            <form action="' . $deleteUrl . '" method="POST" style="display:inline-block;">
+                                ' . csrf_field() . method_field('DELETE') . '
+                                <button type="submit" class="btn btn-sm btn-danger">HAPUS</button>
+                            </form>';
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+
+    
+        }
     }
 
     /**

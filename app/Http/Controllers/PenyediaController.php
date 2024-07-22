@@ -14,6 +14,8 @@ use Illuminate\Http\RedirectResponse;
 
 use Illuminate\Http\Request;
 
+use Yajra\DataTables\Facades\DataTables;
+
 class PenyediaController extends Controller
 {
     
@@ -24,10 +26,29 @@ class PenyediaController extends Controller
      */
     public function index(): view
     {
-        $penyedias = Penyedia::oldest()->paginate();
-
-        return view('kantor.agenda masuk.penyedia', compact('penyedias'));
+        return view('kantor.agenda masuk.penyedia');
     }
+
+    public function getData(Request $request)
+    {
+        if ($request->ajax()) {
+            $data = Penyedia::select('*');
+            return DataTables::of($data)
+                ->addColumn('action', function($row) {
+                    $editUrl = route('penyedias.edit', $row->id);
+                    $deleteUrl = route('penyedias.destroy', $row->id);
+                    return '<a href="' . $editUrl . '" class="btn btn-sm btn-primary">EDIT</a>
+                            <form action="' . $deleteUrl . '" method="POST" style="display:inline-block;">
+                                ' . csrf_field() . method_field('DELETE') . '
+                                <button type="submit" class="btn btn-sm btn-danger">HAPUS</button>
+                            </form>';
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+                
+        }
+    }
+
 
     /**
      * Show the form for creating a new resource.

@@ -13,6 +13,8 @@ use Illuminate\Http\RedirectResponse;
 
 use Illuminate\Http\Request;
 
+use Yajra\DataTables\Facades\DataTables;
+
 class KipBController extends Controller
 {
     /**
@@ -25,6 +27,22 @@ class KipBController extends Controller
         return view('kantor.kip b.kip_b', compact('kipbs'));
 
     }
+
+    public function getData()
+    {
+        $kipbs = KipB::select(['*']);
+        return DataTables::of($kipbs)
+            ->addColumn('action', function ($kipb) {
+                return '<a href="'.route('kipbs.edit', $kipb->id).'" class="btn btn-sm btn-primary">EDIT</a>
+                        <form style="display:inline;" method="POST" action="'.route('kipbs.destroy', $kipb->id).'" onsubmit="return confirm(\'Apakah Anda Yakin ?\');">
+                            '.csrf_field().'
+                            '.method_field('DELETE').'
+                            <button type="submit" class="btn btn-sm btn-danger">HAPUS</button>
+                        </form>';
+            })
+            ->make(true);
+    }
+
 
     /**
      * Show the form for creating a new resource.

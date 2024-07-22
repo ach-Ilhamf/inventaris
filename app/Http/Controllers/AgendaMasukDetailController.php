@@ -13,6 +13,8 @@ use Illuminate\Http\RedirectResponse;
 
 use Illuminate\Support\Facades\Storage;
 
+use Yajra\DataTables\Facades\DataTables;
+
 use Illuminate\Http\Request;
 
 class AgendaMasukDetailController extends Controller
@@ -22,11 +24,34 @@ class AgendaMasukDetailController extends Controller
      */
     public function index($id_agenda): view
     {
-        $agenda = AgendaMasuk::findOrFail($id_agenda);
-        $agendadtls = AgendaMasukDetail::where('id_agenda', $id_agenda)->paginate();
     
-        return view('kantor.agenda masuk.agenda_masuk_detail', compact('agenda', 'agendadtls'));
+        return view('kantor.agenda masuk.agenda_masuk_detail');
     }
+
+    public function getData($id_agenda)
+    {
+        $agendadtls = AgendaMasukDetail::where('id_agenda', $id_agenda)
+            ->get();
+
+        return DataTables::of($agendadtls)
+            ->addColumn('nama_agenda', function ($detail) {
+                return $detail->agendamasuk ? $detail->agendamasuk->nama_agenda : '';
+            })
+            ->addColumn('gambar', function ($detail) {
+                return '<img src="' . asset('storage/gambar/' . $detail->gambar) . '" class="rounded" style="width: 150px">';
+            })
+            ->addColumn('action', function ($detail) {
+                return ' <a href="' . route('agendadtls.edit', $detail->id) . '" class="btn btn-sm btn-primary">EDIT</a>
+                            <form action="' . route('agendadtls.destroy', $detail->id) . '" method="POST" style="display:inline-block;">
+                                ' . csrf_field() . method_field('DELETE') . '
+                                <button type="submit" class="btn btn-sm btn-danger">HAPUS</button>
+                            </form>';
+                
+            })
+            ->rawColumns(['gambar', 'action']) // Render kolom gambar dan action dengan HTML
+            ->make(true);
+    }
+
 
     /**
      * Show the form for creating a new resource.
