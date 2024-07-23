@@ -85,14 +85,23 @@
                                                 value="{{ $id_agenda }}" required>
                                             <!-- Input untuk Lokasi -->
                                             <div class="mb-3">
-                                                <label for="nama_barang" class="form-label">Nama Barang</label>
-                                                <input type="text" class="form-control" id="nama_barang"
-                                                    name="nama_barang" placeholder="Nama Barang" required>
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <label for="nama_barang" class="form-label">Nama Barang</label>
+                                                        <input type="text" class="form-control" id="nama_barang"
+                                                            name="nama_barang" placeholder="Nama Barang" required>
+                                                    </div>
+                                                    <div class="col">
+                                                        <label for="nama_barang" class="form-label">Gambar Barang</label>
+                                                        <input type="file" class="form-control" id="nama_barang"
+                                                            name="gambar" placeholder="Gambar Barang">
+                                                    </div>
+                                                </div>
                                             </div>
                                             <div class="mb-3">
-                                                <label for="nama_barang" class="form-label">Gambar Barang</label>
-                                                <input type="file" class="form-control" id="nama_barang"
-                                                    name="gambar" placeholder="Gambar Barang">
+                                                <label for="nama_barang" class="form-label">Tahun Beli</label>
+                                                <input type="text" class="form-control" id="nama_barang"
+                                                    name="tahun_beli" placeholder="Tahun Beli" required>
                                             </div>
                                             <div class="mb-3">
                                                 <div class="row">

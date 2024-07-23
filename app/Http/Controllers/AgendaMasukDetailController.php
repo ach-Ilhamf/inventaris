@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\AgendaMasuk;
 use App\Models\AgendaMasukDetail;
+use App\Models\KipB;
 
 //return type View
 use Illuminate\View\View;
@@ -70,7 +71,7 @@ class AgendaMasukDetailController extends Controller
         $this->validate($request, [
             'id_agenda'     => 'required',
             'nama_barang'   => 'required',
-            'gambar'        => 'required|image|mimes:jpeg,jpg,png|max:2048',
+            'gambar'        => 'image|mimes:jpeg,jpg,png|max:2048',
             'satuan'        => 'required',
             'harga_satuan'  => 'required',
         ]);
@@ -96,6 +97,15 @@ class AgendaMasukDetailController extends Controller
             'harga_satuan'  => $request->harga_satuan,
             'lokasi'        => $request->lokasi
         ]);
+
+        KipB::create([
+            'jenis_barang'  => $request->nama_barang,
+            'merk'          => $request->merk,
+            'type'          => $request->tipe,
+            'tahun_beli'    => $request->tahun_beli,
+            'harga'         => $request->harga_satuan,
+            'lokasi'        => $request->lokasi
+        ]);    
 
         //redirect to index
         return redirect()->route('agendadtls.index', ['id_agenda' => $request->id_agenda])

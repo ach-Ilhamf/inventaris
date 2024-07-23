@@ -95,6 +95,19 @@
                             </div>
                         </div>
 
+                        <!-- Filter Section -->
+                        <div class="row mb-3">
+                            <div class="col-md-4">
+                                <input type="text" class="form-control" name="jenis_barang" id="filter-jenis-barang" placeholder=" Filter Nama Jenis Barang">
+                            </div>
+                            <div class="col-md-4">
+                                <input type="text" class="form-control" name="tahun_beli" id="filter-tahun-beli" placeholder="Filter Tahun Beli">
+                            </div>
+                            <div class="col-md-4">
+                                <input type="text" class="form-control" name="kondisi" id="filter-kondisi" placeholder="Filter Kondisi">
+                            </div>
+                        </div>
+
                         <!-- Tabel Barang -->
                         <div class="card">
                             <div class="table-responsive text-nowrap">
@@ -120,7 +133,8 @@
                                             <th>Nilai Buku</th>
                                             <th>Kondisi</th>
                                             <th>Lokasi</th>
-                                            <th>Actions</th>                                        </tr>
+                                            <th>Actions</th>                                        
+                                        </tr>
                                     </thead>
                                     <tbody class="table-border-bottom-0" id="table-body">
                                     </tbody>
@@ -160,13 +174,20 @@
 
     <!-- DataTables JS -->
     <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
     <script>
         $(document).ready(function() {
-            $('#kipb_table').DataTable({
+            var table = $('#kipb_table').DataTable({
                 processing: true,
                 serverSide: true,
-                ajax: '{{ route('kipbs.data') }}',
+                ajax: { 
+                    url: '{{ route('kipbs.data') }}',
+                    type: 'GET',
+                    data: function(d) {
+                        d.jenis_barang = $('#filter-jenis-barang').val();
+                        d.tahun_beli = $('#filter-tahun-beli').val();
+                        d.kondisi = $('#filter-kondisi').val();
+                    }
+                },
                 columns: [
                     { data: 'kode_barang', name: 'kode_barang' },
                     { data: 'jenis_barang', name: 'jenis_barang' },
@@ -189,6 +210,10 @@
                     { data: 'lokasi', name: 'lokasi' },
                     { data: 'action', name: 'action', orderable: false, searchable: false }
                 ]
+            });
+
+            $('#filter-jenis-barang, #filter-tahun-beli, #filter-kondisi').on('keyup change', function() {
+                table.draw();
             });
         });
     </script>

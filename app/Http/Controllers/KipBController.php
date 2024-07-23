@@ -28,9 +28,23 @@ class KipBController extends Controller
 
     }
 
-    public function getData()
+    public function getData(Request $request)
     {
+        if ($request->ajax()) {
         $kipbs = KipB::select(['*']);
+
+        if ($request->has('jenis_barang') && !empty($request->jenis_barang)) {
+            $kipbs->where('jenis_barang', 'like', "%{$request->jenis_barang}%");
+        }
+
+        if ($request->has('tahun_beli') && !empty($request->tahun_beli)) {
+            $kipbs->where('tahun_beli', 'like', "%{$request->tahun_beli}%");
+        }
+
+        if ($request->has('kondisi') && !empty($request->kondisi)) {
+            $kipbs->where('kondisi', 'like', "%{$request->kondisi}%");
+        }
+
         return DataTables::of($kipbs)
             ->addColumn('action', function ($kipb) {
                 return '<a href="'.route('kipbs.edit', $kipb->id).'" class="btn btn-sm btn-primary">EDIT</a>
@@ -41,7 +55,9 @@ class KipBController extends Controller
                         </form>';
             })
             ->make(true);
+        }
     }
+
 
 
     /**

@@ -37,6 +37,21 @@ class AgendaMasukController extends Controller
     {
         if ($request->ajax()) {
             $data = AgendaMasuk::with('penyedia')->select('agenda_masuks.*');
+
+            if ($request->has('nama_agenda') && !empty($request->nama_agenda)) {
+                $data->where('nama_agenda', 'like', "%{$request->nama_agenda}%");
+            }
+
+            if ($request->has('penyedia') && !empty($request->penyedia)) {
+                $data->whereHas('penyedia', function($q) use ($request) {
+                    $q->where('nama', 'like', "%{$request->penyedia}%");
+                });
+            }
+
+            if ($request->has('nilai_kontrak') && !empty($request->nilai_kontrak)) {
+                $data->where('nilai_kontrak', 'like', "%{$request->nilai_kontrak}%");
+            }
+
             return DataTables::of($data)
                 ->addColumn('action', function($row) {
                     $showUrl = route('agendadtls.index', ['id_agenda' => $row->id]);
@@ -51,11 +66,10 @@ class AgendaMasukController extends Controller
                 })
                 ->rawColumns(['action'])
                 ->make(true);
-
-    
         }
     }
 
+    
     /**
      * Show the form for creating a new resource.
      */

@@ -28,7 +28,7 @@ return new class extends Migration
             $table->string('no_bpkb')->nullable();
             $table->string('asal_usul')->nullable();
             $table->decimal('harga', 15, 2);
-            $table->decimal('beban_susut', 15, 2)->nullable();
+            $table->decimal('beban_susut', 15, 2)->default(0);
             $table->decimal('nilai_buku', 15 ,2)->nullable();
             $table->enum('kondisi', ['RUSAK BERAT', 'KURANG BAIK', 'BAIK'])->default('BAIK');
             $table->enum('lokasi', ['Kepala Dinas', 'Sekretariat', 'Sekretaris', 'Bidang TI', 'Bidang SIB',

@@ -63,8 +63,6 @@
                         <!-- Pencarian -->
                         <div class="row mb-3">
                             <div class="col">
-                                <input type="text" id="search" class="form-control"
-                                    placeholder="Cari berdasarkan nama atau ID barang...">
                             </div>
                             <div class="col text-end">
                                 <button type="button" class="btn btn-secondary" data-bs-toggle="modal"
@@ -123,7 +121,7 @@
                                             <div class="mb-3">
                                                 <label for="namaBarang" class="form-label">Nama Kegiatan</label>
                                                 <input type="text" class="form-control" id="namaBarang"
-                                                    name="nama_agenda" placeholder="Nama Penyedia" required>
+                                                    name="nama_agenda" placeholder="Nama Kegiatan" required>
                                             </div>
                                             <!-- Input untuk Lokasi -->
                                             <div class="mb-3">
@@ -211,6 +209,19 @@
                             </div>
                         </div>
 
+                        <!-- Filter Section -->
+                        <div class="row mb-3">
+                            <div class="col-md-4">
+                                <input type="text" class="form-control" name="nama_agenda" id="filter-nama-agenda" placeholder=" Filter Nama Kegiatan">
+                            </div>
+                            <div class="col-md-4">
+                                <input type="text" class="form-control" name="penyedia" id="filter-penyedia" placeholder="Filter Penyedia">
+                            </div>
+                            <div class="col-md-4">
+                                <input type="text" class="form-control" name="nilai_kontrak" id="filter-nilai-kontrak" placeholder="Filter Nilai Kontrak">
+                            </div>
+                        </div>
+
                         <!-- Tabel Barang -->
                         <div class="card">
                             <div class="table-responsive text-nowrap">
@@ -270,12 +281,17 @@
     <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
     <script>
         $(document).ready(function() {
-            $('#agenda_table').DataTable({
+            var table = $('#agenda_table').DataTable({
                 processing: true,
                 serverSide: true,
                 ajax: {
                     url: '{{ route('agendas.data') }}',
-                    type: 'GET'
+                    type: 'GET',
+                    data: function(d) {
+                        d.nama_agenda = $('#filter-nama-agenda').val();
+                        d.penyedia = $('#filter-penyedia').val();
+                        d.nilai_kontrak = $('#filter-nilai-kontrak').val();
+                    }
                 },
                 columns: [
                     { data: 'nama_agenda', name: 'nama_agenda' },
@@ -291,6 +307,10 @@
                     { data: 'Keterangan', name: 'Keterangan' },
                     { data: 'action', name: 'action', orderable: false, searchable: false }
                 ]
+            });
+
+            $('#filter-nama-agenda, #filter-penyedia, #filter-nilai-kontrak').on('keyup change', function() {
+                table.draw();
             });
         });
     </script>
