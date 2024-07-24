@@ -72,6 +72,7 @@ class AgendaMasukDetailController extends Controller
             'id_agenda'     => 'required',
             'nama_barang'   => 'required',
             'gambar'        => 'image|mimes:jpeg,jpg,png|max:2048',
+            'tahun_beli'        => 'required',
             'satuan'        => 'required',
             'harga_satuan'  => 'required',
         ]);
@@ -82,31 +83,25 @@ class AgendaMasukDetailController extends Controller
         $gambar->storeAs('public/gambar', $gambarName);
         
 
-            //create post
+        //create post
+        for ($i = 0; $i < $request->satuan; $i++) {
         AgendaMasukDetail::create([
             'id_agenda'     => $request->id_agenda,
             'nama_barang'   => $request->nama_barang,
             'gambar'        => $gambarName,
             'merk'          => $request->merk,
             'tipe'          => $request->tipe,
+            'tahun_beli'    => $request->tahun_beli,
             'no_rangka'     => $request->no_rangka,
             'no_mesin'      => $request->no_mesin,
             'no_polisi'     => $request->no_polisi,
             'no_bpkb'       => $request->no_bpkb,
-            'satuan'        => $request->satuan,
+            'satuan'        => 1,
             'harga_satuan'  => $request->harga_satuan,
             'lokasi'        => $request->lokasi
         ]);
 
-        KipB::create([
-            'jenis_barang'  => $request->nama_barang,
-            'merk'          => $request->merk,
-            'type'          => $request->tipe,
-            'tahun_beli'    => $request->tahun_beli,
-            'harga'         => $request->harga_satuan,
-            'lokasi'        => $request->lokasi
-        ]);    
-
+        }
         //redirect to index
         return redirect()->route('agendadtls.index', ['id_agenda' => $request->id_agenda])
                         ->with(['success' => 'Data Berhasil Disimpan!']);
@@ -198,6 +193,9 @@ class AgendaMasukDetailController extends Controller
     {
         //get post by ID
         $agendadtl = AgendaMasukDetail::findOrFail($id);
+
+        //delete image
+        Storage::delete('public/gambar/'. $agendadtl->gambar);
 
         //delete post
         $agendadtl->delete();

@@ -54,11 +54,11 @@
                 <!-- Content wrapper -->
                 <div class="content-wrapper">
                     <div class="container-xxl flex-grow-1 container-p-y">
-                        <h3>Penyedia</h3>
+                        <h3>Barang KIP-B</h3>
                         <!-- Pencarian -->
                         <div class="row mb-3">
                             <div class="col text-end">
-                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalTambahBarang">Tambah Penyedia</button>
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalTambahBarang">Tambah Barang</button>
                             </div>
                         </div>
 
@@ -67,38 +67,168 @@
                             <div class="modal-dialog modal-dialog-centered">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="modalTambahBarangLabel">Tambah Penyedia</h5>
+                                        <h5 class="modal-title" id="modalTambahBarangLabel">Tambah Barang</h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
-                                        <form action="{{ route('penyedias.store') }}" method="POST">
+                                        <form action="{{ route('kipbs.store') }}" method="POST">
                                             @csrf
-                                            <!-- Input untuk nama barang -->
                                             <div class="mb-3">
-                                                <label for="namaBarang" class="form-label">Nama Penyedia</label>
-                                                <input type="text" class="form-control" id="namaBarang" name="nama" placeholder="Nama Penyedia" required>
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <label for="penyedia" class="form-label">Kode Barang</label>
+                                                        <select class="form-control" id="penyedia" name="kode_barang"
+                                                            required>
+                                                            @foreach($kodes as $kode)
+                                                            <option value="{{ $kode->kode_barang }}">
+                                                                {{ $kode->kode_barang }} - {{ $kode->jenis_barang }}
+                                                            </option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                    <div class="col">
+                                                        <label for="lokasi" class="form-label">Jenis Barang</label>
+                                                        <input type="text" class="form-control" id="lokasi"
+                                                            name="nama_barang" placeholder="Jenis Barang" required>
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <!-- Input untuk Lokasi -->
                                             <div class="mb-3">
-                                                <label for="lokasi" class="form-label">Alamat</label>
-                                                <input type="text" class="form-control" id="lokasi" name="alamat" placeholder="Alamat" required>
+                                                <label for="lokasi" class="form-label">No Register</label>
+                                                <input type="text" class="form-control" id="lokasi" name="no_register"
+                                                    placeholder="No Register" required>
                                             </div>
                                             <div class="mb-3">
-                                                <label for="lokasi" class="form-label">NPWP</label>
-                                                <input type="text" class="form-control" id="lokasi" name="npwp" placeholder="NPWP" required>
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <label for="lokasi" class="form-label">Merk</label>
+                                                        <input type="text" class="form-control" id="lokasi" name="merk"
+                                                            placeholder="Merk">
+                                                    </div>
+                                                    <div class="col">
+                                                        <label for="lokasi" class="form-label">Type</label>
+                                                        <input type="text" class="form-control" id="lokasi" name="tipe"
+                                                            placeholder="Type">
+                                                </div>
                                             </div>
-                                            <!-- Tombol untuk menyimpan data -->
+                                            <div class="mb-3">
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <label for="lokasi" class="form-label">Ukuran</label>
+                                                        <input type="text" class="form-control" id="lokasi"
+                                                            name="ukuran" placeholder="Ukuran">
+                                                    </div>
+                                                    <div class="col">
+                                                        <label for="lokasi" class="form-label">Bahan</label>
+                                                        <input type="text" class="form-control" id="lokasi" name="merk"
+                                                            placeholder="Merk">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="lokasi" class="form-label">Tahun Beli</label>
+                                                <input type="text" class="form-control" id="lokasi" name="tahun_beli"
+                                                    placeholder="Tahun Beli" required>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="lokasi" class="form-label">No Pabrik</label>
+                                                <input type="text" class="form-control" id="lokasi" name="no_pabrik"
+                                                    placeholder="No Pabrik">
+                                            </div>
+                                            <div class="mb-3">
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <label for="lokasi" class="form-label">No Rangka</label>
+                                                        <input type="text" class="form-control" id="lokasi"
+                                                            name="no_rangka" placeholder="No Rangka">
+                                                    </div>
+                                                    <div class="col">
+                                                        <label for="lokasi" class="form-label">No Mesin</label>
+                                                        <input type="text" class="form-control" id="lokasi"
+                                                            name="no_mesin" placeholder="No Mesin">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="mb-3">
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <label for="lokasi" class="form-label">No Polisi</label>
+                                                        <input type="text" class="form-control" id="lokasi"
+                                                            name="no_polisi" placeholder="No Polisi">
+                                                    </div>
+                                                    <div class="col">
+                                                        <label for="lokasi" class="form-label">No BPKB</label>
+                                                        <input type="text" class="form-control" id="lokasi"
+                                                            name="no_bpkb" placeholder="No BPKB">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="lokasi" class="form-label">Asal Usul</label>
+                                                <input type="text" class="form-control" id="lokasi" name="asal_usul"
+                                                    placeholder="Asal Usul">
+                                            </div>
+                                            <div class="mb-3">
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <label for="lokasi" class="form-label">Harga</label>
+                                                        <input type="number" class="form-control" id="lokasi"
+                                                            name="harga_satuan" placeholder="Harga" required>
+                                                    </div>
+                                                    <div class="col">
+                                                        <label for="lokasi" class="form-label">Beban Susut</label>
+                                                        <input type="number" class="form-control" id="lokasi"
+                                                            name="beban_susut" placeholder="Beban Susut" required>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="lokasi" class="form-label">Nilai Buku</label>
+                                                <input type="number" class="form-control" id="lokasi" name="nilai_buku"
+                                                    placeholder="Nilai Buku">
+                                            </div>
+                                            <div class="mb-3">
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <label for="lokasi" class="form-label">Kondisi</label>
+                                                        <select class="form-control" id="lokasi" name="kondisi"
+                                                            required>
+                                                            <option value="">Pilih Kondisi</option>
+                                                            <option value="BAIK">BAIK</option>
+                                                            <option value="KURANG BAIK">KURANG BAIK</option>
+                                                            <option value="RUSAK BERAT">RUSAK BERAT</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col">
+                                                        <label for="lokasi" class="form-label">Lokasi</label>
+                                                        <select class="form-control" id="lokasi" name="lokasi" required>
+                                                            <option value="">Pilih Lokasi</option>
+                                                            <option value="Kepala Dinas">Kepala Dinas</option>
+                                                            <option value="Sekretariat">Sekretariat</option>
+                                                            <option value="Sekretaris">Sekretaris</option>
+                                                            <option value="Bidang TI">Bidang TI</option>
+                                                            <option value="Bidang SIB">Bidang SIB</option>
+                                                            <option value="Bidang SPBE">Bidang SPBE</option>
+                                                            <option value="Ruang Rapat">Ruang Rapat</option>
+                                                            <option value="Radio">Radio</option>
+                                                            <option value="Call Center">Call Center</option>
+                                                            <option value="Server Kominfo">Server Kominfo</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
                                             <button type="submit" class="btn btn-primary">Simpan</button>
                                         </form>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                    </div>
 
                         <!-- Filter Section -->
                         <div class="row mb-3">
                             <div class="col-md-4">
-                                <input type="text" class="form-control" name="jenis_barang" id="filter-jenis-barang" placeholder=" Filter Nama Jenis Barang">
+                                <input type="text" class="form-control" name="nama_barang" id="filter-nama-barang" placeholder=" Filter Jenis Barang">
                             </div>
                             <div class="col-md-4">
                                 <input type="text" class="form-control" name="tahun_beli" id="filter-tahun-beli" placeholder="Filter Tahun Beli">
@@ -107,6 +237,15 @@
                                 <input type="text" class="form-control" name="kondisi" id="filter-kondisi" placeholder="Filter Kondisi">
                             </div>
                         </div>
+                        @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                        @endif
 
                         <!-- Tabel Barang -->
                         <div class="card">
@@ -183,17 +322,17 @@
                     url: '{{ route('kipbs.data') }}',
                     type: 'GET',
                     data: function(d) {
-                        d.jenis_barang = $('#filter-jenis-barang').val();
+                        d.nama_barang = $('#filter-nama-barang').val();
                         d.tahun_beli = $('#filter-tahun-beli').val();
                         d.kondisi = $('#filter-kondisi').val();
                     }
                 },
                 columns: [
                     { data: 'kode_barang', name: 'kode_barang' },
-                    { data: 'jenis_barang', name: 'jenis_barang' },
+                    { data: 'nama_barang', name: 'jenis_barang' },
                     { data: 'no_register', name: 'no_register' },
                     { data: 'merk', name: 'merk' },
-                    { data: 'type', name: 'type' },
+                    { data: 'tipe', name: 'tipe' },
                     { data: 'ukuran', name: 'ukuran' },
                     { data: 'bahan', name: 'bahan' },
                     { data: 'tahun_beli', name: 'tahun_beli' },
@@ -203,7 +342,7 @@
                     { data: 'no_polisi', name: 'no_polisi' },
                     { data: 'no_bpkb', name: 'no_bpkb' },
                     { data: 'asal_usul', name: 'asal_usul' },
-                    { data: 'harga', name: 'harga' },
+                    { data: 'harga_satuan', name: 'harga' },
                     { data: 'beban_susut', name: 'beban_susut' },
                     { data: 'nilai_buku', name: 'nilai_buku' },
                     { data: 'kondisi', name: 'kondisi' },
@@ -212,7 +351,7 @@
                 ]
             });
 
-            $('#filter-jenis-barang, #filter-tahun-beli, #filter-kondisi').on('keyup change', function() {
+            $('#filter-nama-barang, #filter-tahun-beli, #filter-kondisi').on('keyup change', function() {
                 table.draw();
             });
         });

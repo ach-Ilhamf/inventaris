@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 //import Model 
-use App\Models\KipB;
 
+use App\Models\AgendaMasukDetail;
+use App\Models\KodeBarang;
 //return type View
 use Illuminate\View\View;
 
@@ -22,19 +23,20 @@ class KipBController extends Controller
      */
     public function index():View
     {
-        $kipbs = KipB::oldest()->paginate();
-
-        return view('kantor.kip b.kip_b', compact('kipbs'));
+        $kodes = KodeBarang::all();
+        return view('kantor.kip b.kip_b', compact('kodes'));
 
     }
 
     public function getData(Request $request)
     {
         if ($request->ajax()) {
-        $kipbs = KipB::select(['*']);
+        $kipbs = AgendaMasukDetail::select(['id','kode_barang','nama_barang','no_register', 'merk', 'tipe', 'ukuran',
+                                                'bahan', 'tahun_beli', 'no_pabrik', 'no_rangka', 'no_mesin', 'no_polisi',
+                                                'no_bpkb', 'asal_usul', 'harga_satuan', 'beban_susut', 'nilai_buku', 'kondisi', 'lokasi']);
 
-        if ($request->has('jenis_barang') && !empty($request->jenis_barang)) {
-            $kipbs->where('jenis_barang', 'like', "%{$request->jenis_barang}%");
+        if ($request->has('nama_barang') && !empty($request->nama_barang)) {
+            $kipbs->where('nama_barang', 'like', "%{$request->nama_barang}%");
         }
 
         if ($request->has('tahun_beli') && !empty($request->tahun_beli)) {
@@ -79,22 +81,22 @@ class KipBController extends Controller
         //validate form
         $this->validate($request, [
             'kode_barang'    => 'required',
-            'jenis_barang'   => 'required',
+            'nama_barang'   => 'required',
             'no_register'    => 'required',
             'tahun_beli'     => 'required',
-            'harga'          => 'required',
-            'beban_susut'    => 'required',
+            'harga_satuan'   => 'required',
+            'beban_susut'   => 'required',
             'kondisi'        => 'required',
             'lokasi'         => 'required',
         ]);
 
         //create post
-        KipB::create([
+        AgendaMasukDetail::create([
             'kode_barang'   => $request->kode_barang,
-            'jenis_barang'  => $request->jenis_barang,
+            'nama_barang'  => $request->nama_barang,
             'no_register'   => $request->no_register,
             'merk'          => $request->merk,
-            'type'          => $request->type,
+            'tipe'          => $request->tipe,
             'ukuran'        => $request->ukuran,
             'bahan'         => $request->bahan,
             'tahun_beli'    => $request->tahun_beli,
@@ -104,7 +106,7 @@ class KipBController extends Controller
             'no_polisi'     => $request->no_polisi,
             'no_bpkb'       => $request->no_bpkb,
             'asal_usul'     => $request->asal_usul,
-            'harga'         => $request->harga,
+            'harga_satuan'  => $request->harga_satuan,
             'beban_susut'   => $request->beban_susut,
             'nilai_buku'    => $request->nilai_buku,
             'kondisi'       => $request->kondisi,
@@ -129,7 +131,7 @@ class KipBController extends Controller
      */
     public function edit(string $id): View
     {
-        $kipb = KipB::findOrFail($id);
+        $kipb = AgendaMasukDetail::findOrFail($id);
 
         return view('kantor.kip b.edit_kip', compact('kipb'));
 
@@ -142,23 +144,23 @@ class KipBController extends Controller
     {
         $this->validate($request, [
             'kode_barang'    => 'required',
-            'jenis_barang'   => 'required',
+            'nama_barang'   => 'required',
             'no_register'    => 'required',
             'tahun_beli'     => 'required',
-            'harga'          => 'required',
+            'harga_satuan'          => 'required',
             'beban_susut'    => 'required',
             'kondisi'        => 'required',
             'lokasi'         => 'required',
         ]);
 
-        $kipb = KipB::findOrFail($id);
+        $kipb = AgendaMasukDetail::findOrFail($id);
 
         $kipb->update([
             'kode_barang'   => $request->kode_barang,
-            'jenis_barang'  => $request->jenis_barang,
+            'nama_barang'  => $request->nama_barang,
             'no_register'   => $request->no_register,
             'merk'          => $request->merk,
-            'type'          => $request->type,
+            'tipe'          => $request->tipe,
             'ukuran'        => $request->ukuran,
             'bahan'         => $request->bahan,
             'tahun_beli'    => $request->tahun_beli,
@@ -187,7 +189,7 @@ class KipBController extends Controller
     public function destroy($id): RedirectResponse
     {
         //get post by ID
-        $kipb = KipB::findOrFail($id);
+        $kipb = AgendaMasukDetail::findOrFail($id);
 
         //delete post
         $kipb->delete();

@@ -5,8 +5,10 @@ use App\Http\Controllers\PenyediaController;
 use App\Http\Controllers\AgendaMasukController;
 use App\Http\Controllers\AgendaMasukDetailController;
 use App\Http\Controllers\KipBController;
+use App\Http\Controllers\KodeBarangController;
 use App\Models\AgendaMasukDetail;
 use App\Models\KipB;
+use App\Models\KodeBarang;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,3 +38,6 @@ Route::get('/agendadtls/create/{id_agenda}', [AgendaMasukDetailController::class
 
 Route::get('kipbs/data', [KipBController::class, 'getData'])->name('kipbs.data');
 Route::resource('/kipbs', \App\Http\Controllers\KipBController::class);
+
+Route::get('kodes/data', [KodeBarangController::class, 'getData'])->name('kodes.data');
+Route::resource('/kodes', \App\Http\Controllers\KodeBarangController::class);

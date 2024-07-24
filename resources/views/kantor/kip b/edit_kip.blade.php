@@ -91,14 +91,14 @@
                                                     <div class="col">
                                                         <label for="lokasi" class="form-label">Jenis Barang</label>
                                                         <input type="text" class="form-control" id="lokasi"
-                                                            name="jenis_barang" placeholder="Jenis Barang" value="{{ old('kipb', $kipb->jenis_barang) }}" required>
+                                                            name="nama_barang" placeholder="Jenis Barang" value="{{ old('kipb', $kipb->nama_barang) }}" required>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="mb-3">
                                                 <label for="lokasi" class="form-label">No Register</label>
                                                 <input type="text" class="form-control" id="lokasi" name="no_register"
-                                                    placeholder="no_register" value="{{ old('kipb', $kipb->no_register) }}" required>
+                                                    placeholder="No Register" value="{{ old('kipb', $kipb->no_register) }}" required>
                                             </div>
                                             <div class="mb-3">
                                                 <div class="row">
@@ -109,8 +109,8 @@
                                                     </div>
                                                     <div class="col">
                                                         <label for="lokasi" class="form-label">Type</label>
-                                                        <input type="text" class="form-control" id="lokasi" name="type"
-                                                            placeholder="Type" value="{{ old('kipb', $kipb->type) }}">
+                                                        <input type="text" class="form-control" id="lokasi" name="tipe"
+                                                            placeholder="Type" value="{{ old('kipb', $kipb->tipe) }}">
                                                     </div>
                                                 </div>
                                             </div>
@@ -176,7 +176,7 @@
                                                     <div class="col">
                                                         <label for="lokasi" class="form-label">Harga</label>
                                                         <input type="number" class="form-control" id="lokasi"
-                                                            name="harga" placeholder="Harga" value="{{ old('kipb', $kipb->harga) }}" required>
+                                                            name="harga_satuan" placeholder="Harga" value="{{ old('kipb', $kipb->harga_satuan) }}" required>
                                                     </div>
                                                     <div class="col">
                                                         <label for="lokasi" class="form-label">Beban Susut</label>
@@ -197,9 +197,9 @@
                                                         <select class="form-control" id="lokasi" name="kondisi"
                                                             required>
                                                             <option value="">Pilih Kondisi</option>
-                                                            <option value="RUSAK BERAT">RUSAK BERAT</option>
-                                                            <option value="KURANG BAIK">KURANG BAIK</option>
                                                             <option value="BAIK">BAIK</option>
+                                                            <option value="KURANG BAIK">KURANG BAIK</option>
+                                                            <option value="RUSAK BERAT">RUSAK BERAT</option>
                                                         </select>
                                                     </div>
                                                     <div class="col">

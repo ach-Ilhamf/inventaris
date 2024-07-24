@@ -84,7 +84,7 @@
                                             <div class="mb-3">
                                                 <label for="namaBarang" class="form-label">Nama Kegiatan</label>
                                                 <input type="text" class="form-control" id="namaBarang"
-                                                    name="nama_agenda" placeholder="Nama Penyedia"
+                                                    name="nama_agenda" placeholder="Nama Kegiatan"
                                                     value="{{ old('agenda_masuk', $agenda->nama_agenda) }}" required>
                                             </div>
                                             <!-- Input untuk Lokasi -->
