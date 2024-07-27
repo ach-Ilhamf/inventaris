@@ -44,13 +44,13 @@ class KipBController extends Controller
         }
 
         if ($request->has('kondisi') && !empty($request->kondisi)) {
-            $kipbs->where('kondisi', 'like', "%{$request->kondisi}%");
+            $kipbs->where('kondisi', 'like', "{$request->kondisi}%");
         }
 
         return DataTables::of($kipbs)
             ->addColumn('action', function ($kipb) {
                 return '<a href="'.route('kipbs.edit', $kipb->id).'" class="btn btn-sm btn-primary">EDIT</a>
-                        <form style="display:inline;" method="POST" action="'.route('kipbs.destroy', $kipb->id).'" onsubmit="return confirm(\'Apakah Anda Yakin ?\');">
+                        <form style="display:inline;" method="POST" action="'.route('kipbs.destroy', $kipb->id).'" onsubmit="return confirm(\'Apakah Anda Yakin Untuk Menghapus Data ?\');">
                             '.csrf_field().'
                             '.method_field('DELETE').'
                             <button type="submit" class="btn btn-sm btn-danger">HAPUS</button>
@@ -132,8 +132,9 @@ class KipBController extends Controller
     public function edit(string $id): View
     {
         $kipb = AgendaMasukDetail::findOrFail($id);
+        $kodes = KodeBarang::all();
 
-        return view('kantor.kip b.edit_kip', compact('kipb'));
+        return view('kantor.kip b.edit_kip', compact('kipb', 'kodes'));
 
     }
 

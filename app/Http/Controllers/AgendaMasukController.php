@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 //import Model 
 use App\Models\AgendaMasuk;
+use App\Models\AgendaMasukDetail;
 use App\Models\Penyedia;
 
 //return type View
@@ -59,7 +60,7 @@ class AgendaMasukController extends Controller
                     $deleteUrl = route('agendas.destroy', $row->id);
                     return '<a href="' . $showUrl . '" class="btn btn-sm btn-dark">DATA BARANG</a>
                             <a href="' . $editUrl . '" class="btn btn-sm btn-primary">EDIT</a>
-                            <form action="' . $deleteUrl . '" method="POST" style="display:inline-block;">
+                            <form action="' . $deleteUrl . '" method="POST" style="display:inline-block;" onsubmit="return confirm(\'Apakah Anda Yakin Untuk Menghapus Data ?\');">
                                 ' . csrf_field() . method_field('DELETE') . '
                                 <button type="submit" class="btn btn-sm btn-danger">HAPUS</button>
                             </form>';

@@ -19,6 +19,10 @@ class AgendaMasukDetail extends Model
         return $this->belongsTo(KodeBarang::class, 'kode_barang');
     }
 
+    public function pegawai()
+    {
+        return $this->belongsTo(Pegawai::class, 'id_pegawai');
+    }
 
         /**
      * fillable
@@ -30,6 +34,7 @@ class AgendaMasukDetail extends Model
         'kode_barang',
         'nama_barang',
         'no_register',
+        'id_pegawai',
         'gambar',
         'merk',
         'tipe',

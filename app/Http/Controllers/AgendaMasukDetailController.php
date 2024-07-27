@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\AgendaMasuk;
 use App\Models\AgendaMasukDetail;
 use App\Models\KipB;
-
+use App\Models\Pegawai;
 //return type View
 use Illuminate\View\View;
 
@@ -25,13 +25,12 @@ class AgendaMasukDetailController extends Controller
      */
     public function index($id_agenda): view
     {
-    
         return view('kantor.agenda masuk.agenda_masuk_detail');
     }
 
     public function getData($id_agenda)
     {
-        $agendadtls = AgendaMasukDetail::where('id_agenda', $id_agenda)
+        $agendadtls = AgendaMasukDetail::with('pegawai')->where('id_agenda', $id_agenda)
             ->get();
 
         return DataTables::of($agendadtls)
@@ -43,7 +42,7 @@ class AgendaMasukDetailController extends Controller
             })
             ->addColumn('action', function ($detail) {
                 return ' <a href="' . route('agendadtls.edit', $detail->id) . '" class="btn btn-sm btn-primary">EDIT</a>
-                            <form action="' . route('agendadtls.destroy', $detail->id) . '" method="POST" style="display:inline-block;">
+                            <form action="' . route('agendadtls.destroy', $detail->id) . '" method="POST" style="display:inline-block;" onsubmit="return confirm(\'Apakah Anda Yakin Untuk Menghapus Data ?\');">
                                 ' . csrf_field() . method_field('DELETE') . '
                                 <button type="submit" class="btn btn-sm btn-danger">HAPUS</button>
                             </form>';
@@ -59,7 +58,8 @@ class AgendaMasukDetailController extends Controller
      */
     public function create($id_agenda): view
     {
-        return view('kantor.agenda masuk.tambah_agenda_detail', compact('id_agenda'));
+        $pegawaiList = Pegawai::all();
+        return view('kantor.agenda masuk.tambah_agenda_detail', compact('id_agenda', 'pegawaiList'));
     }
 
     /**
@@ -71,8 +71,9 @@ class AgendaMasukDetailController extends Controller
         $this->validate($request, [
             'id_agenda'     => 'required',
             'nama_barang'   => 'required',
+            'id_pegawai'    => 'required',
             'gambar'        => 'image|mimes:jpeg,jpg,png|max:2048',
-            'tahun_beli'        => 'required',
+            'tahun_beli'    => 'required',
             'satuan'        => 'required',
             'harga_satuan'  => 'required',
         ]);
@@ -88,6 +89,7 @@ class AgendaMasukDetailController extends Controller
         AgendaMasukDetail::create([
             'id_agenda'     => $request->id_agenda,
             'nama_barang'   => $request->nama_barang,
+            'id_pegawai'    => $request->id_pegawai,
             'gambar'        => $gambarName,
             'merk'          => $request->merk,
             'tipe'          => $request->tipe,
@@ -124,8 +126,9 @@ class AgendaMasukDetailController extends Controller
     public function edit(string $id)
     {
         $agendadtl = AgendaMasukDetail::findOrFail($id);
+        $pegawaiList = Pegawai::all();
 
-        return view('kantor.agenda masuk.edit_agenda_dtl', compact('agendadtl'));
+        return view('kantor.agenda masuk.edit_agenda_dtl', compact('agendadtl', 'pegawaiList'));
 
     }
 
@@ -138,7 +141,9 @@ class AgendaMasukDetailController extends Controller
     // Validasi form
     $this->validate($request, [
         'nama_barang'   => 'required',
+        'id_pegawai'    => 'required',
         'gambar'        => 'nullable|image|mimes:jpeg,jpg,png|max:2048',
+        'tahun_beli'    => 'required',
         'satuan'        => 'required',
         'harga_satuan'  => 'required',
     ]);
@@ -149,15 +154,17 @@ class AgendaMasukDetailController extends Controller
     // Data yang akan diupdate
     $updateData = [
         'nama_barang'   => $request->nama_barang,
+        'id_pegawai'    => $request->id_pegawai,
         'merk'          => $request->merk,
         'tipe'          => $request->tipe,
+        'tahun_beli'    => $request->tahun_beli,
         'no_rangka'     => $request->no_rangka,
         'no_mesin'      => $request->no_mesin,
         'no_polisi'     => $request->no_polisi,
         'no_bpkb'       => $request->no_bpkb,
         'satuan'        => $request->satuan,
         'harga_satuan'  => $request->harga_satuan,
-        'lokasi'  => $request->lokasi,
+        'lokasi'        => $request->lokasi,
     ];
 
     // Jika ada gambar baru yang diunggah

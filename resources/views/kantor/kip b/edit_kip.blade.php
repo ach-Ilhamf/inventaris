@@ -84,9 +84,15 @@
                                             <div class="mb-3">
                                                 <div class="row">
                                                     <div class="col">
-                                                        <label for="namaBarang" class="form-label">Kode Barang</label>
-                                                        <input type="text" class="form-control" id="namaBarang"
-                                                            name="kode_barang" placeholder="Kode Barang" value="{{ old('kipb', $kipb->kode_barang) }}" required>
+                                                        <label for="penyedia" class="form-label">Kode Barang</label>
+                                                        <select class="form-control" id="penyedia" name="kode_barang"
+                                                            required>
+                                                            @foreach($kodes as $kode)
+                                                            <option value="{{ $kode->kode_barang }}">
+                                                                {{ $kode->kode_barang }} - {{ $kode->jenis_barang }}
+                                                            </option>
+                                                            @endforeach
+                                                        </select>
                                                     </div>
                                                     <div class="col">
                                                         <label for="lokasi" class="form-label">Jenis Barang</label>
@@ -220,7 +226,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <button type="submit" class="btn btn-primary">Simpan</button>
+                                            <button onclick="return confirm('Apakah Anda Yakin Untuk Mengedit Barang ?');" type="submit" class="btn btn-primary">Simpan</button>
                                         </form>
                                     </div>
                                 </div>

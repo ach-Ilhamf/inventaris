@@ -62,6 +62,11 @@
                         <div tabindex="-1" aria-labelledby="modalTambahBarangLabel" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered">
                                 <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="modalTambahBarangLabel">Edit Penyedia</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
                                     @if ($errors->any())
                                     <div class="alert alert-danger">
                                         <ul>
@@ -93,7 +98,7 @@
                                                     placeholder="NPWP" value="{{ old('penyedia', $penyedia->npwp)}}" required>
                                             </div>
                                             <!-- Tombol untuk menyimpan data -->
-                                            <button type="submit" class="btn btn-primary">Simpan</button>
+                                            <button onclick="return confirm('Apakah Anda Yakin Untuk Mengedit Penyedia ?');" type="submit" class="btn btn-primary">Simpan</button>
                                         </form>
                                     </div>
                                 </div>

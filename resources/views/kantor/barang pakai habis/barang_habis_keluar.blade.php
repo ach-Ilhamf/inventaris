@@ -58,12 +58,12 @@
                 <!-- Content wrapper -->
                 <div class="content-wrapper">
                     <div class="container-xxl flex-grow-1 container-p-y">
-                        <h3>Penyedia</h3>
+                        <h3>Pengeluaran Barang Pakai Habis</h3>
                         <!-- Pencarian -->
                         <div class="row mb-3">
                             <div class="col text-end">
                                 <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                    data-bs-target="#modalTambahBarang">Tambah Penyedia</button>
+                                    data-bs-target="#modalTambahBarang">Tambah Penerimaan Barang Pakai Habis</button>
                             </div>
                         </div>
 
@@ -73,32 +73,52 @@
                             <div class="modal-dialog modal-dialog-centered">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="modalTambahBarangLabel">Tambah Penyedia</h5>
+                                        <h5 class="modal-title" id="modalTambahBarangLabel">Tambah Penerimaan Barang Pakai Habis</h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
-                                        <form action="{{ route('penyedias.store') }}" method="POST">
+                                        <form action="{{ route('baranghabiskeluar.store') }}" method="POST">
                                             @csrf
                                             <!-- Input untuk nama barang -->
                                             <div class="mb-3">
-                                                <label for="namaBarang" class="form-label">Nama Penyedia</label>
-                                                <input type="text" class="form-control" id="namaBarang" name="nama"
-                                                    placeholder="Nama Penyedia" required>
+                                                <label for="namaBarang" class="form-label">Jenis Barang Yang Dikeluarkan</label>
+                                                <input type="text" class="form-control" id="namaBarang" name="jenis_barang"
+                                                    placeholder="Jenis Barang Yang Dikeluarkan" required>
                                             </div>
                                             <!-- Input untuk Lokasi -->
                                             <div class="mb-3">
-                                                <label for="lokasi" class="form-label">Alamat</label>
-                                                <input type="text" class="form-control" id="lokasi" name="alamat"
+                                                <label for="lokasi" class="form-label">Tanggal Berita Acara Pengeluaran</label>
+                                                <input type="date" class="form-control" id="lokasi" name="tgl_keluar"
                                                     placeholder="Alamat" required>
                                             </div>
                                             <div class="mb-3">
-                                                <label for="lokasi" class="form-label">NPWP</label>
-                                                <input type="text" class="form-control" id="lokasi" name="npwp"
-                                                    placeholder="NPWP" required>
+                                                <label for="lokasi" class="form-label">No Berita Acara Pengeluaran</label>
+                                                <input type="text" class="form-control" id="lokasi" name="no_keluar"
+                                                    placeholder="No Berita Acara Pengeluaran" required>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="lokasi" class="form-label">Banyaknya Barang</label>
+                                                <input type="number" class="form-control" id="lokasi" name="banyak_barang"
+                                                    placeholder="Banyaknya Barang" required>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="lokasi" class="form-label">Harga Satuan</label>
+                                                <input type="number" class="form-control" id="lokasi" name="harga_satuan"
+                                                    placeholder="Harga Satuan" required>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="lokasi" class="form-label">Dikeluarkan Untuk Unit</label>
+                                                <input type="text" class="form-control" id="lokasi" name="unit"
+                                                    placeholder="Dikeluarkan Untuk Unit" required>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="lokasi" class="form-label">Keterangan</label>
+                                                <input type="number" class="form-control" id="lokasi" name="keterangan"
+                                                    placeholder="Keterangan" required>
                                             </div>
                                             <!-- Tombol untuk menyimpan data -->
-                                            <button onclick="return confirm('Apakah Anda Yakin Untuk Menambah Penyedia ?');" type="submit" class="btn btn-primary">Simpan</button>
+                                            <button onclick="return confirm('Apakah Anda Yakin Untuk Menambah Penerimaan Barang ?');" type="submit" class="btn btn-primary">Simpan</button>
                                         </form>
                                     </div>
                                 </div>
@@ -111,9 +131,14 @@
                                 <table id="penyedia_table" class="table table-striped">
                                     <thead>
                                         <tr class="text-center">
-                                            <th>Nama Penyedia</th>
-                                            <th>Alamat</th>
-                                            <th>NPWP</th>
+                                            <th>Kode Barang</th>
+                                            <th>Jenis Barang Yang Dikeluarkan</th>
+                                            <th>Tanggal Berita Acara Pengeluaran</th>
+                                            <th>No Berita Acara Pengeluaran</th>
+                                            <th>Banyaknya Barang</th>
+                                            <th>Harga Satuan</th>
+                                            <th>Dikeluarkan Untuk Unit</th>
+                                            <th>Keterangan</th>
                                             <th>Actions</th>
                                         </tr>
                                     </thead>

@@ -14,9 +14,10 @@ return new class extends Migration
         Schema::create('agenda_masuk_details', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('id_agenda')->nullable();
-            $table->string('kode_barang')->nullable()->nullable();
+            $table->string('kode_barang')->nullable();
             $table->string('nama_barang');
             $table->string('no_register')->nullable();
+            $table->unsignedBigInteger('id_pegawai');
             $table->string('gambar')->nullable();
             $table->string('merk')->nullable();
             $table->string('tipe')->nullable();
@@ -38,8 +39,9 @@ return new class extends Migration
             'Bidang SPBE', 'Ruang Rapat', 'Radio', 'Call Center', 'Server Kominfo']);
             $table->timestamps();
 
-            $table->foreign('id_agenda')->references('id')->on('agenda_masuks');
+            $table->foreign('id_agenda')->references('id')->on('agenda_masuks')->onDelete('cascade');
             $table->foreign('kode_barang')->references('kode_barang')->on('kode_barangs');
+            $table->foreign('id_pegawai')->references('id')->on('pegawais');
 
         });
     }

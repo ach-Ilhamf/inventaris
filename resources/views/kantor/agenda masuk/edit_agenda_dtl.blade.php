@@ -83,18 +83,42 @@
                                             @method('PUT')
                                             <input type="hidden" name="id_agenda" value="{{ $agendadtl->id_agenda }}">
                                             <div class="mb-3">
-                                                <label for="nama_barang" class="form-label">Nama Barang</label>
-                                                <input type="text" class="form-control" id="nama_barang" name="nama_barang" value="{{ old('nama_barang', $agendadtl->nama_barang) }}" required>
-                                            </div>
-                                            <div class="mb-3">
-                                                <label for="gambar" class="form-label">Gambar Barang</label>
-                                                @if($agendadtl->gambar)
-                                                    <div class="mb-2">
-                                                        <img src="{{ asset('storage/gambar/' . $agendadtl->gambar) }}" class="rounded" style="width: 150px">
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <label for="nama_barang" class="form-label">Nama Barang</label>
+                                                        <input type="text" class="form-control" id="nama_barang" name="nama_barang" value="{{ old('nama_barang', $agendadtl->nama_barang) }}" required>
+                                                        </div>
+                                                        <div class="col">
+                                                            <label for="penyedia" class="form-label">Nama Pegawai</label>
+                                                            <select class="form-control" id="penyedia" name="id_pegawai"
+                                                                required>
+                                                                @foreach($pegawaiList as $pegawai)
+                                                                <option value="{{ $pegawai->id }}">
+                                                                    {{ $pegawai->nama_pegawai }} - {{ $pegawai->unit }} 
+                                                                </option>
+                                                                @endforeach
+                                                            </select>
                                                     </div>
-                                                @endif
-                                                <input type="file" class="form-control" id="gambar" name="gambar">
-                                                <small class="text-muted">Kosongkan jika tidak ingin mengubah gambar.</small>
+                                                </div>
+                                            </div>    
+                                            <div class="mb-3">
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <label for="gambar" class="form-label">Gambar Barang</label>
+                                                        @if($agendadtl->gambar)
+                                                            <div class="mb-2">
+                                                                <img src="{{ asset('storage/gambar/' . $agendadtl->gambar) }}" class="rounded" style="width: 150px">
+                                                            </div>
+                                                        @endif
+                                                        <input type="file" class="form-control" id="gambar" name="gambar">
+                                                        <small class="text-muted">Kosongkan jika tidak ingin mengubah gambar.</small>
+                                                    </div>
+                                                    <div class="col">
+                                                        <label for="nama_barang" class="form-label">Tahun Beli</label>
+                                                        <input type="text" class="form-control" id="nama_barang"
+                                                            name="tahun_beli" value="{{ old('nama_barang', $agendadtl->tahun_beli) }}" placeholder="Tahun Beli" required>
+                                                    </div>
+                                                </div>
                                             </div>
                                             <div class="mb-3">
                                                 <div class="row">
@@ -168,7 +192,7 @@
                                                     <option value="Server Kominfo">Server Kominfo</option>
                                                 </select>
                                             </div>
-                                            <button type="submit" class="btn btn-primary">Simpan</button>
+                                            <button onclick="return confirm('Apakah Anda Yakin Untuk Mengedit Barang ?');" type="submit" class="btn btn-primary">Simpan</button>
                                         </form>                                    
                                     </div>
                                 </div>

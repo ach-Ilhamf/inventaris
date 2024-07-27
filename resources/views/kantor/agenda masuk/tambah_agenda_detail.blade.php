@@ -92,16 +92,31 @@
                                                             name="nama_barang" placeholder="Nama Barang" required>
                                                     </div>
                                                     <div class="col">
+                                                        <label for="penyedia" class="form-label">Nama Pegawai</label>
+                                                        <select class="form-control" id="penyedia" name="id_pegawai"
+                                                            required>
+                                                            @foreach($pegawaiList as $pegawai)
+                                                            <option value="{{ $pegawai->id }}">
+                                                                {{ $pegawai->nama_pegawai }} - {{ $pegawai->unit }} 
+                                                            </option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>    
+                                            <div class="mb-3">
+                                                <div class="row">
+                                                    <div class="col">
                                                         <label for="nama_barang" class="form-label">Gambar Barang</label>
                                                         <input type="file" class="form-control" id="nama_barang"
                                                             name="gambar" placeholder="Gambar Barang">
                                                     </div>
+                                                    <div class="col">
+                                                        <label for="nama_barang" class="form-label">Tahun Beli</label>
+                                                        <input type="text" class="form-control" id="nama_barang"
+                                                            name="tahun_beli" placeholder="Tahun Beli" required>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="mb-3">
-                                                <label for="nama_barang" class="form-label">Tahun Beli</label>
-                                                <input type="text" class="form-control" id="nama_barang"
-                                                    name="tahun_beli" placeholder="Tahun Beli" required>
                                             </div>
                                             <div class="mb-3">
                                                 <div class="row">
@@ -175,7 +190,7 @@
                                                     <option value="Server Kominfo">Server Kominfo</option>
                                                 </select>
                                             </div>                                            <!-- Tombol untuk menyimpan data -->
-                                            <button type="submit" class="btn btn-primary">Simpan</button>
+                                            <button onclick="return confirm('Apakah Anda Yakin Untuk Menambah Barang ?');" type="submit" class="btn btn-primary">Simpan</button>
                                         </form>
                                     </div>
                                 </div>

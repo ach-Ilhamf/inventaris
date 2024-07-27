@@ -55,7 +55,6 @@
                 <div class="content-wrapper">
                     <div class="container-xxl flex-grow-1 container-p-y">
                         <h3>Barang KIP-B</h3>
-                        <!-- Pencarian -->
                         <div class="row mb-3">
                             <div class="col text-end">
                                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalTambahBarang">Tambah Barang</button>
@@ -217,7 +216,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <button type="submit" class="btn btn-primary">Simpan</button>
+                                            <button onclick="return confirm('Apakah Anda Yakin Untuk Menambah Barang ?');" type="submit" class="btn btn-primary">Simpan</button>
                                         </form>
                                     </div>
                                 </div>
@@ -329,7 +328,7 @@
                 },
                 columns: [
                     { data: 'kode_barang', name: 'kode_barang' },
-                    { data: 'nama_barang', name: 'jenis_barang' },
+                    { data: 'nama_barang', name: 'nama_barang' },
                     { data: 'no_register', name: 'no_register' },
                     { data: 'merk', name: 'merk' },
                     { data: 'tipe', name: 'tipe' },
@@ -342,7 +341,8 @@
                     { data: 'no_polisi', name: 'no_polisi' },
                     { data: 'no_bpkb', name: 'no_bpkb' },
                     { data: 'asal_usul', name: 'asal_usul' },
-                    { data: 'harga_satuan', name: 'harga' },
+                    { data: 'harga_satuan', name: 'harga', render: function(data, type, row) {
+                        return 'Rp ' + parseInt(data).toLocaleString('id-ID'); } },
                     { data: 'beban_susut', name: 'beban_susut' },
                     { data: 'nilai_buku', name: 'nilai_buku' },
                     { data: 'kondisi', name: 'kondisi' },

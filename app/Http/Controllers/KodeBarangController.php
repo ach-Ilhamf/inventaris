@@ -37,7 +37,7 @@ class KodeBarangController extends Controller
                     $editUrl = route('kodes.edit', $row->id);
                     $deleteUrl = route('kodes.destroy', $row->id);
                     return '<a href="' . $editUrl . '" class="btn btn-sm btn-primary">EDIT</a>
-                            <form action="' . $deleteUrl . '" method="POST" style="display:inline-block;">
+                            <form action="' . $deleteUrl . '" method="POST" style="display:inline-block;" onsubmit="return confirm(\'Apakah Anda Yakin Untuk Menghapus Data ?\');">
                                 ' . csrf_field() . method_field('DELETE') . '
                                 <button type="submit" class="btn btn-sm btn-danger">HAPUS</button>
                             </form>';

@@ -202,7 +202,7 @@
                                                     placeholder="Keterangan">
                                             </div>
                                             <!-- Tombol untuk menyimpan data -->
-                                            <button type="submit" class="btn btn-primary">Simpan</button>
+                                            <button onclick="return confirm('Apakah Anda Yakin Untuk Menambah Kegiatan ?');" type="submit" class="btn btn-primary">Simpan</button>
                                         </form>
                                     </div>
                                 </div>
@@ -296,7 +296,8 @@
                 columns: [
                     { data: 'nama_agenda', name: 'nama_agenda' },
                     { data: 'penyedia.nama', name: 'penyedia.nama' },
-                    { data: 'nilai_kontrak', name: 'nilai_kontrak' },
+                    { data: 'nilai_kontrak', name: 'nilai_kontrak', render: function(data, type, row) {
+                        return 'Rp ' + parseInt(data).toLocaleString('id-ID');} },
                     { data: 'tgl_masuk', name: 'tgl_masuk' },
                     { data: 'skp', name: 'skp' },
                     { data: 'bahp', name: 'bahp' },

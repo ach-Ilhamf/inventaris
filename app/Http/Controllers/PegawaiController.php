@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 //import Model 
 
+use App\Models\Pegawai;
 use App\Models\Penyedia;
 
 //return type View
@@ -16,7 +17,7 @@ use Illuminate\Http\Request;
 
 use Yajra\DataTables\Facades\DataTables;
 
-class PenyediaController extends Controller
+class PegawaiController extends Controller
 {
     
      /**
@@ -26,19 +27,19 @@ class PenyediaController extends Controller
      */
     public function index(): view
     {
-        return view('kantor.agenda masuk.penyedia');
+        return view('kantor.kip b.pegawai');
     }
 
     public function getData(Request $request)
     {
         if ($request->ajax()) {
-            $data = Penyedia::select('*');
+            $data = Pegawai::select('*');
             return DataTables::of($data)
                 ->addColumn('action', function($row) {
-                    $editUrl = route('penyedias.edit', $row->id);
-                    $deleteUrl = route('penyedias.destroy', $row->id);
+                    $editUrl = route('pegawais.edit', $row->id);
+                    $deleteUrl = route('pegawais.destroy', $row->id);
                     return '<a href="' . $editUrl . '" class="btn btn-sm btn-primary">EDIT</a>
-                            <form action="' . $deleteUrl . '" method="POST" style="display:inline-block;" onsubmit="return confirm(\'Apakah Anda Yakin Untuk Menghapus Data ?\');">
+                            <form action="' . $deleteUrl . '" method="POST" style="display:inline-block;" onsubmit="return confirm(\'Apakah Anda Yakin Untuk Menghapus Pegawai ?\');">
                                 ' . csrf_field() . method_field('DELETE') . '
                                 <button type="submit" class="btn btn-sm btn-danger">HAPUS</button>
                             </form>';
@@ -68,20 +69,20 @@ class PenyediaController extends Controller
     {
         //validate form
         $this->validate($request, [
-            'nama'      => 'required',
-            'alamat'    => 'required',
-            'npwp'      => 'required'
+            'nama_pegawai'  => 'required',
+            'nip'           => 'required',
+            'unit'          => 'required'
         ]);
 
         //create post
-        Penyedia::create([
-            'nama'      => $request->nama,
-            'alamat'    => $request->alamat,
-            'npwp'      => $request->npwp
+        Pegawai::create([
+            'nama_pegawai'  => $request->nama_pegawai,
+            'nip'           => $request->nip,
+            'unit'          => $request->unit
         ]);
 
         //redirect to index
-        return redirect()->route('penyedias.index')->with(['success' => 'Data Berhasil Disimpan!']);
+        return redirect()->route('pegawais.index')->with(['success' => 'Data Berhasil Disimpan!']);
     }
 
     /**
@@ -97,9 +98,9 @@ class PenyediaController extends Controller
      */
     public function edit(string $id): View
     {
-        $penyedia = Penyedia::findOrFail($id);
+        $pegawai = Pegawai::findOrFail($id);
 
-        return view('kantor.agenda masuk.edit_penyedia', compact('penyedia'));
+        return view('kantor.kip b.edit_pegawai', compact('pegawai'));
 
     }
 
@@ -109,20 +110,20 @@ class PenyediaController extends Controller
     public function update(Request $request, $id): RedirectResponse
     {
         $this->validate($request, [
-            'nama'      => 'required',
-            'alamat'    => 'required',
-            'npwp'      => 'required'
+            'nama_pegawai'  => 'required',
+            'nip'           => 'required',
+            'unit'          => 'required'
         ]);
 
-        $penyedia = Penyedia::findOrFail($id);
+        $penyedia = Pegawai::findOrFail($id);
 
         $penyedia->update([
-            'nama'      => $request->nama,
-            'alamat'    => $request->alamat,
-            'npwp'       => $request->npwp,
+            'nama_pegawai'  => $request->nama_pegawai,
+            'nip'           => $request->nip,
+            'unit'          => $request->unit
         ]);
 
-        return redirect()->route('penyedias.index')->with(['success' => 'Data Berhasil Diubah!']);
+        return redirect()->route('pegawais.index')->with(['success' => 'Data Berhasil Diubah!']);
     }
 
     /**
@@ -134,12 +135,12 @@ class PenyediaController extends Controller
     public function destroy($id): RedirectResponse
     {
         //get post by ID
-        $penyedia = Penyedia::findOrFail($id);
+        $pegawai = Pegawai::findOrFail($id);
 
         //delete post
-        $penyedia->delete();
+        $pegawai->delete();
 
         //redirect to index
-        return redirect()->route('penyedias.index')->with(['success' => 'Data Berhasil Dihapus!']);
+        return redirect()->route('pegawais.index')->with(['success' => 'Data Berhasil Dihapus!']);
     }
 }

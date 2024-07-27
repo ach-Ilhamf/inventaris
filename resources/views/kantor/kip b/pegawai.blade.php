@@ -33,7 +33,6 @@
     <link rel="stylesheet" href="{{ asset('assets/vendor/libs/apex-charts/apex-charts.css') }}" />
 
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}" />
 
     <!-- Page CSS -->
     <!-- Helpers -->
@@ -59,43 +58,80 @@
                 <!-- Content wrapper -->
                 <div class="content-wrapper">
                     <div class="container-xxl flex-grow-1 container-p-y">
-                        <h3> Barang Kegiatan Masuk </h3>
+                        <h3>Pegawai</h3>
                         <!-- Pencarian -->
                         <div class="row mb-3">
                             <div class="col text-end">
-                                <a href="{{ route('agendadtls.create', $agenda->id) }}">
                                 <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                    data-bs-target="#modalTambahBarang">Tambah Barang</button></a>
+                                    data-bs-target="#modalTambahBarang">Tambah Pegawai</button>
                             </div>
                         </div>
 
-                        <!-- Tabel Barang -->
+                        <!-- Modal Tambah Barang -->
+                        <div class="modal fade" id="modalTambahBarang" tabindex="-1"
+                            aria-labelledby="modalTambahBarangLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="modalTambahBarangLabel">Tambah Pegawai</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form action="{{ route('pegawais.store') }}" method="POST">
+                                            @csrf
+                                            <!-- Input untuk nama barang -->
+                                            <div class="mb-3">
+                                                <label for="namaBarang" class="form-label">Nama Pegawai</label>
+                                                <input type="text" class="form-control" id="namaBarang" name="nama_pegawai"
+                                                    placeholder="Nama Pegawai" required>
+                                            </div>
+                                            <!-- Input untuk Lokasi -->
+                                            <div class="mb-3">
+                                                <label for="lokasi" class="form-label">NIP</label>
+                                                <input type="text" class="form-control" id="lokasi" name="nip"
+                                                    placeholder="NIP" required>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="lokasi" class="form-label">Unit</label>
+                                                <select class="form-control" id="lokasi" name="unit">
+                                                    <option value="">Pilih Unit</option>
+                                                    <option value="Kepala Dinas">Kepala Dinas</option>
+                                                    <option value="Sekretariat">Sekretariat</option>
+                                                    <option value="Sekretaris">Sekretaris</option>
+                                                    <option value="Bidang TI">Bidang TI</option>
+                                                    <option value="Bidang SIB">Bidang SIB</option>
+                                                    <option value="Bidang SPBE">Bidang SPBE</option>
+                                                    <option value="Ruang Rapat">Ruang Rapat</option>
+                                                    <option value="Radio">Radio</option>
+                                                    <option value="Call Center">Call Center</option>
+                                                    <option value="Server Kominfo">Server Kominfo</option>
+                                                </select>
+                                            </div>                                            <!-- Tombol untuk menyimpan data -->
+                                            <button onclick="return confirm('Apakah Anda Yakin Untuk Menambah Pegawai ?');" type="submit" class="btn btn-primary">Simpan</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Tabel Penyedia -->
                         <div class="card">
                             <div class="table-responsive text-nowrap">
-                                <table class="table table-striped" id='agenda_table'>
+                                <table id="pegawai_table" class="table table-striped">
                                     <thead>
                                         <tr class="text-center">
-                                            <th>Nama Kegiatan</th>
-                                            <th>Nama Barang</th>
                                             <th>Nama Pegawai</th>
-                                            <th>Gambar</th>
-                                            <th>Merk</th>
-                                            <th>Tipe</th>
-                                            <th>No Rangka</th>
-                                            <th>No Mesin</th>
-                                            <th>No Polisi</th>
-                                            <th>No BPKB</th>
-                                            <th>Satuan</th>
-                                            <th>Harga</th>
-                                            <th>Lokasi</th>
+                                            <th>NIP</th>
+                                            <th>Unit</th>
                                             <th>Actions</th>
                                         </tr>
                                     </thead>
+                                    
                                 </table>
                             </div>
                         </div>
                     </div>
-
 
                     <!-- / Content -->
 
@@ -130,30 +166,18 @@
     <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
     <script>
         $(document).ready(function() {
-            $('#agenda_table').DataTable({
+            $('#pegawai_table').DataTable({
                 processing: true,
                 serverSide: true,
-                ajax: {
-                    url: '{{ route('agendadtls.getData', $agenda->id) }}',
-                    type: 'GET'
-                },
+                ajax: '{{ route('pegawais.data') }}',
                 columns: [
-                    { data: 'nama_agenda', name: 'nama_agenda' },
-                    { data: 'nama_barang', name: 'nama_barang' },
-                    { data: 'pegawai.nama_pegawai', name: 'pegawai.nama_pegawai' },
-                    { data: 'gambar', name: 'gambar', orderable: false, searchable: false },
-                    { data: 'merk', name: 'merk' },
-                    { data: 'tipe', name: 'tipe' },
-                    { data: 'no_rangka', name: 'no_rangka' },
-                    { data: 'no_mesin', name: 'no_mesin' },
-                    { data: 'no_polisi', name: 'no_polisi' },
-                    { data: 'no_bpkb', name: 'no_bpkb' },
-                    { data: 'satuan', name: 'satuan' },
-                    { data: 'harga_satuan', name: 'harga_satuan', render: function(data, type, row) {
-                        return 'Rp ' + parseInt(data).toLocaleString('id-ID');} },
-                    { data: 'lokasi', name: 'lokasi' },
+                    { data: 'nama_pegawai', name: 'nama_pegawai' },
+                    { data: 'nip', name: 'nip' },
+                    { data: 'unit', name: 'unit' },
                     { data: 'action', name: 'action', orderable: false, searchable: false }
                 ]
             });
         });
     </script>
+</body>
+</html>

@@ -178,7 +178,7 @@
                                                     placeholder="Keterangan">
                                             </div>
                                             <!-- Tombol untuk menyimpan data -->
-                                            <button type="submit" class="btn btn-primary">Simpan</button>
+                                            <button onclick="return confirm('Apakah Anda Yakin Untuk Mengedit Kegiatan ?');" type="submit" class="btn btn-primary">Simpan</button>
                                         </form>
                                     </div>
                                 </div>
