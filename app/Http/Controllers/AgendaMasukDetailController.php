@@ -78,14 +78,12 @@ class AgendaMasukDetailController extends Controller
             'harga_satuan'  => 'required',
         ]);
 
+        for ($i = 0; $i < $request->satuan; $i++) {
         $request->hasFile('gambar');
         $gambar = $request->file('gambar');
         $gambarName = $gambar->hashName();
         $gambar->storeAs('public/gambar', $gambarName);
-        
-
         //create post
-        for ($i = 0; $i < $request->satuan; $i++) {
         AgendaMasukDetail::create([
             'id_agenda'     => $request->id_agenda,
             'nama_barang'   => $request->nama_barang,

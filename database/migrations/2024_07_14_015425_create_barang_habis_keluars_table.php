@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('barang_habis_keluars', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('jenis_barang');
+            $table->unsignedBigInteger('id_barang');
             $table->date('tgl_keluar');
             $table->string('no_keluar');
             $table->integer('banyak_barang');
@@ -21,8 +21,8 @@ return new class extends Migration
             $table->string('unit');
             $table->string('keterangan')->nullable();
             $table->timestamps();
-
-            $table->foreign('no_keluar')->references('no_keluar')->on('spk_keluar_barangs');
+            
+            $table->foreign('id_barang')->references('id')->on('barang_pakai_habis')->onDelete('cascade');
 
         });
     }

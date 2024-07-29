@@ -95,7 +95,7 @@
                                                         <select class="form-control" id="penyedia" name="id_penyedia"
                                                             required>
                                                             @foreach($penyediaList as $penyedia)
-                                                            <option value="{{ $penyedia->id }}">
+                                                            <option value="{{ $penyedia->id }}" {{ $agenda->id_penyedia == $penyedia->id ? 'selected' : '' }}>
                                                                 {{ $penyedia->nama }}
                                                             </option>
                                                             @endforeach

@@ -93,9 +93,24 @@
                                                 </div>
                                             </div>
                                             <div class="mb-3">
-                                                <label for="lokasi" class="form-label">No Register</label>
-                                                <input type="text" class="form-control" id="lokasi" name="no_register"
-                                                    placeholder="No Register" required>
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <label for="lokasi" class="form-label">No Register</label>
+                                                        <input type="text" class="form-control" id="lokasi" name="no_register"
+                                                            placeholder="No Register" required>
+                                                    </div>
+                                                    <div class="col">
+                                                        <label for="penyedia" class="form-label">Nama Pegawai</label>
+                                                        <select class="form-control" id="penyedia" name="id_pegawai"
+                                                            required>
+                                                            @foreach($pegawaiList as $pegawai)
+                                                            <option value="{{ $pegawai->id }}">
+                                                                {{ $pegawai->nama_pegawai }} - {{ $pegawai->unit }} 
+                                                            </option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                </div>
                                             </div>
                                             <div class="mb-3">
                                                 <div class="row">
@@ -237,12 +252,17 @@
                             </div>
                         </div>
                         @if ($errors->any())
-                        <div class="alert alert-danger">
+                        <div class="alert alert-danger" id="error-alert">
                             <ul>
                                 @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
+                                    <li>{{ $error }}</li>
                                 @endforeach
                             </ul>
+                        </div>
+                        @endif
+                        @if(session('success'))
+                        <div class="alert alert-success" id="success-alert">
+                            {{ session('success') }}
                         </div>
                         @endif
 
@@ -255,6 +275,7 @@
                                             <th>Kode Barang</th>
                                             <th>Jenis Barang</th>
                                             <th>No Register</th>
+                                            <th>Nama Pegawai</th>
                                             <th>Merk</th>
                                             <th>Type</th>
                                             <th>Ukuran</th>
@@ -330,6 +351,7 @@
                     { data: 'kode_barang', name: 'kode_barang' },
                     { data: 'nama_barang', name: 'nama_barang' },
                     { data: 'no_register', name: 'no_register' },
+                    { data: 'pegawai.nama_pegawai', name: 'pegawai.nama_pegawai' },
                     { data: 'merk', name: 'merk' },
                     { data: 'tipe', name: 'tipe' },
                     { data: 'ukuran', name: 'ukuran' },
@@ -356,5 +378,19 @@
             });
         });
     </script>
+        <script>
+            $(document).ready(function() {
+                setTimeout(function() {
+                    $("#success-alert").fadeTo(500, 0).slideUp(500, function() {
+                        $(this).remove();
+                    });
+        
+                    $("#error-alert").fadeTo(500, 0).slideUp(500, function() {
+                        $(this).remove();
+                    });
+                }, 3000); 
+            });
+    </script>
+        
 </body>
 </html>

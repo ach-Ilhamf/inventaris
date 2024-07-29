@@ -16,7 +16,7 @@ class AgendaMasuk extends Model
 
     public function agendadetail()
     {
-        return $this->hasMany(AgendaMasukDetail::class, 'id_penyedia');
+        return $this->hasMany(AgendaMasukDetail::class, 'id_agenda');
     }
 
     /**

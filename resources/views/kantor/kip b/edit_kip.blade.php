@@ -102,9 +102,24 @@
                                                 </div>
                                             </div>
                                             <div class="mb-3">
-                                                <label for="lokasi" class="form-label">No Register</label>
-                                                <input type="text" class="form-control" id="lokasi" name="no_register"
-                                                    placeholder="No Register" value="{{ old('kipb', $kipb->no_register) }}" required>
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <label for="lokasi" class="form-label">No Register</label>
+                                                        <input type="text" class="form-control" id="lokasi" name="no_register"
+                                                            placeholder="No Register" value="{{ old('kipb', $kipb->no_register) }}" required>
+                                                    </div>
+                                                    <div class="col">
+                                                        <label for="penyedia" class="form-label">Nama Pegawai</label>
+                                                        <select class="form-control" id="penyedia" name="id_pegawai"
+                                                            required>
+                                                            @foreach($pegawaiList as $pegawai)
+                                                            <option value="{{ $pegawai->id }}" {{ $kipb->id_pegawai == $pegawai->id ? 'selected' : '' }}>
+                                                                {{ $pegawai->nama_pegawai }} - {{ $pegawai->unit }} 
+                                                            </option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                </div>
                                             </div>
                                             <div class="mb-3">
                                                 <div class="row">

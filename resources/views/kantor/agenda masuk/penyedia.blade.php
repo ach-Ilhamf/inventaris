@@ -66,7 +66,6 @@
                                     data-bs-target="#modalTambahBarang">Tambah Penyedia</button>
                             </div>
                         </div>
-
                         <!-- Modal Tambah Barang -->
                         <div class="modal fade" id="modalTambahBarang" tabindex="-1"
                             aria-labelledby="modalTambahBarangLabel" aria-hidden="true">
@@ -104,6 +103,20 @@
                                 </div>
                             </div>
                         </div>
+                        @if ($errors->any())
+                        <div class="alert alert-danger" id="error-alert">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                        @endif
+                        @if(session('success'))
+                        <div class="alert alert-success" id="success-alert">
+                            {{ session('success') }}
+                        </div>
+                        @endif
 
                         <!-- Tabel Penyedia -->
                         <div class="card">
@@ -168,6 +181,21 @@
                 ]
             });
         });
+    </script>
+    <script>
+    $(document).ready(function() {
+        setTimeout(function() {
+            // Menghilangkan alert dengan id "success-alert"
+            $("#success-alert").fadeTo(500, 0).slideUp(500, function() {
+                $(this).remove();
+            });
+
+            // Menghilangkan alert dengan id "error-alert"
+            $("#error-alert").fadeTo(500, 0).slideUp(500, function() {
+                $(this).remove();
+            });
+        }, 3000); // Alert akan menghilang setelah 3 detik
+    });
     </script>
 </body>
 </html>

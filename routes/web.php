@@ -4,13 +4,13 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PenyediaController;
 use App\Http\Controllers\AgendaMasukController;
 use App\Http\Controllers\AgendaMasukDetailController;
+use App\Http\Controllers\BarangHabisKeluarController;
+use App\Http\Controllers\BarangHabisTerimaController;
+use App\Http\Controllers\BarangPakaiHabisController;
 use App\Http\Controllers\KipBController;
 use App\Http\Controllers\KodeBarangController;
 use App\Http\Controllers\PegawaiController;
-use App\Models\AgendaMasukDetail;
-use App\Models\KipB;
-use App\Models\KodeBarang;
-use App\Models\Pegawai;
+use App\Models\BarangHabisTerima;
 
 /*
 |--------------------------------------------------------------------------
@@ -47,6 +47,11 @@ Route::resource('/kipbs', \App\Http\Controllers\KipBController::class);
 Route::get('kodes/data', [KodeBarangController::class, 'getData'])->name('kodes.data');
 Route::resource('/kodes', \App\Http\Controllers\KodeBarangController::class);
 
-Route::resource('/baranghabisterimas', \App\Http\Controllers\BarangHabisTerimaController::class);
+Route::get('barangs/data', [BarangPakaiHabisController::class, 'getData'])->name('barangs.data');
+Route::resource('/barangs', \App\Http\Controllers\BarangPakaiHabisController::class);
 
-Route::resource('/baranghabiskeluars', \App\Http\Controllers\BarangHabisTerimaController::class);
+Route::get('barangterimas/data', [BarangHabisTerimaController::class, 'getData'])->name('barangterimas.data');
+Route::resource('/barangterimas', \App\Http\Controllers\BarangHabisTerimaController::class);
+
+Route::get('barangkeluars/data', [BarangHabisKeluarController::class, 'getData'])->name('barangkeluars.data');
+Route::resource('/barangkeluars', \App\Http\Controllers\BarangHabisKeluarController::class);

@@ -14,18 +14,18 @@ return new class extends Migration
         Schema::create('barang_habis_terimas', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('kode_barang');
-            $table->string('jenis_barang');
+            $table->unsignedBigInteger('id_barang');
             $table->date('tgl_spk');
             $table->string('no_spk');
-            $table->date('tgl_dpa');
+            $table->date('tgl_dpa')->nullable();
             $table->string('no_dpa');
             $table->integer('banyak_barang');
             $table->decimal('harga_satuan');
             $table->string('unit');
-            $table->string('keterangan');
+            $table->string('keterangan')->nullable();
             $table->timestamps();
 
-            $table->foreign('no_spk')->references('no_spk')->on('spk_terima_barangs');
+            $table->foreign('id_barang')->references('id')->on('barang_pakai_habis')->onDelete('cascade');
         });
     }
 

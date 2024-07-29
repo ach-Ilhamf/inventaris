@@ -94,7 +94,7 @@
                                             </div>
                                             <div class="mb-3">
                                                 <label for="lokasi" class="form-label">Unit</label>
-                                                <select class="form-control" id="lokasi" name="unit">
+                                                <select class="form-control" id="lokasi" name="unit" required>
                                                     <option value="">Pilih Unit</option>
                                                     <option value="Kepala Dinas">Kepala Dinas</option>
                                                     <option value="Sekretariat">Sekretariat</option>
@@ -114,6 +114,20 @@
                                 </div>
                             </div>
                         </div>
+                        @if ($errors->any())
+                        <div class="alert alert-danger" id="error-alert">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                        @endif
+                        @if(session('success'))
+                        <div class="alert alert-success" id="success-alert">
+                            {{ session('success') }}
+                        </div>
+                        @endif
 
                         <!-- Tabel Penyedia -->
                         <div class="card">
@@ -179,5 +193,19 @@
             });
         });
     </script>
+    <script>
+        $(document).ready(function() {
+            setTimeout(function() {
+                $("#success-alert").fadeTo(500, 0).slideUp(500, function() {
+                    $(this).remove();
+                });
+    
+                $("#error-alert").fadeTo(500, 0).slideUp(500, function() {
+                    $(this).remove();
+                });
+            }, 3000); 
+        });
+    </script>
+    
 </body>
 </html>

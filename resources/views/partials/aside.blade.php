@@ -31,7 +31,7 @@
                 </a>
             </li>
               <li class="menu-item">
-                  <a href="" class="menu-link">
+                  <a href="{{ route('barangs.index') }}" class="menu-link">
                       <div data-i18n="Notifications">Barang Pakai Habis</div>
                   </a>
               </li>
@@ -73,12 +73,12 @@
             </a>
             <ul class="menu-sub">
                 <li class="menu-item">
-                    <a href="" class="menu-link">
+                    <a href="{{ route('barangterimas.index') }}" class="menu-link">
                         <div data-i18n="Account">Daftar Penerimaan Barang Pakai Habis</div>
                     </a>
                 </li>
                 <li class="menu-item">
-                    <a href="" class="menu-link">
+                    <a href="{{ route('barangkeluars.index') }}" class="menu-link">
                         <div data-i18n="Notifications">Daftar Pengeluaran Barang Pakai Habis</div>
                     </a>
                 </li>

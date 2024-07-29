@@ -93,7 +93,7 @@
                                                             <select class="form-control" id="penyedia" name="id_pegawai"
                                                                 required>
                                                                 @foreach($pegawaiList as $pegawai)
-                                                                <option value="{{ $pegawai->id }}">
+                                                                <option value="{{ $pegawai->id }}" {{ $agendadtl->id_pegawai == $pegawai->id ? 'selected' : '' }}>
                                                                     {{ $pegawai->nama_pegawai }} - {{ $pegawai->unit }} 
                                                                 </option>
                                                                 @endforeach

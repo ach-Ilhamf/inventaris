@@ -58,7 +58,7 @@
                 <!-- Content wrapper -->
                 <div class="content-wrapper">
                     <div class="container-xxl flex-grow-1 container-p-y">
-                        <h3>Penyedia</h3>
+                        <h3>Kode Barang KIP B</h3>
                         <!-- Pencarian -->
                         <div class="row mb-3">
                             <div class="col text-end">
@@ -73,7 +73,7 @@
                             <div class="modal-dialog modal-dialog-centered">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="modalTambahBarangLabel">Tambah Penyedia</h5>
+                                        <h5 class="modal-title" id="modalTambahBarangLabel">Tambah Kode Barang</h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="Close"></button>
                                     </div>
@@ -99,7 +99,20 @@
                                 </div>
                             </div>
                         </div>
-
+                        @if ($errors->any())
+                        <div class="alert alert-danger" id="error-alert">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                        @endif
+                        @if(session('success'))
+                        <div class="alert alert-success" id="success-alert">
+                            {{ session('success') }}
+                        </div>
+                        @endif
                         <!-- Tabel Penyedia -->
                         <div class="card">
                             <div class="table-responsive text-nowrap">
@@ -162,5 +175,19 @@
             });
         });
     </script>
+    <script>
+        $(document).ready(function() {
+            setTimeout(function() {
+                $("#success-alert").fadeTo(500, 0).slideUp(500, function() {
+                    $(this).remove();
+                });
+    
+                $("#error-alert").fadeTo(500, 0).slideUp(500, function() {
+                    $(this).remove();
+                });
+            }, 3000); 
+        });
+    </script>
+    
 </body>
 </html>

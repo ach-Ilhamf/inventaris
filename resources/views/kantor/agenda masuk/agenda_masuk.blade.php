@@ -221,6 +221,20 @@
                                 <input type="text" class="form-control" name="nilai_kontrak" id="filter-nilai-kontrak" placeholder="Filter Nilai Kontrak">
                             </div>
                         </div>
+                        @if ($errors->any())
+                        <div class="alert alert-danger" id="error-alert">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                        @endif
+                        @if(session('success'))
+                        <div class="alert alert-success" id="success-alert">
+                            {{ session('success') }}
+                        </div>
+                        @endif
 
                         <!-- Tabel Barang -->
                         <div class="card">
@@ -315,3 +329,17 @@
             });
         });
     </script>
+    <script>
+        $(document).ready(function() {
+            setTimeout(function() {
+                $("#success-alert").fadeTo(500, 0).slideUp(500, function() {
+                    $(this).remove();
+                });
+    
+                $("#error-alert").fadeTo(500, 0).slideUp(500, function() {
+                    $(this).remove();
+                });
+            }, 3000); 
+        });
+    </script>
+    

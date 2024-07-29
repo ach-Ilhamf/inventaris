@@ -32,7 +32,7 @@
     <link rel="stylesheet" href="{{ asset('assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/vendor/libs/apex-charts/apex-charts.css') }}" />
 
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}" />
 
     <!-- Page CSS -->
     <!-- Helpers -->
@@ -58,42 +58,41 @@
                 <!-- Content wrapper -->
                 <div class="content-wrapper">
                     <div class="container-xxl flex-grow-1 container-p-y">
-                        <h3>Penerimaan Barang Pakai Habis</h3>
-                        <!-- Pencarian -->
-                        <div class="row mb-3">
-                            <div class="col text-end">
-                                <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                    data-bs-target="#modalTambahBarang">Tambah Penerimaan Barang Pakai Habis</button>
-                            </div>
-                        </div>
-
-                        <!-- Modal Tambah Barang -->
-                        <div class="modal fade" id="modalTambahBarang" tabindex="-1"
-                            aria-labelledby="modalTambahBarangLabel" aria-hidden="true">
+                        <div tabindex="-1" aria-labelledby="modalTambahBarangLabel" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="modalTambahBarangLabel">Tambah Penerimaan Barang Pakai Habis</h5>
+                                        <h5 class="modal-title" id="modalTambahBarangLabel">Edit Pegawai</h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="Close"></button>
                                     </div>
+                                    @if ($errors->any())
+                                    <div class="alert alert-danger">
+                                        <ul>
+                                            @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                    @endif
                                     <div class="modal-body">
-                                        <form action="{{ route('barangterimas.store') }}" method="POST">
+                                        <form action="{{ route('barangterimas.update', $terima->id) }}" method="POST">
                                             @csrf
+                                            @method('PUT')
                                             <!-- Input untuk nama barang -->
                                             <div class="mb-3">
                                                 <div class="row">
                                                     <div class="col">
                                                         <label for="namaBarang" class="form-label">Kode Barang</label>
                                                         <input type="text" class="form-control" id="namaBarang" name="kode_barang"
-                                                            placeholder="Kode Barang" required>
+                                                            placeholder="Kode Barang" value="{{ old('baranghabisterimas', $terima->kode_barang)}}" required>
                                                     </div>
                                                     <div class="col">
                                                         <label for="penyedia" class="form-label">Jenis Barang</label>
-                                                        <select class="form-control" id="penyedia" name="id_barang"
+                                                        <select class="form-control" id="penyedia" name="id_barang" }
                                                             required>
                                                             @foreach($barangList as $barang)
-                                                            <option value="{{ $barang->id }}">
+                                                            <option value="{{ $barang->id }}" {{ $terima->id_barang == $barang->id ? 'selected' : '' }}>
                                                                 {{ $barang->jenis_barang }}
                                                             </option>
                                                             @endforeach
@@ -106,12 +105,12 @@
                                                     <div class="col">
                                                         <label for="lokasi" class="form-label">Tanggal SPK/perjanjian/Kontrak</label>
                                                         <input type="date" class="form-control" id="lokasi" name="tgl_spk"
-                                                            placeholder="Tanggal SPK/Perjanjian/Kontrak" required>
+                                                            placeholder="Tanggal SPK/Perjanjian/Kontrak" value="{{ old('baranghabisterimas', $terima->tgl_spk)}}" required>
                                                     </div>
                                                     <div class="col">
                                                         <label for="lokasi" class="form-label">No SPK/perjanjian/Kontrak</label>
                                                         <input type="text" class="form-control" id="lokasi" name="no_spk"
-                                                            placeholder="No SPK/Perjanjian/Kontrak" required>
+                                                            placeholder="No SPK/Perjanjian/Kontrak" value="{{ old('baranghabisterimas', $terima->no_spk)}}" required>
                                                     </div>
                                                 </div>
                                             </div>
@@ -120,12 +119,12 @@
                                                     <div class="col">
                                                         <label for="lokasi" class="form-label">Tanggal DPA/SPM/Kwitansi</label>
                                                         <input type="date" class="form-control" id="lokasi" name="tgl_dpa"
-                                                            placeholder="Tanggal DPA/SPM/Kwitansi" required>
+                                                            placeholder="Tanggal DPA/SPM/Kwitansi" value="{{ old('baranghabisterimas', $terima->tgl_dpa)}}">
                                                     </div>
                                                     <div class="col">
                                                         <label for="lokasi" class="form-label">No DPA/SPM/Kwitansi</label>
                                                         <input type="text" class="form-control" id="lokasi" name="no_dpa"
-                                                            placeholder="No DPA/SPM/Kwitansi" required>
+                                                            placeholder="No DPA/SPM/Kwitansi" value="{{ old('baranghabisterimas', $terima->no_dpa)}}" required>
                                                     </div>
                                                 </div>
                                             </div>
@@ -134,12 +133,12 @@
                                                     <div class="col">
                                                         <label for="lokasi" class="form-label">Banyak Barang</label>
                                                         <input type="number" class="form-control" id="lokasi" name="banyak_barang"
-                                                            placeholder="Banyak Barang" required>
+                                                            placeholder="Banyak Barang" value="{{ old('baranghabisterimas', $terima->banyak_barang)}}" required>
                                                     </div>
                                                     <div class="col">
                                                         <label for="lokasi" class="form-label">Harga Satuan</label>
                                                         <input type="number" class="form-control" id="lokasi" name="harga_satuan"
-                                                            placeholder="Harga Satuan" required>
+                                                            placeholder="Harga Satuan" value="{{ old('baranghabisterimas', $terima->harga_satuan)}}" required>
                                                     </div>
                                                 </div>
                                             </div>
@@ -147,7 +146,7 @@
                                                 <div class="row">
                                                     <div class="col">
                                                         <label for="lokasi" class="form-label">Dipergunakan Pada Unit</label>
-                                                        <select class="form-control" id="lokasi" name="unit" required>
+                                                        <select class="form-control" id="lokasi" name="unit">
                                                             <option value="">Pilih Lokasi</option>
                                                             <option value="Kepala Dinas">Kepala Dinas</option>
                                                             <option value="Sekretariat">Sekretariat</option>
@@ -164,144 +163,42 @@
                                                     <div class="col">
                                                         <label for="lokasi" class="form-label">Keterangan</label>
                                                         <input type="text" class="form-control" id="lokasi" name="keterangan"
-                                                            placeholder="Keterangan" required>
+                                                            placeholder="Keterangan" value="{{ old('baranghabisterimas', $terima->keterangan)}}" required>
                                                     </div>
                                                 </div>
                                             </div>
                                             <!-- Tombol untuk menyimpan data -->
-                                            <button onclick="return confirm('Apakah Anda Yakin Untuk Menambah Penerimaan Barang ?');" type="submit" class="btn btn-primary">Simpan</button>
+                                            <button onclick="return confirm('Apakah Anda Yakin Untuk Mengedit Penerimaan Barang ?');" type="submit" class="btn btn-primary">Simpan</button>
                                         </form>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Filter Section -->
-                        <div class="row mb-3">
-                            <div class="col-md-4">
-                                <input type="text" class="form-control" name="jenis_barang" id="filter-jenis-barang" placeholder=" Filter Jenis Barang">
-                            </div>
-                            <div class="col-md-4">
-                                <input type="text" class="form-control" name="harga_satuan" id="filter-harga-satuan" placeholder="Filter Harga Satuan">
-                            </div>
-                        </div>
-
-                        @if ($errors->any())
-                        <div class="alert alert-danger" id="error-alert">
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                        @endif
-                        @if(session('success'))
-                        <div class="alert alert-success" id="success-alert">
-                            {{ session('success') }}
-                        </div>
-                        @endif
-
-                        <!-- Tabel Penyedia -->
-                        <div class="card">
-                            <div class="table-responsive text-nowrap">
-                                <table id="barang_table" class="table table-striped">
-                                    <thead>
-                                        <tr class="text-center">
-                                            <th>Kode Barang</th>
-                                            <th>Jenis Barang</th>
-                                            <th>Tanggal SPK/Perjanjian/kontrak</th>
-                                            <th>No SPK/Perjanjian/kontrak</th>
-                                            <th>Tanggal DPA/SPM/Kwitansi</th>
-                                            <th>No DPA/SPM/Kwitansi</th>
-                                            <th>Banyaknya Barang</th>
-                                            <th>Harga Satuan</th>
-                                            <th>Dipergunakan Pada Unit</th>
-                                            <th>Keterangan</th>
-                                            <th>Actions</th>
-                                        </tr>
-                                    </thead>
-                                    
-                                </table>
-                            </div>
-                        </div>
+                        <div class="content-backdrop fade"></div>
                     </div>
-
-                    <!-- / Content -->
-
-                    <div class="content-backdrop fade"></div>
+                    <!-- Content wrapper -->
                 </div>
-                <!-- Content wrapper -->
+                <!-- / Layout page -->
             </div>
-            <!-- / Layout page -->
+
+            <!-- Overlay -->
+            <div class="layout-overlay layout-menu-toggle"></div>
         </div>
+        <!-- / Layout wrapper -->
 
-        <!-- Overlay -->
-        <div class="layout-overlay layout-menu-toggle"></div>
-    </div>
-    <!-- / Layout wrapper -->
+        <!-- Core JS -->
+        <script src="{{ asset('assets/vendor/libs/jquery/jquery.js') }}"></script>
+        <script src="{{ asset('assets/vendor/libs/popper/popper.js') }}"></script>
+        <script src="{{ asset('assets/vendor/js/bootstrap.js') }}"></script>
+        <script src="{{ asset('assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js') }}"></script>
+        <script src="{{ asset('assets/vendor/js/menu.js') }}"></script>
 
-    <!-- Core JS -->
-    <script src="{{ asset('assets/vendor/libs/jquery/jquery.js') }}"></script>
-    <script src="{{ asset('assets/vendor/libs/popper/popper.js') }}"></script>
-    <script src="{{ asset('assets/vendor/js/bootstrap.js') }}"></script>
-    <script src="{{ asset('assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js') }}"></script>
-    <script src="{{ asset('assets/vendor/js/menu.js') }}"></script>
+        <!-- Vendors JS -->
+        <script src="{{ asset('assets/vendor/libs/apex-charts/apexcharts.js') }}"></script>
 
-    <!-- Vendors JS -->
-    <script src="{{ asset('assets/vendor/libs/apex-charts/apexcharts.js') }}"></script>
+        <!-- Main JS -->
+        <script src="{{ asset('assets/js/main.js') }}"></script>
 
-    <!-- Main JS -->
-    <script src="{{ asset('assets/js/main.js') }}"></script>
-
-    <!-- Page JS -->
-    <script src="{{ asset('assets/js/dashboards-analytics.js') }}"></script>
-
-    <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            var table = $('#barang_table').DataTable({
-                processing: true,
-                serverSide: true,
-                ajax: {
-                    url: '{{ route('barangterimas.data') }}',
-                    type: 'GET',
-                    data: function(d) {
-                        d.jenis_barang = $('#filter-jenis-barang').val();
-                        d.harga_satuan = $('#filter-harga-satuan').val();
-                    }
-                },
-                columns: [
-                    { data: 'kode_barang', name: 'kode_barang' },
-                    { data: 'barangpakaihabis.jenis_barang', name: 'barangpakaihabis.jenis_barang' },
-                    { data: 'tgl_spk', name: 'tgl_spk' },
-                    { data: 'no_spk', name: 'no_spk' },
-                    { data: 'tgl_dpa', name: 'tgl_dpa' },
-                    { data: 'no_dpa', name: 'no_dpa' },
-                    { data: 'banyak_barang', name: 'banyak_barang' },
-                    { data: 'harga_satuan', name: 'harga_satuan' },
-                    { data: 'unit', name: 'unit' },
-                    { data: 'keterangan', name: 'keterangan' },
-                    { data: 'action', name: 'action', orderable: false, searchable: false }
-                ]
-            });
-
-            $('#filter-jenis-barang, #filter-harga-satuan').on('keyup change', function() {
-                table.draw();
-            });
-        });
-    </script>
-    <script>
-        $(document).ready(function() {
-            setTimeout(function() {
-                $("#success-alert").fadeTo(500, 0).slideUp(500, function() {
-                    $(this).remove();
-                });
-    
-                $("#error-alert").fadeTo(500, 0).slideUp(500, function() {
-                    $(this).remove();
-                });
-            }, 3000); 
-        });
-    </script>
-</body>
-</html>
+        <!-- Page JS -->
+        <script src="{{ asset('assets/js/dashboards-analytics.js') }}"></script>
