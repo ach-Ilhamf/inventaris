@@ -78,31 +78,31 @@ class AgendaMasukDetailController extends Controller
             'harga_satuan'  => 'required',
         ]);
 
-        for ($i = 0; $i < $request->satuan; $i++) {
-        $request->hasFile('gambar');
-        $gambar = $request->file('gambar');
-        $gambarName = $gambar->hashName();
-        $gambar->storeAs('public/gambar', $gambarName);
-        //create post
-        AgendaMasukDetail::create([
-            'id_agenda'     => $request->id_agenda,
-            'nama_barang'   => $request->nama_barang,
-            'id_pegawai'    => $request->id_pegawai,
-            'gambar'        => $gambarName,
-            'merk'          => $request->merk,
-            'tipe'          => $request->tipe,
-            'tahun_beli'    => $request->tahun_beli,
-            'no_rangka'     => $request->no_rangka,
-            'no_mesin'      => $request->no_mesin,
-            'no_polisi'     => $request->no_polisi,
-            'no_bpkb'       => $request->no_bpkb,
-            'satuan'        => 1,
-            'harga_satuan'  => $request->harga_satuan,
-            'lokasi'        => $request->lokasi
-        ]);
+        if ($request->hasFile('gambar')) {
+            $gambar = $request->file('gambar');
 
-        }
-        //redirect to index
+            for ($i = 0; $i < $request->satuan; $i++) {
+                $gambarName = time() . '_' . $i . '.' . $gambar->getClientOriginalExtension();                
+                $gambar->storeAs('public/gambar', $gambarName);
+                    
+                AgendaMasukDetail::create([
+                    'id_agenda'     => $request->id_agenda,
+                    'nama_barang'   => $request->nama_barang,
+                    'id_pegawai'    => $request->id_pegawai,
+                    'gambar'        => $gambarName,
+                    'merk'          => $request->merk,
+                    'tipe'          => $request->tipe,
+                    'tahun_beli'    => $request->tahun_beli,
+                    'no_rangka'     => $request->no_rangka,
+                    'no_mesin'      => $request->no_mesin,
+                    'no_polisi'     => $request->no_polisi,
+                    'no_bpkb'       => $request->no_bpkb,
+                    'satuan'        => 1,
+                    'harga_satuan'  => $request->harga_satuan,
+                    'lokasi'        => $request->lokasi
+                ]);
+            }
+        }    
         return redirect()->route('agendadtls.index', ['id_agenda' => $request->id_agenda])
                         ->with(['success' => 'Data Berhasil Disimpan!']);
     }

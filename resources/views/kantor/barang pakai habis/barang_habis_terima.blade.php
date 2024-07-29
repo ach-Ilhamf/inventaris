@@ -278,7 +278,8 @@
                     { data: 'tgl_dpa', name: 'tgl_dpa' },
                     { data: 'no_dpa', name: 'no_dpa' },
                     { data: 'banyak_barang', name: 'banyak_barang' },
-                    { data: 'harga_satuan', name: 'harga_satuan' },
+                    { data: 'harga_satuan', name: 'harga_satuan', render: function(data, type, row) {
+                        return 'Rp ' + parseInt(data).toLocaleString('id-ID');}  },
                     { data: 'unit', name: 'unit' },
                     { data: 'keterangan', name: 'keterangan' },
                     { data: 'action', name: 'action', orderable: false, searchable: false }

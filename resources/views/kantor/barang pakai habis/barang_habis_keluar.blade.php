@@ -250,7 +250,8 @@
                     { data: 'tgl_keluar', name: 'tgl_keluar'},
                     { data: 'no_keluar', name: 'no_keluar' },
                     { data: 'banyak_barang', name: 'banyak_barang' },
-                    { data: 'harga_satuan', name: 'harga_satuan' },
+                    { data: 'harga_satuan', name: 'harga_satuan', render: function(data, type, row) {
+                        return 'Rp ' + parseInt(data).toLocaleString('id-ID');}  },
                     { data: 'unit', name: 'unit' },
                     { data: 'keterangan', name: 'keterangan' },
                     { data: 'action', name: 'action', orderable: false, searchable: false }
