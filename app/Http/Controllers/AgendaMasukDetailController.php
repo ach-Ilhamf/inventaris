@@ -6,6 +6,7 @@ use App\Models\AgendaMasuk;
 use App\Models\AgendaMasukDetail;
 use App\Models\KipB;
 use App\Models\Pegawai;
+use Barryvdh\DomPDF\Facade\Pdf;
 //return type View
 use Illuminate\View\View;
 
@@ -17,6 +18,7 @@ use Illuminate\Support\Facades\Storage;
 use Yajra\DataTables\Facades\DataTables;
 
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class AgendaMasukDetailController extends Controller
 {
@@ -52,6 +54,45 @@ class AgendaMasukDetailController extends Controller
             ->make(true);
     }
 
+    public function buktiMemorial($id_agenda)
+    {
+        $agendadtl = AgendaMasukDetail::with('pegawai')->where('id_agenda', $id_agenda)->get();
+        $agenda = AgendaMasuk::with('penyedia')->where('id', $id_agenda)->first();
+
+        Carbon::setLocale('id');
+        $agenda->tgl_masuk_formatted = Carbon::parse($agenda->tgl_masuk)->translatedFormat('d F Y');
+        $agenda->tgl_bast_formatted = Carbon::parse($agenda->tgl_bast)->translatedFormat('d F Y');
+        $agenda->tgl_bahp_formatted = Carbon::parse($agenda->tgl_bahp)->translatedFormat('d F Y');
+        $agenda->tgl_ttd = Carbon::parse($agenda->tgl_bahp)->translatedFormat('F Y');
+
+        $groupedBarang = $agendadtl->groupBy('nama_barang')->map(function ($row) {
+            $jumlah = $row->sum('satuan');
+            $harga = $row->first()->harga_satuan;    
+            return [
+                'jumlah' => $jumlah,
+                'harga' => $harga,
+                'total_nilai' => $jumlah * $harga,
+                'items' => $row
+            ];
+        });
+
+        $totalKeseluruhan = $groupedBarang->sum(function($barang) {
+            return $barang['total_nilai'];
+        });
+
+        $data = [
+            'agenda' => $agenda,
+            'agendadtl' => $agendadtl,
+            'groupedBarang' => $groupedBarang,
+            'totalKeseluruhan' => $totalKeseluruhan
+        ];
+
+        $pdf = Pdf::loadView('kantor.agenda masuk.cetak_buktimemorial', $data)
+                    ->setOptions(['defaultFont'=>'Arial']);
+        
+        return $pdf->download('bukti_memorial.pdf');
+
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -186,7 +227,7 @@ class AgendaMasukDetailController extends Controller
     // Redirect ke halaman index dengan pesan sukses
     return redirect()->route('agendadtls.index', ['id_agenda' => $request->id_agenda])
                 ->with(['success' => 'Data Berhasil Diperbarui!']);
-}
+    }
 
     /**
      * destroy
@@ -207,5 +248,7 @@ class AgendaMasukDetailController extends Controller
 
         //redirect to index
         return redirect()->route('agendadtls.index', ['id_agenda' => $agendadtl->id_agenda])
-        ->with(['success' => 'Data Berhasil Dihapus!']);    }
+        ->with(['success' => 'Data Berhasil Dihapus!']);    
+    }
+
 }

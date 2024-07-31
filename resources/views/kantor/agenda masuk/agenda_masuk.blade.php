@@ -155,7 +155,7 @@
                                                     placeholder="Tanggal Masuk" required>
                                             </div>
                                             <div class="mb-3">
-                                                <label for="lokasi" class="form-label">No SKP/SP</label>
+                                                <label for="lokasi" class="form-label">No SPK/SP</label>
                                                 <input type="text" class="form-control" id="lokasi" name="skp"
                                                     placeholder="No SKP/SP" required>
                                             </div>

@@ -59,16 +59,18 @@
                 <!-- Content wrapper -->
                 <div class="content-wrapper">
                     <div class="container-xxl flex-grow-1 container-p-y">
-                        <h3> Barang Kegiatan Masuk </h3>
-                        <!-- Pencarian -->
+                        <h3>Barang Kegiatan Masuk</h3>
                         <div class="row mb-3">
-                            <div class="col text-end">
+                            <div class="col d-flex justify-content-between">
+                                <a href="{{ route('agendadtls.cetakBuktiMemorial', $agenda->id) }}">
+                                    <button type="button" class="btn btn-success">Cetak Bukti Memorial</button>
+                                </a>
                                 <a href="{{ route('agendadtls.create', $agenda->id) }}">
-                                <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                    data-bs-target="#modalTambahBarang">Tambah Barang</button></a>
+                                    <button type="button" class="btn btn-primary">Tambah Barang</button>
+                                </a>
                             </div>
                         </div>
-                        
+                                        
                         @if ($errors->any())
                         <div class="alert alert-danger" id="error-alert">
                             <ul>
