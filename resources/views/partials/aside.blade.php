@@ -91,5 +91,12 @@
               <div data-i18n="Basic">Log Activity</div>
           </a>
       </li>
+      <li class="menu-header small text-uppercase"><span class="menu-header-text">Settings</span></li>      
+      <li class="menu-item">
+          <a href="/logout" class="menu-link">
+            <i class="menu-icon tf-icons bx bx-log-out"></i>
+              <div data-i18n="Basic">Log Out</div>
+          </a>
+      </li>
   </ul>
 </aside>
