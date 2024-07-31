@@ -363,7 +363,7 @@
                     { data: 'no_polisi', name: 'no_polisi' },
                     { data: 'no_bpkb', name: 'no_bpkb' },
                     { data: 'asal_usul', name: 'asal_usul' },
-                    { data: 'harga_satuan', name: 'harga', render: function(data, type, row) {
+                    { data: 'harga_satuan', name: 'harga_satuan', render: function(data, type, row) {
                         return 'Rp ' + parseInt(data).toLocaleString('id-ID'); } },
                     { data: 'beban_susut', name: 'beban_susut' },
                     { data: 'nilai_buku', name: 'nilai_buku' },

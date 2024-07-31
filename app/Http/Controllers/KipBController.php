@@ -33,7 +33,7 @@ class KipBController extends Controller
     public function getData(Request $request)
     {
         if ($request->ajax()) {
-        $kipbs = AgendaMasukDetail::with('Pegawai')->select('agenda_masuk_details.*');
+        $kipbs = AgendaMasukDetail::with('pegawai')->select('agenda_masuk_details.*');
 
         if ($request->has('nama_barang') && !empty($request->nama_barang)) {
             $kipbs->where('nama_barang', 'like', "%{$request->nama_barang}%");
