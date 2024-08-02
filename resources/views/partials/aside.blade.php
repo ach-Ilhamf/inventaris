@@ -1,8 +1,9 @@
 <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
   <div class="app-brand demo">
     <a href="" class="app-brand-link">
-      <img src="" height="24">
-      <span class="app-brand-text demo menu-text fw-bolder ms-2">Minvento</span>
+      <img src="img/logo/logo.png" height="30">
+      <span class="app-brand-text menu-text fw-bolder ms-2" style="margin-left: 20px ">
+        <b>ASET DINAS KOMINFO</b></span>
     </a>
 
     <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
@@ -85,12 +86,6 @@
             </ul>
         </li>
       
-      <li class="menu-item">
-          <a href="" class="menu-link">
-              <i class="menu-icon tf-icons bx bx-collection"></i>
-              <div data-i18n="Basic">Log Activity</div>
-          </a>
-      </li>
       <li class="menu-header small text-uppercase"><span class="menu-header-text">Settings</span></li>      
       <li class="menu-item">
           <a href="/logout" class="menu-link">

@@ -24,8 +24,8 @@
   <nav class="navbar bg-white">
       <div class="container">
           <a class="navbar-brand" href="index.php">
-              <img src="img/logo/logo.png" height="24" class="d-inline-block align-text-top">
-              <span class="logo-name">Minvento</span>
+              <img src="img/logo/logo.png" height="30" class="d-inline-block align-text-top">
+              <span class="logo-name">ASET DINAS KOMINFO</span>
           </a>
     </div>
   </nav>

@@ -35,7 +35,7 @@ class SesiController extends Controller
         'password'=>$request->password,
       ] ;     
       if(Auth::attempt($ceklogin)){
-        return redirect('/penyedias');
+        return redirect('/agendas');
       }else{
         return redirect('')->withErrors('Username dan Password Tidak Sesuai')->withInput();
       }

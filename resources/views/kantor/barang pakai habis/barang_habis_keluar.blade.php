@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport"
         content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum=1.0" />
-    <title>Dashboard - Kantor</title>
+    <title>Pengeluaran Barang Pakai Habis</title>
     <meta name="description" content="" />
 
     <!-- Favicon -->
@@ -63,7 +63,7 @@
                         <div class="row mb-3">
                             <div class="col text-end">
                                 <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                    data-bs-target="#modalTambahBarang">Tambah Pengeluaran Barang Pakai Habis</button>
+                                    data-bs-target="#modalTambahBarang">Tambah Pengeluaran</button>
                             </div>
                         </div>
 
