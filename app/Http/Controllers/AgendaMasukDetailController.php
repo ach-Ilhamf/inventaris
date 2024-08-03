@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\AgendaMasuk;
 use App\Models\AgendaMasukDetail;
-use App\Models\KipB;
 use App\Models\Pegawai;
 use Barryvdh\DomPDF\Facade\Pdf;
 //return type View
@@ -54,8 +53,17 @@ class AgendaMasukDetailController extends Controller
             ->make(true);
     }
 
-    public function buktiMemorial($id_agenda)
+    public function buktiMemorial(Request $request ,$id_agenda)
     {
+        $validatedData = $request->validate([
+            'tgl_persetujuan'   => 'required',
+            'rekening'          => 'string',
+            'nama_kadis'        => 'required',
+            'nip_kadis'         => 'required',
+            'nama_pptk'         => 'required',
+            'nip_pptk'          => 'required',
+        ]);
+    
         $agendadtl = AgendaMasukDetail::with('pegawai')->where('id_agenda', $id_agenda)->get();
         $agenda = AgendaMasuk::with('penyedia')->where('id', $id_agenda)->first();
 
@@ -63,8 +71,10 @@ class AgendaMasukDetailController extends Controller
         $agenda->tgl_masuk_formatted = Carbon::parse($agenda->tgl_masuk)->translatedFormat('d F Y');
         $agenda->tgl_bast_formatted = Carbon::parse($agenda->tgl_bast)->translatedFormat('d F Y');
         $agenda->tgl_bahp_formatted = Carbon::parse($agenda->tgl_bahp)->translatedFormat('d F Y');
-        $agenda->tgl_ttd = Carbon::parse($agenda->tgl_bahp)->translatedFormat('F Y');
-
+        $agenda->tgl_spm_formatted = Carbon::parse($agenda->tgl_spm)->translatedFormat('d F Y');
+        $agenda->tgl_sp2d_formatted = Carbon::parse($agenda->tgl_sp2d)->translatedFormat('d F Y');
+        $validatedData['tgl_persetujuan'] = Carbon::parse($validatedData['tgl_persetujuan'])->format('d F Y');
+        
         $groupedBarang = $agendadtl->groupBy('nama_barang')->map(function ($row) {
             $jumlah = $row->sum('satuan');
             $harga = $row->first()->harga_satuan;    
@@ -80,12 +90,12 @@ class AgendaMasukDetailController extends Controller
             return $barang['total_nilai'];
         });
 
-        $data = [
+        $data = array_merge($validatedData, [
             'agenda' => $agenda,
             'agendadtl' => $agendadtl,
             'groupedBarang' => $groupedBarang,
             'totalKeseluruhan' => $totalKeseluruhan
-        ];
+        ]);
 
         $pdf = Pdf::loadView('kantor.agenda masuk.cetak_buktimemorial', $data)
                     ->setOptions(['defaultFont'=>'Arial']);

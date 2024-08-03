@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
 <head>
     <title>Dashboard - Kantor</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -10,10 +9,18 @@
             font-family: Arial, sans-serif;
             font-size: 10px;
         }
+        .signature-table {
+            width: 40%;
+        }
+        .signature-left {
+            float: left;
+            margin-right: 4%;
+        }
+        .signature-right {
+            float: right;
+        }
     </style>
-
 </head>
-
 <body>
     <div class="container">
         <div class="row">
@@ -92,10 +99,10 @@
             <tr style="border: 1px solid black; text-align: left; padding: 8px;">
                 <td style="border: 1px solid black; text-align: left; padding: 8px;">1</td>
                 <td style="border: 1px solid black; text-align: left; padding: 8px;">Biaya Pembelian</td>
-                <td style="border: 1px solid black; text-align: left; padding: 8px;"></td>
-                <td style="border: 1px solid black; text-align: left; padding: 8px;"></td>
+                <td style="border: 1px solid black; text-align: left; padding: 8px;">{{ $agenda->sp2d }}, {{ $agenda->tgl_sp2d_formatted }}</td>
+                <td style="border: 1px solid black; text-align: left; padding: 8px;">{{ $agenda->spm }}, {{ $agenda->tgl_spm_formatted }}</td>
                 <td style="border: 1px solid black; text-align: left; padding: 8px;">Rp {{ number_format($agenda->nilai_kontrak, 2, ',', '.') }}</td>
-                <td style="border: 1px solid black; text-align: left; padding: 8px;"></td>
+                <td style="border: 1px solid black; text-align: left; padding: 8px;">{{ $rekening }}</td>
             </tr>
             <tr style="border: 1px solid black; text-align: left; padding: 8px;">
                 <td style="border: 1px solid black; text-align: left; padding: 8px;"></td>
@@ -103,22 +110,6 @@
                 <td style="border: 1px solid black; text-align: left; padding: 8px;"></td>
                 <td style="border: 1px solid black; text-align: left; padding: 8px;"></td>
                 <td style="border: 1px solid black; text-align: left; padding: 8px;">Rp {{ number_format($agenda->nilai_kontrak, 2, ',', '.') }}</td>
-                <td style="border: 1px solid black; text-align: left; padding: 8px;"></td>
-            </tr>
-            <tr style="border: 1px solid black; text-align: left; padding: 8px;">
-                <td style="border: 1px solid black; text-align: left; padding: 8px;"></td>
-                <td style="border: 1px solid black; text-align: left; padding: 8px;"></td>
-                <td style="border: 1px solid black; text-align: left; padding: 8px;"></td>
-                <td style="border: 1px solid black; text-align: left; padding: 8px;"></td>
-                <td style="border: 1px solid black; text-align: left; padding: 8px;">Rp -</td>
-                <td style="border: 1px solid black; text-align: left; padding: 8px;"></td>
-            </tr>
-            <tr style="border: 1px solid black; text-align: left; padding: 8px;">
-                <td style="border: 1px solid black; text-align: left; padding: 8px;"></td>
-                <td style="border: 1px solid black; text-align: left; padding: 8px;">Sub Jumlah</td>
-                <td style="border: 1px solid black; text-align: left; padding: 8px;"></td>
-                <td style="border: 1px solid black; text-align: left; padding: 8px;"></td>
-                <td style="border: 1px solid black; text-align: left; padding: 8px;">Rp -</td>
                 <td style="border: 1px solid black; text-align: left; padding: 8px;"></td>
             </tr>
             <tr style="border: 1px solid black; text-align: left; padding: 8px;">
@@ -145,13 +136,10 @@
                     <th rowspan="2" style="border: 1px solid black; padding: 8px;">Nama Barang</th>
                     <th rowspan="2" style="border: 1px solid black; padding: 8px;">Jumlah Barang</th>
                     <th colspan="2" style="border: 1px solid black; padding: 8px;">Biaya</th>
-                    <th colspan="2" style="border: 1px solid black; padding: 8px;">Biaya Atribusi</th>
                     <th rowspan="2" style="border: 1px solid black; padding: 8px;">Jumlah Nilai Aset</th>
                 </tr>
                 <tr style="border: 1px solid black; text-align: left; padding: 8px;">
                     <th style="border: 1px solid black; padding: 8px;">Harga Satuan</th>
-                    <th style="border: 1px solid black; padding: 8px;">Jumlah</th>
-                    <th style="border: 1px solid black; padding: 8px;">Satuan Barang</th>
                     <th style="border: 1px solid black; padding: 8px;">Jumlah</th>
                 </tr>
             </thead>
@@ -161,8 +149,6 @@
                     <td>
                         Belanja {{ $agenda->klas_aset }}
                     </td>
-                    <td></td>
-                    <td></td>
                     <td></td>
                     <td></td>
                     <td></td>
@@ -190,8 +176,6 @@
                             Rp {{ number_format($barang['total_nilai'], 2, ',', '.') }} <br>
                         @endforeach
                     </td>
-                    <td style="border: 1px solid black; text-align: left; padding: 8px;">-<br>-</td>
-                    <td style="border: 1px solid black; text-align: left; padding: 8px;">-<br>-</td>
                     <td style="border: 1px solid black; text-align: left; padding: 8px;">
                         @foreach ($groupedBarang as $nama_barang => $barang)
                             Rp {{ number_format($barang['total_nilai'], 2, ',', '.') }} <br>
@@ -201,31 +185,43 @@
                 <tr style="border: 1px solid black; text-align: left; padding: 8px;">
                     <td colspan="4" class="text-left" style="border: 1px solid black; text-align: left; padding: 8px;">Jumlah</td>
                     <td style="border: 1px solid black; text-align: left; padding: 8px;"> Rp {{ number_format($totalKeseluruhan, 2, ',', '.') }}</td>
-                    <td style="border: 1px solid black; text-align: left; padding: 8px;">-</td>
-                    <td style="border: 1px solid black; text-align: left; padding: 8px;">-</td>
                     <td style="border: 1px solid black; text-align: left; padding: 8px;"> Rp {{ number_format($totalKeseluruhan, 2, ',', '.') }}</td>
                 </tr>
             </tbody>
         </table>    
     </div>
     <P>Nota Bukti Memorial ini dibuat dengan kondisi yang sebenarnya</P>
-    <br><br>
-    <table align="right">
+    <br>
+    <table class="signature-table signature-left">
         <tr>
-            <td style="text-align: center;">Gresik, {{ $agenda->tgl_ttd }}</td>
+            <td style="text-align: center;">Gresik, {{ $tgl_persetujuan }}</td>
         </tr>
+        <tr>
+            <td style="text-align: center;"><b>Kepala Dinas Komunikasi Dan Informatika</b></td>
+        </tr>
+        <br><br><br>
+        <tr>
+            <td style="text-align: center;"><b><u>{{ $nama_kadis }}</u></b></td>
+        </tr>
+        <tr>
+            <td style="text-align: center;">NIP.{{ $nip_kadis }}</td>
+        </tr>
+    </table>
+    <br>
+    <table class="signature-table signature-right">
+        <tr><td></td></tr>
         <tr>
             <td style="text-align: center;"><b>PPTK Kegiatan</b></td>
         </tr>
         <br><br><br>
         <tr>
-            <td style="text-align: center;"><b><u>Drs. OEDI MARGIANTONIUS, M.Ec.Dec</u></b></td>
+            <td style="text-align: center;"><b><u>{{ $nama_pptk }}</u></b></td>
         </tr>
         <tr>
             <td style="text-align: center;">Pembina Tk.I</td>
         </tr>
         <tr>
-            <td style="text-align: center;">NIP.19701118 199101 1001</td>
+            <td style="text-align: center;">NIP.{{ $nip_pptk }}</td>
         </tr>
     </table>
 </body>

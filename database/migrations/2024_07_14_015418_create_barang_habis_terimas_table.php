@@ -15,6 +15,7 @@ return new class extends Migration
             $table->bigIncrements('id');
             $table->string('kode_barang');
             $table->unsignedBigInteger('id_barang');
+            $table->date('tgl_terima');
             $table->date('tgl_spk');
             $table->string('no_spk');
             $table->date('tgl_dpa')->nullable();

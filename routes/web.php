@@ -44,7 +44,7 @@ Route::get('pegawais/data', [PegawaiController::class, 'getData'])->name('pegawa
 Route::resource('/pegawais', \App\Http\Controllers\PegawaiController::class);
 
 Route::get('agendadtls/data/{id_agenda}', [AgendaMasukDetailController::class, 'getData'])->name('agendadtls.getData');
-Route::get('agendadtls/cetak/{id_agenda}', [AgendaMasukDetailController::class, 'buktiMemorial'])->name('agendadtls.cetakBuktiMemorial');
+Route::post('agendadtls/cetak/{id_agenda}', [AgendaMasukDetailController::class, 'buktiMemorial'])->name('agendadtls.cetakBuktiMemorial');
 Route::resource('/agendadtls', \App\Http\Controllers\AgendaMasukDetailController::class);
 Route::get('agendadtls/{id_agenda}', [AgendaMasukDetailController::class, 'index'])->name('agendadtls.index');
 Route::get('/agendadtls/create/{id_agenda}', [AgendaMasukDetailController::class, 'create'])->name('agendadtls.create');

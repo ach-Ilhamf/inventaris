@@ -65,33 +65,8 @@
                             <div class="col">
                             </div>
                             <div class="col text-end">
-                                <button type="button" class="btn btn-secondary" data-bs-toggle="modal"
-                                    data-bs-target="#modalImport">Impor Data</button>
-                                <a href="../../controller/export.php" class="btn btn-success">Export Data</a>
                                 <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                                     data-bs-target="#modalTambahBarang">Tambah Kegiatan Masuk</button>
-                            </div>
-                        </div>
-
-                        <!-- Modal import data -->
-                        <div class="modal fade" id="modalImport" tabindex="-1" aria-labelledby="modalImportLabel"
-                            aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="modalImportLabel">Import Data</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                            aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <form action="" method="POST" enctype="multipart/form-data">
-                                            <input class="form-control" type="file" name="file_excel"
-                                                accept=".xlsx,.xls">
-                                            <button type="submit" class="btn btn-primary mt-3"
-                                                name="Import">Import</button>
-                                        </form>
-                                    </div>
-                                </div>
                             </div>
                         </div>
 
@@ -145,14 +120,18 @@
                                                 </div>
                                             </div>
                                             <div class="mb-3">
-                                                <label for="lokasi" class="form-label">Klasifikasi Aset</label>
-                                                <input type="text" class="form-control" id="lokasi" name="klas_aset"
-                                                    placeholder="Klasifikasi Aset" required>
-                                            </div>
-                                            <div class="mb-3">
-                                                <label for="lokasi" class="form-label">Tanggal Masuk</label>
-                                                <input type="date" class="form-control" id="lokasi" name="tgl_masuk"
-                                                    placeholder="Tanggal Masuk" required>
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <label for="lokasi" class="form-label">Klasifikasi Aset</label>
+                                                        <input type="text" class="form-control" id="lokasi" name="klas_aset"
+                                                            placeholder="Klasifikasi Aset" required>
+                                                    </div>
+                                                    <div class="col">
+                                                        <label for="lokasi" class="form-label">Tanggal Masuk</label>
+                                                        <input type="date" class="form-control" id="lokasi" name="tgl_masuk"
+                                                            placeholder="Tanggal Masuk" required>
+                                                    </div>
+                                                </div>
                                             </div>
                                             <div class="mb-3">
                                                 <label for="lokasi" class="form-label">No SPK/SP</label>
@@ -162,13 +141,40 @@
                                             <div class="mb-3">
                                                 <div class="row">
                                                     <div class="col">
+                                                        <label for="lokasi" class="form-label">No SPM</label>
+                                                        <input type="text" class="form-control" id="lokasi" name="spm"
+                                                            placeholder="No SPM" required>
+                                                    </div>
+                                                    <div class="col">
+                                                        <label for="lokasi" class="form-label">Tanggal SPM</label>
+                                                        <input type="date" class="form-control" id="lokasi"
+                                                            name="tgl_spm" placeholder="Tanggal SPM" required>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="mb-3">
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <label for="lokasi" class="form-label">No SP2D</label>
+                                                        <input type="text" class="form-control" id="lokasi" name="sp2d"
+                                                            placeholder="No SP2D" required>
+                                                    </div>
+                                                    <div class="col">
+                                                        <label for="lokasi" class="form-label">Tanggal SP2D</label>
+                                                        <input type="date" class="form-control" id="lokasi"
+                                                            name="tgl_sp2d" placeholder="Tanggal SPM" required>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="mb-3">
+                                                <div class="row">
+                                                    <div class="col">
                                                         <label for="lokasi" class="form-label">No BAHP/BAPPHP</label>
                                                         <input type="text" class="form-control" id="lokasi" name="bahp"
                                                             placeholder="No BAPH/BAPPHP" required>
                                                     </div>
                                                     <div class="col">
-                                                        <label for="lokasi" class="form-label">Tanggal
-                                                            BAPH/BAPPHP</label>
+                                                        <label for="lokasi" class="form-label">Tanggal BAPH/BAPPHP</label>
                                                         <input type="date" class="form-control" id="lokasi"
                                                             name="tgl_bahp" placeholder="Tanggal BAHP/BAPPHP" required>
                                                     </div>
@@ -189,17 +195,21 @@
                                                 </div>
                                             </div>
                                             <div class="mb-3">
-                                                <label for="lokasi" class="form-label">Dokumen</label>
-                                                <select class="form-control" id="lokasi" name="dokumen">
-                                                    <option value="">Pilih Dokumen</option>
-                                                    <option value="Lengkap">Lengkap</option>
-                                                    <option value="Tidak Lengkap">Tidak Lengkap</option>
-                                                </select>
-                                            </div>
-                                            <div class="mb-3">
-                                                <label for="lokasi" class="form-label">Keterangan</label>
-                                                <input type="text" class="form-control" id="lokasi" name="Keterangan"
-                                                    placeholder="Keterangan">
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <label for="lokasi" class="form-label">Dokumen</label>
+                                                        <select class="form-control" id="lokasi" name="dokumen">
+                                                            <option value="">Pilih Dokumen</option>
+                                                            <option value="Lengkap">Lengkap</option>
+                                                            <option value="Tidak Lengkap">Tidak Lengkap</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col">
+                                                        <label for="lokasi" class="form-label">Keterangan</label>
+                                                        <input type="text" class="form-control" id="lokasi" name="Keterangan"
+                                                            placeholder="Keterangan">
+                                                    </div>
+                                                </div>
                                             </div>
                                             <!-- Tombol untuk menyimpan data -->
                                             <button onclick="return confirm('Apakah Anda Yakin Untuk Menambah Kegiatan ?');" type="submit" class="btn btn-primary">Simpan</button>
@@ -247,10 +257,6 @@
                                             <th>Nilai Kontrak</th>
                                             <th>Tanggal Masuk</th>
                                             <th>No SKP</th>
-                                            <th>No BAHP</th>
-                                            <th>Tanggal BAHP</th>
-                                            <th>No BAST</th>
-                                            <th>Tanggal BAST</th>
                                             <th>Dokumen</th>
                                             <th>Keterangan</th>
                                             <th>Actions</th>
@@ -314,10 +320,6 @@
                         return 'Rp ' + parseInt(data).toLocaleString('id-ID');} },
                     { data: 'tgl_masuk', name: 'tgl_masuk' },
                     { data: 'skp', name: 'skp' },
-                    { data: 'bahp', name: 'bahp' },
-                    { data: 'tgl_bahp', name: 'tgl_bahp' },
-                    { data: 'bast', name: 'bast' },
-                    { data: 'tgl_bast', name: 'tgl_bast' },
                     { data: 'dokumen', name: 'dokumen' },
                     { data: 'Keterangan', name: 'Keterangan' },
                     { data: 'action', name: 'action', orderable: false, searchable: false }

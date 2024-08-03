@@ -62,14 +62,73 @@
                         <h3>Barang Kegiatan Masuk</h3>
                         <div class="row mb-3">
                             <div class="col d-flex justify-content-between">
-                                <a href="{{ route('agendadtls.cetakBuktiMemorial', $agenda->id) }}">
-                                    <button type="button" class="btn btn-success">Cetak Bukti Memorial</button>
-                                </a>
+                                <button type="button" class="btn btn-success" data-bs-toggle="modal"
+                                data-bs-target="#modalCetak">Cetak Bukti Memorial</button>
                                 <a href="{{ route('agendadtls.create', $agenda->id) }}">
                                     <button type="button" class="btn btn-primary">Tambah Barang</button>
                                 </a>
                             </div>
                         </div>
+                
+                        <div class="modal fade" id="modalCetak" tabindex="-1"
+                        aria-labelledby="modalTambahBarangLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="modalTambahBarangLabel">Cetak Bukti Memorial</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <form action="{{ route('agendadtls.cetakBuktiMemorial', $agenda->id) }}" method="POST">
+                                        @csrf
+                                        <!-- Input untuk nama barang -->
+                                        <div class="mb-3">
+                                            <label for="namaBarang" class="form-label">Tanggal Persetujuan</label>
+                                            <input type="date" class="form-control" id="namaBarang"
+                                                name="tgl_persetujuan" placeholder="Tanggal Persetujuan" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="namaBarang" class="form-label">Kode Rekening</label>
+                                            <input type="text" class="form-control" id="namaBarang"
+                                                name="rekening" placeholder="Kode Rekening" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <div class="row">
+                                                <div class="col">
+                                                    <label for="namaBarang" class="form-label">Nama Kepala Dinas</label>
+                                                    <input type="text" class="form-control" id="namaBarang"
+                                                        name="nama_kadis" placeholder="Nama Kepala Dinas" required>
+                                                </div>
+                                                <div class="col">
+                                                    <label for="namaBarang" class="form-label">NIP Kepala Dinas</label>
+                                                    <input type="text" class="form-control" id="namaBarang"
+                                                        name="nip_kadis" placeholder="NIP Kepala Dinas" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="mb-3">
+                                            <div class="row">
+                                                <div class="col">
+                                                    <label for="namaBarang" class="form-label">Nama PPTK Kegiatan</label>
+                                                    <input type="text" class="form-control" id="namaBarang"
+                                                        name="nama_pptk" placeholder="Nama PPTK Kegiatan" required>
+                                                </div>
+                                                <div class="col">
+                                                    <label for="namaBarang" class="form-label">NIP PPTK Kegiatan</label>
+                                                    <input type="text" class="form-control" id="namaBarang"
+                                                        name="nip_pptk" placeholder="NIP PPTK Kegiatan" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Tombol untuk menyimpan data -->
+                                        <button onclick="return confirm('Apakah Anda Yakin Untuk Mencetak ?');" type="submit" class="btn btn-success">Cetak</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                                         
                         @if ($errors->any())
                         <div class="alert alert-danger" id="error-alert">

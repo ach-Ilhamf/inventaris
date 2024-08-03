@@ -111,22 +111,58 @@
                                                 </div>
                                             </div>
                                             <div class="mb-3">
-                                                <label for="lokasi" class="form-label">Klasifikasi Aset</label>
-                                                <input type="text" class="form-control" id="lokasi" name="klas_aset"
-                                                    placeholder="Klasifikasi Aset"
-                                                    value="{{ old('agenda_masuk', $agenda->klas_aset) }}" required>
-                                            </div>
-                                            <div class="mb-3">
-                                                <label for="lokasi" class="form-label">Tanggal Masuk</label>
-                                                <input type="date" class="form-control" id="lokasi" name="tgl_masuk"
-                                                    placeholder="Tanggal Masuk"
-                                                    value="{{ old('agenda_masuk', $agenda->tgl_masuk) }}" required>
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <label for="lokasi" class="form-label">Klasifikasi Aset</label>
+                                                        <input type="text" class="form-control" id="lokasi" name="klas_aset"
+                                                            placeholder="Klasifikasi Aset"
+                                                            value="{{ old('agenda_masuk', $agenda->klas_aset) }}" required>
+                                                    </div>
+                                                    <div class="col">
+                                                        <label for="lokasi" class="form-label">Tanggal Masuk</label>
+                                                        <input type="date" class="form-control" id="lokasi" name="tgl_masuk"
+                                                            placeholder="Tanggal Masuk"
+                                                            value="{{ old('agenda_masuk', $agenda->tgl_masuk) }}" required>
+                                                    </div>
+                                                </div>
                                             </div>
                                             <div class="mb-3">
                                                 <label for="lokasi" class="form-label">No SKP/SP</label>
                                                 <input type="text" class="form-control" id="lokasi" name="skp"
                                                     placeholder="No SKP/SP"
                                                     value="{{ old('agenda_masuk', $agenda->skp) }}" required>
+                                            </div>
+                                            <div class="mb-3">
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <label for="lokasi" class="form-label">No SPM</label>
+                                                        <input type="text" class="form-control" id="lokasi" name="spm"
+                                                            placeholder="No SPM" 
+                                                            value="{{ old('agenda_masuk', $agenda->spm) }}" required>
+                                                    </div>
+                                                    <div class="col">
+                                                        <label for="lokasi" class="form-label">Tanggal SPM</label>
+                                                        <input type="date" class="form-control" id="lokasi"
+                                                            name="tgl_spm" placeholder="Tanggal SPM" 
+                                                            value="{{ old('agenda_masuk', $agenda->tgl_spm) }}" required>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="mb-3">
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <label for="lokasi" class="form-label">No SP2D</label>
+                                                        <input type="text" class="form-control" id="lokasi" name="sp2d"
+                                                            placeholder="No SP2D" 
+                                                            value="{{ old('agenda_masuk', $agenda->sp2d) }}" required>
+                                                    </div>
+                                                    <div class="col">
+                                                        <label for="lokasi" class="form-label">Tanggal SP2D</label>
+                                                        <input type="date" class="form-control" id="lokasi"
+                                                            name="tgl_sp2d" placeholder="Tanggal SPM" 
+                                                            value="{{ old('agenda_masuk', $agenda->tgl_sp2d) }}" required>
+                                                    </div>
+                                                </div>
                                             </div>
                                             <div class="mb-3">
                                                 <div class="row">

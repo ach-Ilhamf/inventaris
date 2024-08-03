@@ -19,6 +19,10 @@ return new class extends Migration
             $table->string('klas_aset');
             $table->date('tgl_masuk');
             $table->string('skp');
+            $table->string('spm');
+            $table->date('tgl_spm');
+            $table->string('sp2d');
+            $table->date('tgl_sp2d');
             $table->string('bahp');
             $table->date('tgl_bahp');
             $table->string('bast');
