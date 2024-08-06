@@ -91,11 +91,6 @@
                                                 <input type="text" class="form-control" id="lokasi" name="stok"
                                                     placeholder="Stok" value="{{ old('barangpakaihabis', $barang->stok)}}" required>
                                             </div>
-                                            <div class="mb-3">
-                                                <label for="lokasi" class="form-label">Harga Satuan</label>
-                                                <input type="text" class="form-control" id="lokasi" name="harga_satuan"
-                                                    placeholder="Harga Satuan" value="{{ old('barangpakaihabis', $barang->harga_satuan)}}" required>
-                                            </div>
                                             <!-- Tombol untuk menyimpan data -->
                                             <button onclick="return confirm('Apakah Anda Yakin Untuk Mengedit Barang ?');" type="submit" class="btn btn-primary">Simpan</button>
                                         </form>

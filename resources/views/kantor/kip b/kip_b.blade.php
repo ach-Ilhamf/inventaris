@@ -56,10 +56,72 @@
                     <div class="container-xxl flex-grow-1 container-p-y">
                         <h3>Barang KIP-B</h3>
                         <div class="row mb-3">
-                            <div class="col text-end">
-                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalTambahBarang">Tambah Barang</button>
+                            <div class="col d-flex justify-content-between">
+                                <button type="button" class="btn btn-success" data-bs-toggle="modal"
+                                    data-bs-target="#modalCetak">Cetak Barang KIP-B</button>
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" 
+                                    data-bs-target="#modalTambahBarang">Tambah Barang</button>
                             </div>
                         </div>
+                        <!-- Filter Section -->
+                        <div class="row mb-3">
+                            <div class="col-md-4">
+                                <input type="text" class="form-control" name="nama_barang" id="filter-nama-barang" placeholder=" Filter Jenis Barang">
+                            </div>
+                            <div class="col-md-4">
+                                <input type="text" class="form-control" name="tahun_beli" id="filter-tahun-beli" placeholder="Filter Tahun Beli">
+                            </div>
+                            <div class="col-md-4">
+                                <input type="text" class="form-control" name="kondisi" id="filter-kondisi" placeholder="Filter Kondisi">
+                            </div>
+                        </div>
+                        <div class="modal fade" id="modalCetak" tabindex="-1"
+                        aria-labelledby="modalTambahBarangLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="modalTambahBarangLabel">Cetak Barang KIP-B</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <form action="{{ route('export.kipb') }}" method="GET">
+                                        @csrf
+                                        <input type="hidden" name="nama_barang" id="export-nama-barang">
+                                        <input type="hidden" name="tahun_beli" id="export-tahun-beli">
+                                        <input type="hidden" name="kondisi" id="export-kondisi">
+                                        <input type="hidden" class="form-control" name="left_position" id="right_position" 
+                                                value="Kepala Dinas Komunikasi Dan Informatika">
+                                        <input type="hidden" class="form-control" name="right_position" id="left_position" 
+                                                value="Pengelola Pemanfaatan Barang">
+
+                                        <div class="mb-3">    
+                                            <label for="approval_date" class="form-label">Tanggal Persetujuan </label>
+                                            <input type="date" class="form-control" name="approval_date" id="approval_date" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="left_name" class="form-label">Nama Kepala Dinas</label>
+                                            <input type="text" class="form-control" name="left_name" id="left_name" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="left_nip" class="form-label">NIP Kepala Dinas</label>
+                                            <input type="text" class="form-control" name="left_nip" id="left_nip" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="right_name" class="form-label">Nama Pengelola Pemanfaatan Barang</label>
+                                            <input type="text" class="form-control" name="right_name" id="right_name" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="right_nip" class="form-label">NIP Pengelola Pemanfaatan Barang</label>
+                                            <input type="text" class="form-control" name="right_nip" id="right_nip" required> 
+                                        </div>
+                                        <button onclick="return confirm('Apakah Anda Yakin Untuk Mencetak ?');" class="btn btn-success">Cetak</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
 
                         <!-- Modal Tambah Barang -->
                         <div class="modal fade" id="modalTambahBarang" tabindex="-1" aria-labelledby="modalTambahBarangLabel" aria-hidden="true">
@@ -135,7 +197,7 @@
                                                     <div class="col">
                                                         <label for="lokasi" class="form-label">Bahan</label>
                                                         <input type="text" class="form-control" id="lokasi" name="merk"
-                                                            placeholder="Merk">
+                                                            placeholder="Bahan">
                                                     </div>
                                                 </div>
                                             </div>
@@ -192,7 +254,7 @@
                                                     <div class="col">
                                                         <label for="lokasi" class="form-label">Beban Susut</label>
                                                         <input type="number" class="form-control" id="lokasi"
-                                                            name="beban_susut" placeholder="Beban Susut" required>
+                                                            name="beban_susut" placeholder="Beban Susut">
                                                     </div>
                                                 </div>
                                             </div>
@@ -239,18 +301,6 @@
                         </div>
                     </div>
 
-                        <!-- Filter Section -->
-                        <div class="row mb-3">
-                            <div class="col-md-4">
-                                <input type="text" class="form-control" name="nama_barang" id="filter-nama-barang" placeholder=" Filter Jenis Barang">
-                            </div>
-                            <div class="col-md-4">
-                                <input type="text" class="form-control" name="tahun_beli" id="filter-tahun-beli" placeholder="Filter Tahun Beli">
-                            </div>
-                            <div class="col-md-4">
-                                <input type="text" class="form-control" name="kondisi" id="filter-kondisi" placeholder="Filter Kondisi">
-                            </div>
-                        </div>
                         @if ($errors->any())
                         <div class="alert alert-danger" id="error-alert">
                             <ul>
@@ -376,6 +426,17 @@
             $('#filter-nama-barang, #filter-tahun-beli, #filter-kondisi').on('keyup change', function() {
                 table.draw();
             });
+             // Sinkronisasi filter dengan form ekspor
+             $('#filter-nama-barang').on('change keyup', function() {
+                $('#export-nama-barang').val($(this).val());
+            });
+            $('#filter-tahun-beli').on('change keyup', function() {
+                $('#export-tahun-beli').val($(this).val());
+            });
+            $('#filter-kondisi').on('change keyup', function() {
+                $('#export-kondisi').val($(this).val());
+            });
+
         });
     </script>
         <script>
@@ -391,6 +452,20 @@
                 }, 3000); 
             });
     </script>
+    <script>
+            // test untuk button
+            document.getElementById('export-btn').addEventListener('click', function() {
+                let namaBarang = document.getElementById('filter-nama-barang').value;
+                let tahunBeli = document.getElementById('filter-tahun-beli').value;
+                let kondisi = document.getElementById('filter-kondisi').value;
         
+                let url = new URL('{{ route('export.kipb') }}');
+                url.searchParams.append('nama_barang', namaBarang);
+                url.searchParams.append('tahun_beli', tahunBeli);
+                url.searchParams.append('kondisi', kondisi);
+        
+                window.location.href = url;
+            });
+    </script>        
 </body>
 </html>

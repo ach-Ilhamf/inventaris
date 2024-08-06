@@ -13,9 +13,10 @@ return new class extends Migration
     {
         Schema::create('barang_habis_keluars', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('kode_barang')->nullable();
             $table->unsignedBigInteger('id_barang');
             $table->date('tgl_keluar');
-            $table->string('no_keluar');
+            $table->string('no_keluar')->nullable();
             $table->integer('banyak_barang');
             $table->decimal('harga_satuan', 15,2);
             $table->string('unit');

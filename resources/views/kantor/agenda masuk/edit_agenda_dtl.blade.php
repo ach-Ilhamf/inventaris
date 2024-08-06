@@ -178,7 +178,7 @@
                                             </div>
                                             <div class="mb-3">
                                                 <label for="lokasi" class="form-label">Lokasi</label>
-                                                <select class="form-control" id="lokasi" name="lokasi">
+                                                <select class="form-control" id="lokasi" name="lokasi" required>
                                                     <option value="">Pilih Lokasi</option>
                                                     <option value="Kepala Dinas">Kepala Dinas</option>
                                                     <option value="Sekretariat">Sekretariat</option>

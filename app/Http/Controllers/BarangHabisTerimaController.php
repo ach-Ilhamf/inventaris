@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 //import Model 
 
+use App\Exports\ExportBarangTerima;
 use App\Models\BarangHabisTerima;
 use App\Models\BarangPakaiHabis;
 //return type View
@@ -15,6 +16,9 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 use Yajra\DataTables\Facades\DataTables;
+
+use Maatwebsite\Excel\Facades\Excel;
+use Carbon\Carbon;
 
 class BarangHabisTerimaController extends Controller
 {
@@ -39,8 +43,8 @@ class BarangHabisTerimaController extends Controller
                 });
             }
 
-            if ($request->has('harga_satuan') && !empty($request->harga_satuan)) {
-                $terima->where('harga_satuan', 'like', "%{$request->harga_satuan}%");
+            if ($request->has('tgl_terima') && !empty($request->tgl_terima)) {
+                $terima->where('tgl_terima', 'like', "%{$request->tgl_terima}%");
             }
 
             return DataTables::of($terima)
@@ -54,6 +58,45 @@ class BarangHabisTerimaController extends Controller
                 })
                 ->make(true);
         }
+    }
+
+    public function export_barang_terima(Request $request)
+    {
+        $excludeColumns = ['id', 'id_barang','tgl_spk', 'no_spk', 'tgl_dpa', 'no_dpa',
+                                'keterangan', 'created_at', 'updated_at']; 
+
+        $filters = [
+            'jenis_barang'   => $request->input('jenis_barang'),
+            'tgl_terima'     => $request->input('tgl_terima')
+        ];
+
+        $columnMappings = [
+            'kode_barang'   => 'Kode Barang',
+            'jenis_barang'  => 'Nama Barang',
+            'tgl_terima'    => 'Tanggal Masuk',
+            'banyak_barang' => 'Jumlah Barang',
+            'harga_satuan'  => 'Nilai Barang',
+            'unit'          => 'Keterangan'
+        ];
+
+        Carbon::setLocale('id');
+        $approvalDate = Carbon::parse($request->input('approval_date'))->translatedFormat('d F Y');
+
+        $approvalDetails = [
+            'date'  => $approvalDate,
+            'left'  => [
+                'name'      => $request->input('left_name'),
+                'position'  => $request->input('left_position'),
+                'nip'       => $request->input('left_nip')
+            ],
+            'right' => [
+                'name'      => $request->input('right_name'),
+                'position'  => $request->input('right_position'),
+                'nip'       => $request->input('right_nip')
+            ]
+        ];
+
+        return Excel::download(new ExportBarangTerima($excludeColumns, $filters, $columnMappings, $approvalDetails), 'penerimaan barang pakai habis.xlsx');
     }
 
 
@@ -75,31 +118,29 @@ class BarangHabisTerimaController extends Controller
     {
         //validate form
         $this->validate($request, [
-            'kode_barang'   => 'required',
             'id_barang'     => 'required',
-            'tgl_spk'       => 'required',
-            'no_spk'        => 'required',
-            'no_dpa'        => 'required',
+            'tgl_terima'    => 'required',
             'banyak_barang' => 'required',
             'harga_satuan'  => 'required',
             'unit'          => 'required',
         ]);
 
-        //create post
+        for ($i = 0; $i < $request->banyak_barang; $i++) {
         BarangHabisTerima::create([
             'kode_barang'   => $request->kode_barang,
             'id_barang'     => $request->id_barang,
+            'tgl_terima'    => $request->tgl_terima, 
             'tgl_spk'       => $request->tgl_spk,
             'no_spk'        => $request->no_spk,
             'tgl_dpa'       => $request->tgl_dpa,
             'no_dpa'        => $request->no_dpa,
-            'banyak_barang' => $request->banyak_barang,
+            'banyak_barang' => 1,
             'harga_satuan'  => $request->harga_satuan,
             'unit'          => $request->unit,
             'keterangan'    => $request->keterangan
     
         ]);
-
+        }
         //redirect to index
         return redirect()->route('barangterimas.index');
     }
@@ -129,11 +170,8 @@ class BarangHabisTerimaController extends Controller
     public function update(Request $request, $id): RedirectResponse
     {
         $this->validate($request, [
-            'kode_barang'   => 'required',
             'id_barang'     => 'required',
-            'tgl_spk'      => 'required',
-            'no_spk'        => 'required',
-            'no_dpa'        => 'required',
+            'tgl_terima'    => 'required',
             'banyak_barang' => 'required',
             'harga_satuan'  => 'required',
             'unit'          => 'required',
@@ -144,6 +182,7 @@ class BarangHabisTerimaController extends Controller
         $terima->update([
             'kode_barang'   => $request->kode_barang,
             'id_barang'     => $request->id_barang,
+            'tgl_terima'    => $request->tgl_terima, 
             'tgl_spk'       => $request->tgl_spk,
             'no_spk'        => $request->no_spk,
             'tgl_dpa'       => $request->tgl_dpa,

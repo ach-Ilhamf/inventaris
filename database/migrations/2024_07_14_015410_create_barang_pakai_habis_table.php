@@ -15,7 +15,6 @@ return new class extends Migration
             $table->bigIncrements('id');
             $table->string('jenis_barang');
             $table->integer('stok')->nullable();
-            $table->decimal('harga_satuan', 15,2);
             $table->timestamps();
         });
     }

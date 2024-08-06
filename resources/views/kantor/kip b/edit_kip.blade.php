@@ -145,7 +145,7 @@
                                                     <div class="col">
                                                         <label for="lokasi" class="form-label">Bahan</label>
                                                         <input type="text" class="form-control" id="lokasi" name="merk"
-                                                            placeholder="Merk" value="{{ old('kipb', $kipb->bahan) }}">
+                                                            placeholder="Bahan" value="{{ old('kipb', $kipb->bahan) }}">
                                                     </div>
                                                 </div>
                                             </div>
@@ -202,7 +202,7 @@
                                                     <div class="col">
                                                         <label for="lokasi" class="form-label">Beban Susut</label>
                                                         <input type="number" class="form-control" id="lokasi"
-                                                            name="beban_susut" placeholder="Beban Susut" value="{{ old('kipb', $kipb->beban_susut) }}" required>
+                                                            name="beban_susut" placeholder="Beban Susut" value="{{ old('kipb', $kipb->beban_susut) }}">
                                                     </div>
                                                 </div>
                                             </div>

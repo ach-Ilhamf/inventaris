@@ -17,6 +17,10 @@ use Illuminate\Http\Request;
 
 use Yajra\DataTables\Facades\DataTables;
 
+use App\Exports\ExportFile;
+use Maatwebsite\Excel\Facades\Excel;
+use Carbon\Carbon;
+
 class KipBController extends Controller
 {
     /**
@@ -60,7 +64,51 @@ class KipBController extends Controller
         }
     }
 
+    public function export_kipb_excel(Request $request)
+    {
+        $excludeColumns = ['id', 'id_agenda', 'gambar', 'ukuran', 'bahan', 'no_pabrik',
+                                'no_rangka', 'no_mesin', 'no_polisi', 'no_bpkb', 'asal_usul',
+                                'beban_susut', 'nila_buku','created_at', 'updated_at']; 
 
+        $filters = [
+            'nama_barang'   => $request->input('nama_barang'),
+            'tahun_beli'    => $request->input('tahun_beli'),
+            'kondisi'       => $request->input('kondisi'),
+        ];
+
+        $columnMappings = [
+            'kode_barang'   => 'Kode Barang',
+            'nama_barang'   => 'Nama Barang',
+            'no_Registe'    => 'Nomor Register',
+            'nama_barang'   => 'Nama Barang',
+            'merk'          => 'Merk',
+            'type'          => 'Type',
+            'tahun_beli'    => 'Tahun Beli',
+            'satuan'        => 'Jumlah Barang',
+            'harga_satuan'  => 'Nilai Barang',
+            'kondisi'       => 'Kondisi',
+            'lokasi'        => 'Keterangan',
+        ];
+
+        Carbon::setLocale('id');
+        $approvalDate = Carbon::parse($request->input('approval_date'))->translatedFormat('d F Y');
+
+        $approvalDetails = [
+            'date'  => $approvalDate,
+            'left'  => [
+                'name'      => $request->input('left_name'),
+                'position'  => $request->input('left_position'),
+                'nip'       => $request->input('left_nip')
+            ],
+            'right' => [
+                'name'      => $request->input('right_name'),
+                'position'  => $request->input('right_position'),
+                'nip'       => $request->input('right_nip')
+            ]
+        ];
+
+        return Excel::download(new ExportFile($excludeColumns, $filters, $columnMappings, $approvalDetails), 'kipb.xlsx');
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -85,8 +133,8 @@ class KipBController extends Controller
             'no_register'   => 'required',
             'id_pegawai'    => 'required',
             'tahun_beli'    => 'required',
+            'satuan'        => 'required',
             'harga_satuan'  => 'required',
-            'beban_susut'   => 'required',
             'kondisi'       => 'required',
             'lokasi'        => 'required',
         ]);
@@ -152,8 +200,8 @@ class KipBController extends Controller
             'no_register'   => 'required',
             'id_pegawai'    => 'required',
             'tahun_beli'    => 'required',
+            'satuan'        => 'required',
             'harga_satuan'  => 'required',
-            'beban_susut'   => 'required',
             'kondisi'       => 'required',
             'lokasi'        => 'required',
         ]);

@@ -61,11 +61,67 @@
                         <h3>Penerimaan Barang Pakai Habis</h3>
                         <!-- Pencarian -->
                         <div class="row mb-3">
-                            <div class="col text-end">
+                            <div class="col d-flex justify-content-between">
+                                <button type="button" class="btn btn-success" data-bs-toggle="modal"
+                                    data-bs-target="#modalCetak">Cetak Penerimaan Barang Pakai Habis</button>
                                 <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                                     data-bs-target="#modalTambahBarang">Tambah Penerimaan</button>
                             </div>
                         </div>
+                        <!-- Filter Section -->
+                        <div class="row mb-3">
+                            <div class="col-md-4">
+                                <input type="text" class="form-control" name="jenis_barang" id="filter-jenis-barang" placeholder=" Filter Jenis Barang">
+                            </div>
+                            <div class="col-md-4">
+                                <input type="text" class="form-control" name="tgl_terima" id="filter-tgl-terima" placeholder="Filter Tanggal Terima">
+                            </div>
+                        </div>
+                        <div class="modal fade" id="modalCetak" tabindex="-1"
+                        aria-labelledby="modalTambahBarangLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="modalTambahBarangLabel">Cetak Penerimaan Barang Pakai Habis</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <form action="{{ route('export.barangterima') }}" method="GET">
+                                        @csrf
+                                        <input type="hidden" name="jenis_barang" id="export-jenis-barang">
+                                        <input type="hidden" name="tgl_terima" id="export-tgl-terima">
+                                        <input type="hidden" class="form-control" name="left_position" id="right_position" 
+                                                value="Kepala Bidang">
+                                        <input type="hidden" class="form-control" name="right_position" id="left_position" 
+                                                value="Pengurus Barang">
+
+                                        <div class="mb-3">    
+                                            <label for="approval_date" class="form-label">Tanggal Persetujuan </label>
+                                            <input type="date" class="form-control" name="approval_date" id="approval_date" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="left_name" class="form-label">Nama Kepala Bidang</label>
+                                            <input type="text" class="form-control" name="left_name" id="left_name" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="left_nip" class="form-label">NIP Kepala Bidang</label>
+                                            <input type="text" class="form-control" name="left_nip" id="left_nip" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="right_name" class="form-label">Nama Pengurus Barang</label>
+                                            <input type="text" class="form-control" name="right_name" id="right_name" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="right_nip" class="form-label">NIP Pegurus Barang</label>
+                                            <input type="text" class="form-control" name="right_nip" id="right_nip" required> 
+                                        </div>
+                                        <button onclick="return confirm('Apakah Anda Yakin Untuk Mencetak ?');" class="btn btn-success">Cetak</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
                         <!-- Modal Tambah Barang -->
                         <div class="modal fade" id="modalTambahBarang" tabindex="-1"
@@ -86,7 +142,7 @@
                                                     <div class="col">
                                                         <label for="namaBarang" class="form-label">Kode Barang</label>
                                                         <input type="text" class="form-control" id="namaBarang" name="kode_barang"
-                                                            placeholder="Kode Barang" required>
+                                                            placeholder="Kode Barang">
                                                     </div>
                                                     <div class="col">
                                                         <label for="penyedia" class="form-label">Jenis Barang</label>
@@ -102,16 +158,21 @@
                                                 </div>
                                             </div>
                                             <div class="mb-3">
+                                                <label for="lokasi" class="form-label">Tanggal Terima Barang</label>
+                                                <input type="date" class="form-control" id="lokasi" name="tgl_terima"
+                                                    placeholder="Tanggal Terima Barang" required>
+                                            </div>
+                                            <div class="mb-3">
                                                 <div class="row">
                                                     <div class="col">
                                                         <label for="lokasi" class="form-label">Tanggal SPK/perjanjian/Kontrak</label>
                                                         <input type="date" class="form-control" id="lokasi" name="tgl_spk"
-                                                            placeholder="Tanggal SPK/Perjanjian/Kontrak" required>
+                                                            placeholder="Tanggal SPK/Perjanjian/Kontrak">
                                                     </div>
                                                     <div class="col">
                                                         <label for="lokasi" class="form-label">No SPK/perjanjian/Kontrak</label>
                                                         <input type="text" class="form-control" id="lokasi" name="no_spk"
-                                                            placeholder="No SPK/Perjanjian/Kontrak" required>
+                                                            placeholder="No SPK/Perjanjian/Kontrak">
                                                     </div>
                                                 </div>
                                             </div>
@@ -120,12 +181,12 @@
                                                     <div class="col">
                                                         <label for="lokasi" class="form-label">Tanggal DPA/SPM/Kwitansi</label>
                                                         <input type="date" class="form-control" id="lokasi" name="tgl_dpa"
-                                                            placeholder="Tanggal DPA/SPM/Kwitansi" required>
+                                                            placeholder="Tanggal DPA/SPM/Kwitansi">
                                                     </div>
                                                     <div class="col">
                                                         <label for="lokasi" class="form-label">No DPA/SPM/Kwitansi</label>
                                                         <input type="text" class="form-control" id="lokasi" name="no_dpa"
-                                                            placeholder="No DPA/SPM/Kwitansi" required>
+                                                            placeholder="No DPA/SPM/Kwitansi">
                                                     </div>
                                                 </div>
                                             </div>
@@ -164,7 +225,7 @@
                                                     <div class="col">
                                                         <label for="lokasi" class="form-label">Keterangan</label>
                                                         <input type="text" class="form-control" id="lokasi" name="keterangan"
-                                                            placeholder="Keterangan" required>
+                                                            placeholder="Keterangan">
                                                     </div>
                                                 </div>
                                             </div>
@@ -173,16 +234,6 @@
                                         </form>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-
-                        <!-- Filter Section -->
-                        <div class="row mb-3">
-                            <div class="col-md-4">
-                                <input type="text" class="form-control" name="jenis_barang" id="filter-jenis-barang" placeholder=" Filter Jenis Barang">
-                            </div>
-                            <div class="col-md-4">
-                                <input type="text" class="form-control" name="harga_satuan" id="filter-harga-satuan" placeholder="Filter Harga Satuan">
                             </div>
                         </div>
 
@@ -209,6 +260,7 @@
                                         <tr class="text-center">
                                             <th>Kode Barang</th>
                                             <th>Jenis Barang</th>
+                                            <th>Tanggal Terima</th>
                                             <th>Tanggal SPK/Perjanjian/kontrak</th>
                                             <th>No SPK/Perjanjian/kontrak</th>
                                             <th>Tanggal DPA/SPM/Kwitansi</th>
@@ -267,12 +319,14 @@
                     type: 'GET',
                     data: function(d) {
                         d.jenis_barang = $('#filter-jenis-barang').val();
+                        d.tgl_terima = $('#filter-tgl-terima').val();
                         d.harga_satuan = $('#filter-harga-satuan').val();
                     }
                 },
                 columns: [
                     { data: 'kode_barang', name: 'kode_barang' },
                     { data: 'barangpakaihabis.jenis_barang', name: 'barangpakaihabis.jenis_barang' },
+                    { data: 'tgl_terima', name: 'tgl_terima' },
                     { data: 'tgl_spk', name: 'tgl_spk' },
                     { data: 'no_spk', name: 'no_spk' },
                     { data: 'tgl_dpa', name: 'tgl_dpa' },
@@ -286,9 +340,18 @@
                 ]
             });
 
-            $('#filter-jenis-barang, #filter-harga-satuan').on('keyup change', function() {
+            $('#filter-jenis-barang, #filter-tgl-terima').on('keyup change', function() {
                 table.draw();
             });
+
+             // Sinkronisasi filter dengan form ekspor
+             $('#filter-jenis-barang').on('change keyup', function() {
+                $('#export-jenis-barang').val($(this).val());
+            });
+            $('#filter-tgl-terima').on('change keyup', function() {
+                $('#export-tgl-terima').val($(this).val());
+            });
+
         });
     </script>
     <script>
@@ -304,5 +367,19 @@
             }, 3000); 
         });
     </script>
+    <script>
+            // test untuk button
+            document.getElementById('export-btn').addEventListener('click', function() {
+                let jenisBarang= document.getElementById('filter-jenis-barang').value;
+                let tanggalTerima = document.getElementById('filter-tanggal-terima').value;
+        
+                let url = new URL('{{ route('export.barangterima') }}');
+                url.searchParams.append('jenis_barang', jenisBarang);
+                url.searchParams.append('tanggal_terima', tanggalTerima);
+        
+                window.location.href = url;
+            });
+    </script>        
+
 </body>
 </html>

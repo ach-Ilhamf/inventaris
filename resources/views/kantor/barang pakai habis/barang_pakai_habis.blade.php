@@ -92,11 +92,6 @@
                                                 <input type="number" class="form-control" id="lokasi" name="stok"
                                                     placeholder="Stok" required>
                                             </div>
-                                            <div class="mb-3">
-                                                <label for="lokasi" class="form-label">Harga Satuan</label>
-                                                <input type="number" class="form-control" id="lokasi" name="harga_satuan"
-                                                    placeholder="Harga Satuan" required>
-                                            </div>
                                             <button onclick="return confirm('Apakah Anda Yakin Untuk Menambah Barang ?');" type="submit" class="btn btn-primary">Simpan</button>
                                         </form>
                                     </div>
@@ -125,7 +120,6 @@
                                         <tr class="text-center">
                                             <th>Jenis Barang</th>
                                             <th>Stok</th>
-                                            <th>Harga Satuan</th>
                                             <th>Actions</th>
                                         </tr>
                                     </thead>
@@ -175,8 +169,6 @@
                 columns: [
                     { data: 'jenis_barang', name: 'jenis_barang' },
                     { data: 'stok', name: 'stok' },
-                    { data: 'harga_satuan', name: 'harga_satuan', render: function(data, type, row) {
-                        return 'Rp ' + parseInt(data).toLocaleString('id-ID');} },
                     { data: 'action', name: 'action', orderable: false, searchable: false }
                 ]
             });

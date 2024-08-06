@@ -7,6 +7,7 @@ use App\Http\Controllers\AgendaMasukDetailController;
 use App\Http\Controllers\BarangHabisKeluarController;
 use App\Http\Controllers\BarangHabisTerimaController;
 use App\Http\Controllers\BarangPakaiHabisController;
+use App\Http\Controllers\ExportFileController;
 use App\Http\Controllers\KipBController;
 use App\Http\Controllers\KodeBarangController;
 use App\Http\Controllers\PegawaiController;
@@ -51,6 +52,7 @@ Route::get('/agendadtls/create/{id_agenda}', [AgendaMasukDetailController::class
 
 Route::get('kipbs/data', [KipBController::class, 'getData'])->name('kipbs.data');
 Route::resource('/kipbs', \App\Http\Controllers\KipBController::class);
+Route::get('export-kipb', [KipBController::class, 'export_kipb_excel'])->name('export.kipb');
 
 Route::get('kodes/data', [KodeBarangController::class, 'getData'])->name('kodes.data');
 Route::resource('/kodes', \App\Http\Controllers\KodeBarangController::class);
@@ -60,10 +62,11 @@ Route::resource('/barangs', \App\Http\Controllers\BarangPakaiHabisController::cl
 
 Route::get('barangterimas/data', [BarangHabisTerimaController::class, 'getData'])->name('barangterimas.data');
 Route::resource('/barangterimas', \App\Http\Controllers\BarangHabisTerimaController::class);
+Route::get('export-barangterima', [BarangHabisTerimaController::class, 'export_barang_terima'])->name('export.barangterima');
 
 Route::get('barangkeluars/data', [BarangHabisKeluarController::class, 'getData'])->name('barangkeluars.data');
 Route::resource('/barangkeluars', \App\Http\Controllers\BarangHabisKeluarController::class);
-
+Route::get('export-barangkeluar', [BarangHabisKeluarController::class, 'export_barang_keluar'])->name('export.barangkeluar');
 
 Route::get('/logout',[SesiController::class,'logout']);
 });

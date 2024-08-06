@@ -13,13 +13,13 @@ return new class extends Migration
     {
         Schema::create('barang_habis_terimas', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('kode_barang');
+            $table->string('kode_barang')->nullable();
             $table->unsignedBigInteger('id_barang');
             $table->date('tgl_terima');
-            $table->date('tgl_spk');
-            $table->string('no_spk');
+            $table->date('tgl_spk')->nullable();
+            $table->string('no_spk')->nullable();
             $table->date('tgl_dpa')->nullable();
-            $table->string('no_dpa');
+            $table->string('no_dpa')->nullable();
             $table->integer('banyak_barang');
             $table->decimal('harga_satuan');
             $table->string('unit');

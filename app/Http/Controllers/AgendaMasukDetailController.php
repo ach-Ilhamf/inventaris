@@ -127,6 +127,7 @@ class AgendaMasukDetailController extends Controller
             'tahun_beli'    => 'required',
             'satuan'        => 'required',
             'harga_satuan'  => 'required',
+            'lokasi'        => 'required',
         ]);
 
         if ($request->hasFile('gambar')) {
@@ -195,6 +196,7 @@ class AgendaMasukDetailController extends Controller
         'tahun_beli'    => 'required',
         'satuan'        => 'required',
         'harga_satuan'  => 'required',
+        'lokasi'        => 'required'
     ]);
 
     // Temukan model berdasarkan ID

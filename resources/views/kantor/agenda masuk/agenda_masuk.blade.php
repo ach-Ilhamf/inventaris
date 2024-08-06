@@ -124,31 +124,31 @@
                                                     <div class="col">
                                                         <label for="lokasi" class="form-label">Klasifikasi Aset</label>
                                                         <input type="text" class="form-control" id="lokasi" name="klas_aset"
-                                                            placeholder="Klasifikasi Aset" required>
+                                                            placeholder="Klasifikasi Aset">
                                                     </div>
                                                     <div class="col">
                                                         <label for="lokasi" class="form-label">Tanggal Masuk</label>
                                                         <input type="date" class="form-control" id="lokasi" name="tgl_masuk"
-                                                            placeholder="Tanggal Masuk" required>
+                                                            placeholder="Tanggal Masuk">
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="mb-3">
                                                 <label for="lokasi" class="form-label">No SPK/SP</label>
                                                 <input type="text" class="form-control" id="lokasi" name="skp"
-                                                    placeholder="No SKP/SP" required>
+                                                    placeholder="No SKP/SP">
                                             </div>
                                             <div class="mb-3">
                                                 <div class="row">
                                                     <div class="col">
                                                         <label for="lokasi" class="form-label">No SPM</label>
                                                         <input type="text" class="form-control" id="lokasi" name="spm"
-                                                            placeholder="No SPM" required>
+                                                            placeholder="No SPM">
                                                     </div>
                                                     <div class="col">
                                                         <label for="lokasi" class="form-label">Tanggal SPM</label>
                                                         <input type="date" class="form-control" id="lokasi"
-                                                            name="tgl_spm" placeholder="Tanggal SPM" required>
+                                                            name="tgl_spm" placeholder="Tanggal SPM">
                                                     </div>
                                                 </div>
                                             </div>
@@ -157,12 +157,12 @@
                                                     <div class="col">
                                                         <label for="lokasi" class="form-label">No SP2D</label>
                                                         <input type="text" class="form-control" id="lokasi" name="sp2d"
-                                                            placeholder="No SP2D" required>
+                                                            placeholder="No SP2D">
                                                     </div>
                                                     <div class="col">
                                                         <label for="lokasi" class="form-label">Tanggal SP2D</label>
                                                         <input type="date" class="form-control" id="lokasi"
-                                                            name="tgl_sp2d" placeholder="Tanggal SPM" required>
+                                                            name="tgl_sp2d" placeholder="Tanggal SPM">
                                                     </div>
                                                 </div>
                                             </div>
@@ -171,12 +171,12 @@
                                                     <div class="col">
                                                         <label for="lokasi" class="form-label">No BAHP/BAPPHP</label>
                                                         <input type="text" class="form-control" id="lokasi" name="bahp"
-                                                            placeholder="No BAPH/BAPPHP" required>
+                                                            placeholder="No BAPH/BAPPHP">
                                                     </div>
                                                     <div class="col">
                                                         <label for="lokasi" class="form-label">Tanggal BAPH/BAPPHP</label>
                                                         <input type="date" class="form-control" id="lokasi"
-                                                            name="tgl_bahp" placeholder="Tanggal BAHP/BAPPHP" required>
+                                                            name="tgl_bahp" placeholder="Tanggal BAHP/BAPPHP">
                                                     </div>
                                                 </div>
                                             </div>
@@ -185,12 +185,12 @@
                                                     <div class="col">
                                                         <label for="lokasi" class="form-label">No BAST</label>
                                                         <input type="text" class="form-control" id="lokasi" name="bast"
-                                                            placeholder="No BAST" required>
+                                                            placeholder="No BAST">
                                                     </div>
                                                     <div class="col">
                                                         <label for="lokasi" class="form-label">Tanggal BAST</label>
                                                         <input type="date" class="form-control" id="lokasi"
-                                                            name="tgl_bast" placeholder="Tanggal BAST" required>
+                                                            name="tgl_bast" placeholder="Tanggal BAST">
                                                     </div>
                                                 </div>
                                             </div>

@@ -85,7 +85,7 @@
                                                     <div class="col">
                                                         <label for="namaBarang" class="form-label">Kode Barang</label>
                                                         <input type="text" class="form-control" id="namaBarang" name="kode_barang"
-                                                            placeholder="Kode Barang" value="{{ old('baranghabisterimas', $terima->kode_barang)}}" required>
+                                                            placeholder="Kode Barang" value="{{ old('baranghabisterimas', $terima->kode_barang)}}">
                                                     </div>
                                                     <div class="col">
                                                         <label for="penyedia" class="form-label">Jenis Barang</label>
@@ -101,16 +101,21 @@
                                                 </div>
                                             </div>
                                             <div class="mb-3">
+                                                <label for="lokasi" class="form-label">Tanggal Terima Barang</label>
+                                                <input type="date" class="form-control" id="lokasi" name="tgl_terima"
+                                                    placeholder="Tanggal Terima Barang" value="{{ old('baranghabisterimas', $terima->tgl_terima)}}" required>
+                                            </div>
+                                            <div class="mb-3">
                                                 <div class="row">
                                                     <div class="col">
                                                         <label for="lokasi" class="form-label">Tanggal SPK/perjanjian/Kontrak</label>
                                                         <input type="date" class="form-control" id="lokasi" name="tgl_spk"
-                                                            placeholder="Tanggal SPK/Perjanjian/Kontrak" value="{{ old('baranghabisterimas', $terima->tgl_spk)}}" required>
+                                                            placeholder="Tanggal SPK/Perjanjian/Kontrak" value="{{ old('baranghabisterimas', $terima->tgl_spk)}}">
                                                     </div>
                                                     <div class="col">
                                                         <label for="lokasi" class="form-label">No SPK/perjanjian/Kontrak</label>
                                                         <input type="text" class="form-control" id="lokasi" name="no_spk"
-                                                            placeholder="No SPK/Perjanjian/Kontrak" value="{{ old('baranghabisterimas', $terima->no_spk)}}" required>
+                                                            placeholder="No SPK/Perjanjian/Kontrak" value="{{ old('baranghabisterimas', $terima->no_spk)}}">
                                                     </div>
                                                 </div>
                                             </div>
@@ -124,7 +129,7 @@
                                                     <div class="col">
                                                         <label for="lokasi" class="form-label">No DPA/SPM/Kwitansi</label>
                                                         <input type="text" class="form-control" id="lokasi" name="no_dpa"
-                                                            placeholder="No DPA/SPM/Kwitansi" value="{{ old('baranghabisterimas', $terima->no_dpa)}}" required>
+                                                            placeholder="No DPA/SPM/Kwitansi" value="{{ old('baranghabisterimas', $terima->no_dpa)}}">
                                                     </div>
                                                 </div>
                                             </div>
@@ -146,7 +151,7 @@
                                                 <div class="row">
                                                     <div class="col">
                                                         <label for="lokasi" class="form-label">Dipergunakan Pada Unit</label>
-                                                        <select class="form-control" id="lokasi" name="unit">
+                                                        <select class="form-control" id="lokasi" name="unit" required>
                                                             <option value="">Pilih Lokasi</option>
                                                             <option value="Kepala Dinas">Kepala Dinas</option>
                                                             <option value="Sekretariat">Sekretariat</option>
@@ -163,7 +168,7 @@
                                                     <div class="col">
                                                         <label for="lokasi" class="form-label">Keterangan</label>
                                                         <input type="text" class="form-control" id="lokasi" name="keterangan"
-                                                            placeholder="Keterangan" value="{{ old('baranghabisterimas', $terima->keterangan)}}" required>
+                                                            placeholder="Keterangan" value="{{ old('baranghabisterimas', $terima->keterangan)}}">
                                                     </div>
                                                 </div>
                                             </div>

@@ -116,13 +116,13 @@
                                                         <label for="lokasi" class="form-label">Klasifikasi Aset</label>
                                                         <input type="text" class="form-control" id="lokasi" name="klas_aset"
                                                             placeholder="Klasifikasi Aset"
-                                                            value="{{ old('agenda_masuk', $agenda->klas_aset) }}" required>
+                                                            value="{{ old('agenda_masuk', $agenda->klas_aset) }}">
                                                     </div>
                                                     <div class="col">
                                                         <label for="lokasi" class="form-label">Tanggal Masuk</label>
                                                         <input type="date" class="form-control" id="lokasi" name="tgl_masuk"
                                                             placeholder="Tanggal Masuk"
-                                                            value="{{ old('agenda_masuk', $agenda->tgl_masuk) }}" required>
+                                                            value="{{ old('agenda_masuk', $agenda->tgl_masuk) }}">
                                                     </div>
                                                 </div>
                                             </div>
@@ -130,7 +130,7 @@
                                                 <label for="lokasi" class="form-label">No SKP/SP</label>
                                                 <input type="text" class="form-control" id="lokasi" name="skp"
                                                     placeholder="No SKP/SP"
-                                                    value="{{ old('agenda_masuk', $agenda->skp) }}" required>
+                                                    value="{{ old('agenda_masuk', $agenda->skp) }}">
                                             </div>
                                             <div class="mb-3">
                                                 <div class="row">
@@ -138,13 +138,13 @@
                                                         <label for="lokasi" class="form-label">No SPM</label>
                                                         <input type="text" class="form-control" id="lokasi" name="spm"
                                                             placeholder="No SPM" 
-                                                            value="{{ old('agenda_masuk', $agenda->spm) }}" required>
+                                                            value="{{ old('agenda_masuk', $agenda->spm) }}">
                                                     </div>
                                                     <div class="col">
                                                         <label for="lokasi" class="form-label">Tanggal SPM</label>
                                                         <input type="date" class="form-control" id="lokasi"
                                                             name="tgl_spm" placeholder="Tanggal SPM" 
-                                                            value="{{ old('agenda_masuk', $agenda->tgl_spm) }}" required>
+                                                            value="{{ old('agenda_masuk', $agenda->tgl_spm) }}">
                                                     </div>
                                                 </div>
                                             </div>
@@ -154,13 +154,13 @@
                                                         <label for="lokasi" class="form-label">No SP2D</label>
                                                         <input type="text" class="form-control" id="lokasi" name="sp2d"
                                                             placeholder="No SP2D" 
-                                                            value="{{ old('agenda_masuk', $agenda->sp2d) }}" required>
+                                                            value="{{ old('agenda_masuk', $agenda->sp2d) }}">
                                                     </div>
                                                     <div class="col">
                                                         <label for="lokasi" class="form-label">Tanggal SP2D</label>
                                                         <input type="date" class="form-control" id="lokasi"
                                                             name="tgl_sp2d" placeholder="Tanggal SPM" 
-                                                            value="{{ old('agenda_masuk', $agenda->tgl_sp2d) }}" required>
+                                                            value="{{ old('agenda_masuk', $agenda->tgl_sp2d) }}">
                                                     </div>
                                                 </div>
                                             </div>
@@ -170,15 +170,14 @@
                                                         <label for="lokasi" class="form-label">No BAHP/BAPPHP</label>
                                                         <input type="text" class="form-control" id="lokasi" name="bahp"
                                                             placeholder="No BAPH/BAPPHP"
-                                                            value="{{ old('agenda_masuk', $agenda->bahp) }}" required>
+                                                            value="{{ old('agenda_masuk', $agenda->bahp) }}">
                                                     </div>
                                                     <div class="col">
                                                         <label for="lokasi" class="form-label">Tanggal
                                                             BAPH/BAPPHP</label>
                                                         <input type="date" class="form-control" id="lokasi"
                                                             name="tgl_bahp" placeholder="Tanggal BAHP/BAPPHP"
-                                                            value="{{ old('agenda_masuk', $agenda->tgl_bahp) }}"
-                                                            required>
+                                                            value="{{ old('agenda_masuk', $agenda->tgl_bahp) }}">
                                                     </div>
                                                 </div>
                                             </div>
@@ -188,14 +187,13 @@
                                                         <label for="lokasi" class="form-label">No BAST</label>
                                                         <input type="text" class="form-control" id="lokasi" name="bast"
                                                             placeholder="No BAST"
-                                                            value="{{ old('agenda_masuk', $agenda->bast) }}" required>
+                                                            value="{{ old('agenda_masuk', $agenda->bast) }}">
                                                     </div>
                                                     <div class="col">
                                                         <label for="lokasi" class="form-label">Tanggal BAST</label>
                                                         <input type="date" class="form-control" id="lokasi"
                                                             name="tgl_bast" placeholder="Tanggal BAST"
-                                                            value="{{ old('agenda_masuk', $agenda->tgl_bast) }}"
-                                                            required>
+                                                            value="{{ old('agenda_masuk', $agenda->tgl_bast) }}">
                                                     </div>
                                                 </div>
                                             </div>

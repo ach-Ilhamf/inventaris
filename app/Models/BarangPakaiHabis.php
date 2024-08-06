@@ -27,7 +27,6 @@ class BarangPakaiHabis extends Model
     protected $fillable = [
         'jenis_barang',
         'stok',
-        'harga_satuan'
     ];
 
 }

@@ -93,17 +93,6 @@ class AgendaMasukController extends Controller
             'id_penyedia'   => 'required',
             'nama_agenda'   => 'required',
             'nilai_kontrak' => 'required',
-            'klas_aset'     => 'required',
-            'tgl_masuk'     => 'required',
-            'skp'           => 'required',
-            'spm'           => 'required',
-            'tgl_spm'       => 'required',
-            'sp2d'          => 'required',
-            'tgl_sp2d'      => 'required',
-            'bahp'          => 'required',
-            'tgl_bahp'      => 'required',
-            'bast'          => 'required',
-            'tgl_bast'      => 'required'
         ]);
 
         //create post
@@ -159,17 +148,6 @@ class AgendaMasukController extends Controller
             'id_penyedia'   => 'required',
             'nama_agenda'   => 'required',
             'nilai_kontrak' => 'required',
-            'klas_aset'     => 'required',
-            'tgl_masuk'     => 'required',
-            'skp'           => 'required',
-            'spm'           => 'required',
-            'tgl_spm'       => 'required',
-            'sp2d'          => 'required',
-            'tgl_sp2d'      => 'required',
-            'bahp'          => 'required',
-            'tgl_bahp'      => 'required',
-            'bast'          => 'required',
-            'tgl_bast'      => 'required'
         ]);
 
         $agenda = AgendaMasuk::findOrFail($id);

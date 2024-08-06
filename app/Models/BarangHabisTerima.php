@@ -22,6 +22,7 @@ class BarangHabisTerima extends Model
     protected $fillable = [
         'kode_barang',
         'id_barang',
+        'tgl_terima',
         'tgl_spk',
         'no_spk',
         'tgl_dpa',

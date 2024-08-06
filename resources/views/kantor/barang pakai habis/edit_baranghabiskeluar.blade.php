@@ -81,27 +81,36 @@
                                             @method('PUT')
                                             <!-- Input untuk nama barang -->
                                             <div class="mb-3">
-                                                <label for="penyedia" class="form-label">Jenis Barang</label>
-                                                <select class="form-control" id="penyedia" name="id_barang"
-                                                    required>
-                                                    @foreach($barangList as $barang)
-                                                    <option value="{{ $barang->id }}" {{ $keluar->id_barang == $barang->id ? 'selected' : '' }}>
-                                                        {{ $barang->jenis_barang }}
-                                                    </option>
-                                                    @endforeach
-                                                </select>
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <label for="namaBarang" class="form-label">Kode Barang</label>
+                                                        <input type="text" class="form-control" id="namaBarang" name="kode_barang"
+                                                            placeholder="Kode Barang" value="{{ old('baranghabiskeluars', $keluar->tgl_keluar)}}">
+                                                    </div>
+                                                    <div class="col">
+                                                        <label for="penyedia" class="form-label">Jenis Barang</label>
+                                                        <select class="form-control" id="penyedia" name="id_barang"
+                                                            required>
+                                                            @foreach($barangList as $barang)
+                                                            <option value="{{ $barang->id }}" {{ $keluar->id_barang == $barang->id ? 'selected' : '' }}>
+                                                                {{ $barang->jenis_barang }}
+                                                            </option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                </div>
                                             </div>
                                             <div class="mb-3">
                                                 <div class="row">
                                                     <div class="col">
-                                                        <label for="lokasi" class="form-label">Tanggal Berita Acara Pengeluaran</label>
+                                                        <label for="lokasi" class="form-label">Tanggal Pengeluaran</label>
                                                         <input type="date" class="form-control" id="lokasi" name="tgl_keluar"
                                                             placeholder="Alamat" value="{{ old('baranghabiskeluars', $keluar->tgl_keluar)}}" required>
                                                     </div>
                                                     <div class="col">
                                                         <label for="lokasi" class="form-label">No Berita Acara Pengeluaran</label>
                                                         <input type="text" class="form-control" id="lokasi" name="no_keluar"
-                                                            placeholder="No Berita Acara Pengeluaran" value="{{ old('baranghabiskeluars', $keluar->no_keluar)}}" required>
+                                                            placeholder="No Berita Acara Pengeluaran" value="{{ old('baranghabiskeluars', $keluar->no_keluar)}}">
                                                     </div>
                                                 </div>
                                             </div>

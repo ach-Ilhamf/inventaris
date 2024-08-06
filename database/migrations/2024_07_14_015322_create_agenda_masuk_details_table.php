@@ -30,9 +30,9 @@ return new class extends Migration
             $table->string('no_polisi')->nullable();
             $table->string('no_bpkb')->nullable();
             $table->string('asal_usul')->nullable();
-            $table->integer('satuan')->nullable();
+            $table->integer('satuan');
             $table->decimal('harga_satuan', 15,2);
-            $table->decimal('beban_susut', 15, 2)->default(0);
+            $table->decimal('beban_susut', 15, 2)->nullable();
             $table->decimal('nilai_buku', 15 ,2)->nullable();
             $table->enum('kondisi', ['Baik', 'Kurang Baik', 'Rusak Berat'])->default('Baik');
             $table->enum('lokasi', ['Kepala Dinas', 'Sekretariat', 'Sekretaris', 'Bidang TI', 'Bidang SIB',

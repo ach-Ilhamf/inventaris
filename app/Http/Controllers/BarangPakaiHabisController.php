@@ -71,14 +71,12 @@ class BarangPakaiHabisController extends Controller
         $this->validate($request, [
             'jenis_barang'=> 'required',
             'stok'        => 'required',
-            'harga_satuan'=> 'required'
         ]);
 
         //create post
         BarangPakaiHabis::create([
             'jenis_barang'=> $request->jenis_barang,
             'stok'        => $request->stok,
-            'harga_satuan'=> $request->harga_satuan
         ]);
 
         //redirect to index
@@ -112,7 +110,6 @@ class BarangPakaiHabisController extends Controller
         $this->validate($request, [
             'jenis_barang'=> 'required',
             'stok'        => 'required',
-            'harga_satuan'=> 'required'
         ]);
 
         $barang = BarangPakaiHabis::findOrFail($id);
@@ -120,7 +117,6 @@ class BarangPakaiHabisController extends Controller
         $barang->update([
             'jenis_barang'=> $request->jenis_barang,
             'stok'        => $request->stok,
-            'harga_satuan'=> $request->harga_satuan
         ]);
 
         return redirect()->route('barangs.index')->with(['success' => 'Data Berhasil Diubah!']);
