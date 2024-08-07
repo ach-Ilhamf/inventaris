@@ -87,11 +87,17 @@
         </li>
       
       <li class="menu-header small text-uppercase"><span class="menu-header-text">Settings</span></li>      
-      <li class="menu-item">
+        <li class="menu-item">
+            <a href="{{route('edit-user')}}" class="menu-link">
+            <i class="menu-icon tf-icons bx bx-user"></i>
+                <div data-i18n="Basic">Akun</div>
+            </a>
+        </li>
+        <li class="menu-item">
           <a href="/logout" class="menu-link">
             <i class="menu-icon tf-icons bx bx-log-out"></i>
               <div data-i18n="Basic">Log Out</div>
           </a>
-      </li>
+        </li>
   </ul>
 </aside>

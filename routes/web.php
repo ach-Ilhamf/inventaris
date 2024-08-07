@@ -68,5 +68,8 @@ Route::get('barangkeluars/data', [BarangHabisKeluarController::class, 'getData']
 Route::resource('/barangkeluars', \App\Http\Controllers\BarangHabisKeluarController::class);
 Route::get('export-barangkeluar', [BarangHabisKeluarController::class, 'export_barang_keluar'])->name('export.barangkeluar');
 
+Route::get('/account',[SesiController::class,'edit_user'])->name('edit-user');
+Route::put('/account-update/{id}', [SesiController::class, 'update_user'])->name('update-user');
+
 Route::get('/logout',[SesiController::class,'logout']);
 });
