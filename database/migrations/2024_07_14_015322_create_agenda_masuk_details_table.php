@@ -30,7 +30,7 @@ return new class extends Migration
             $table->string('no_polisi')->nullable();
             $table->string('no_bpkb')->nullable();
             $table->string('asal_usul')->nullable();
-            $table->integer('satuan');
+            $table->integer('satuan')->default(1);
             $table->decimal('harga_satuan', 15,2);
             $table->decimal('beban_susut', 15, 2)->nullable();
             $table->decimal('nilai_buku', 15 ,2)->nullable();

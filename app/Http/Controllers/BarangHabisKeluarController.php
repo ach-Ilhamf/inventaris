@@ -94,7 +94,7 @@ class BarangHabisKeluarController extends Controller
             ]
         ];
 
-        return Excel::download(new ExportBarangKeluar($excludeColumns, $filters, $columnMappings, $approvalDetails), 'penerimaan barang pakai habis.xlsx');
+        return Excel::download(new ExportBarangKeluar($excludeColumns, $filters, $columnMappings, $approvalDetails), 'pengeluaran barang pakai habis.xlsx');
     }
 
 

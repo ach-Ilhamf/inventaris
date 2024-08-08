@@ -88,7 +88,7 @@
                                                         <select class="form-control" id="penyedia" name="kode_barang"
                                                             required>
                                                             @foreach($kodes as $kode)
-                                                            <option value="{{ $kode->kode_barang }}">
+                                                            <option value="{{ $kode->kode_barang }}" {{ $kipb->kode_barang == $kode->kode_barang ? 'selected' : '' }}>
                                                                 {{ $kode->kode_barang }} - {{ $kode->jenis_barang }}
                                                             </option>
                                                             @endforeach
