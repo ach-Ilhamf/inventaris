@@ -1,8 +1,8 @@
 <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
   <div class="app-brand demo">
     <a href="" class="app-brand-link">
-      <img src="img/logo/logo.png" height="30">
-      <span class="app-brand-text menu-text fw-bolder ms-2" style="margin-left: 20px ">
+        <img src="{{ asset('img/logo/logo.png') }}" height="30">
+        <span class="app-brand-text menu-text fw-bolder ms-2" style="margin-left: 20px ">
         <b>ASET DINAS KOMINFO</b></span>
     </a>
 

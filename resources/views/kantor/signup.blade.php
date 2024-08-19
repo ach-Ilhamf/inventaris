@@ -46,9 +46,7 @@
             <button type="submit" onclick="return confirm('Apakah Anda Yakin Untuk Menyimpan Akun ?');" class="btn btn-signup-custom">Daftar</button>
         </div>
       </form>
-      <div class="text-center mt-3">
         <a href="{{ route('login2') }}"><button class="btn btn-signup-custom">< Kembali</button></a>
-      </div>    
     </div>
   </div>
 </div>

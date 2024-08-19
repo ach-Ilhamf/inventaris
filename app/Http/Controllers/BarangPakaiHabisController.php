@@ -130,13 +130,20 @@ class BarangPakaiHabisController extends Controller
      */
     public function destroy($id): RedirectResponse
     {
-        //get post by ID
         $barang = BarangPakaiHabis::findOrFail($id);
 
-        //delete post
+        $relatedTabel = $barang->baranghabisterima()->exists();
+        $relatedTabel2 = $barang->baranghabiskeluar()->exists();
+
+        if ($relatedTabel) {
+            return redirect()->route('barangs.index')->withErrors('Data tidak bisa dihapus karena terkait dengan penerimaan atau pengeluaran barang');
+        } elseif ($relatedTabel2) {
+            return redirect()->route('barangs.index')->withErrors('Data tidak bisa dihapus karena terkait dengan penerimaan atau pengeluaran barang');
+        }
+
+    
         $barang->delete();
 
-        //redirect to index
         return redirect()->route('barangs.index')->with(['success' => 'Data Berhasil Dihapus!']);
     }
 }

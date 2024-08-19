@@ -15,10 +15,10 @@ class SesiController extends Controller
         return view('kantor.login2');
     }
 
-    // function signup()
-    // {
-    //   return view('signup');
-    // }
+    public function landing()
+    {
+      return view(('kantor.landing'));
+    }
 
     function login2(Request $request)
     {
@@ -39,7 +39,7 @@ class SesiController extends Controller
       if(Auth::attempt($ceklogin)){
         return redirect('/agendas');
       }else{
-        return redirect('')->withErrors('Username dan Password Tidak Sesuai')->withInput();
+        return redirect()->route('login2')->withErrors('Username atau Password Tidak Sesuai');
       }
     }
     function logout(){
@@ -66,7 +66,7 @@ class SesiController extends Controller
       $data['password']=Hash::make($request->password);
       $data['level']=$request->level;
       user::create($data);
-      return redirect()->route('login2')->with('success', 'Registration successful! Please login.');
+      return redirect()->route('login2')->with('success', 'Registrasi Berhasil');
     }
 
     public function edit_user()
@@ -90,7 +90,7 @@ class SesiController extends Controller
         'name' => 'required|string|max:255',
         'username' => 'required|string|max:255|unique:users,username,' . $user->id,
         'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
-        'password' => 'nullable|string|min:5|confirmed', // Password is optional and needs to be confirmed if provided
+        'password' => 'nullable|string|min:5|confirmed', 
     ]);
 
     $data = $request->only(['name', 'username', 'email']);
@@ -101,7 +101,7 @@ class SesiController extends Controller
     $user->update($data);
 
     return redirect()->route('agendas.index')->with(['success' => 'Akun Berhasil Diubah!']);
-}
+  }
 
 
 

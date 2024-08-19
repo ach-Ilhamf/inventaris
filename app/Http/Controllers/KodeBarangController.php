@@ -122,13 +122,19 @@ class KodeBarangController extends Controller
     /**
      * destroy
      *
-     * @param  mixed $post
-     * @return void
+     * @param  mixed $id
+     * @return RedirectResponse
      */
     public function destroy($id): RedirectResponse
     {
         //get post by ID
         $kode = KodeBarang::findOrFail($id);
+
+        $relatedTabel = $kode->agendadetail()->exists();
+
+        if ($relatedTabel) {
+            return redirect()->route('kodes.index')->withErrors('Data tidak bisa dihapus karena terkait dengan barang KIP-B');
+        }    
 
         //delete post
         $kode->delete();

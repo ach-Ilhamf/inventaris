@@ -133,13 +133,16 @@ class PenyediaController extends Controller
      */
     public function destroy($id): RedirectResponse
     {
-        //get post by ID
         $penyedia = Penyedia::findOrFail($id);
 
-        //delete post
+        $relatedTabel = $penyedia->agendamasuk()->exists();
+
+        if ($relatedTabel) {
+            return redirect()->route('penyedias.index')->withErrors('Data tidak bisa dihapus karena terkait dengan data kegiatan masuk');
+        }    
+
         $penyedia->delete();
 
-        //redirect to index
         return redirect()->route('penyedias.index')->with(['success' => 'Data Berhasil Dihapus!']);
     }
 }

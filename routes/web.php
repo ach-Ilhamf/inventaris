@@ -7,7 +7,6 @@ use App\Http\Controllers\AgendaMasukDetailController;
 use App\Http\Controllers\BarangHabisKeluarController;
 use App\Http\Controllers\BarangHabisTerimaController;
 use App\Http\Controllers\BarangPakaiHabisController;
-use App\Http\Controllers\ExportFileController;
 use App\Http\Controllers\KipBController;
 use App\Http\Controllers\KodeBarangController;
 use App\Http\Controllers\PegawaiController;
@@ -24,8 +23,10 @@ use App\Http\Controllers\SesiController;
 |
 */
 Route::middleware(['guest'])->group(function(){
-    Route::get('/',[SesiController::class,'index'])->name('login2');
-    Route::post('/',[SesiController::class,'login2']);
+    Route::get('/',[SesiController::class,'landing'])->name('landing');
+
+    Route::get('/login',[SesiController::class,'index'])->name('login2');
+    Route::post('/login',[SesiController::class,'login2']);
 
     Route::get('/signup',[SesiController::class,'signup'])->name('signup');
     Route::post('/signup-proses',[SesiController::class,'signup_proses'])->name('signup-proses');

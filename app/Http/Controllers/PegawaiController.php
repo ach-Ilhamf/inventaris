@@ -129,18 +129,21 @@ class PegawaiController extends Controller
     /**
      * destroy
      *
-     * @param  mixed $post
-     * @return void
+     * @param  mixed $id
+     * @return RedirectResponse
      */
     public function destroy($id): RedirectResponse
     {
-        //get post by ID
         $pegawai = Pegawai::findOrFail($id);
 
-        //delete post
+        $relatedTabel = $pegawai->agendamasukdetail()->exists();
+
+        if ($relatedTabel) {
+            return redirect()->route('pegawais.index')->withErrors('Data tidak bisa dihapus karena terkait dengan barang KIP-B');
+        }
+
         $pegawai->delete();
 
-        //redirect to index
         return redirect()->route('pegawais.index')->with(['success' => 'Data Berhasil Dihapus!']);
-    }
+}
 }

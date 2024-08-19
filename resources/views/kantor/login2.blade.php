@@ -50,18 +50,18 @@
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
           </div>
         @endif
+        @if ($errors->any())
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+          @foreach ($errors->all() as $error)
+            {{ $error }}
+          @endforeach
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      @endif
+            
         <h1>Selamat Datang</h1> <br>
       </div>
       <div class="login-form">
-        @if ($errors->any())
-          <div class="alert alert-danger">
-            <ul>
-              @foreach ($errors->all() as $item)
-                <li>{{ $item }}</li>
-              @endforeach
-            </ul>
-          </div>
-        @endif
         <form method="post" action="">
           @csrf
           <label for="username" class="form-label">Username</label>
@@ -69,11 +69,13 @@
 
           <label for="password" class="form-label">Password</label>
           <input type="password" class="form-control" id="password" name="password" placeholder="Masukkan Password" required> 
-          <input type="checkbox" onclick="showHidePassword()"> Tampilkan Password
-         <center><button type="submit" class="btn btn-signup-custom">Masuk</button></center>
+          <input type="checkbox" onclick="showHidePassword()"> Tampilkan Password 
+         <center><br> <button type="submit" class="btn btn-signup-custom">Masuk</button></center>
         </form>
         <center><h6>Atau</h6></center>
         <center><a href="{{ route('signup') }}"><button class="btn btn-signup-custom">Daftar</button></a></center>
+
+        <a href="{{ route('landing') }}"><button class="btn btn-signup-custom">< Kembali</button></a>
       </div>
     </div>
   </div>
@@ -92,6 +94,5 @@
     }
   }
 </script>
-
 </body>
 </html>

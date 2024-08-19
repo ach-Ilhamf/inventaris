@@ -398,10 +398,10 @@
                     }
                 },
                 columns: [
-                    { data: 'kode_barang', name: 'kode_barang' },
+                    { data: 'kode_barang', name: 'kode_barang'},
                     { data: 'nama_barang', name: 'nama_barang' },
                     { data: 'no_register', name: 'no_register' },
-                    { data: 'pegawai.nama_pegawai', name: 'pegawai.nama_pegawai' },
+                    { data: 'pegawai.nama_pegawai', name: 'pegawai.nama_pegawai'},
                     { data: 'merk', name: 'merk' },
                     { data: 'tipe', name: 'tipe' },
                     { data: 'ukuran', name: 'ukuran' },

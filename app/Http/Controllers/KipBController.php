@@ -79,7 +79,7 @@ class KipBController extends Controller
         $columnMappings = [
             'kode_barang'   => 'Kode Barang',
             'nama_barang'   => 'Nama Barang',
-            'no_Registe'    => 'Nomor Register',
+            'no_register'    => 'Nomor Register',
             'nama_barang'   => 'Nama Barang',
             'merk'          => 'Merk',
             'type'          => 'Type',

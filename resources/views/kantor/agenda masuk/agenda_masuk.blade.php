@@ -315,7 +315,7 @@
                 },
                 columns: [
                     { data: 'nama_agenda', name: 'nama_agenda' },
-                    { data: 'penyedia.nama', name: 'penyedia.nama' },
+                    { data: 'penyedia.nama', name: 'penyedia.nama'},
                     { data: 'nilai_kontrak', name: 'nilai_kontrak', render: function(data, type, row) {
                         return 'Rp ' + parseInt(data).toLocaleString('id-ID');} },
                     { data: 'tgl_masuk', name: 'tgl_masuk' },

@@ -216,7 +216,7 @@
                 columns: [
                     { data: 'nama_agenda', name: 'nama_agenda' },
                     { data: 'nama_barang', name: 'nama_barang' },
-                    { data: 'pegawai.nama_pegawai', name: 'pegawai.nama_pegawai' },
+                    { data: 'pegawai.nama_pegawai', name: 'pegawai.nama_pegawai'},
                     { data: 'gambar', name: 'gambar', orderable: false, searchable: false },
                     { data: 'merk', name: 'merk' },
                     { data: 'tipe', name: 'tipe' },

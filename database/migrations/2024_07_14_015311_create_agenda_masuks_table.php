@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('agenda_masuks', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('id_penyedia');
+            $table->unsignedBigInteger('id_penyedia')->nullable();
             $table->string('nama_agenda');
             $table->decimal('nilai_kontrak', 15, 2);
             $table->string('klas_aset')->nullable();
