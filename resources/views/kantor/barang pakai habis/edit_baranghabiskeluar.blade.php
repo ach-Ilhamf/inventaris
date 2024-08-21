@@ -85,7 +85,7 @@
                                                     <div class="col">
                                                         <label for="namaBarang" class="form-label">Kode Barang</label>
                                                         <input type="text" class="form-control" id="namaBarang" name="kode_barang"
-                                                            placeholder="Kode Barang" value="{{ old('baranghabiskeluars', $keluar->tgl_keluar)}}">
+                                                            placeholder="Kode Barang" value="{{ old('baranghabiskeluars', $keluar->kode_barang)}}">
                                                     </div>
                                                     <div class="col">
                                                         <label for="penyedia" class="form-label">Jenis Barang</label>

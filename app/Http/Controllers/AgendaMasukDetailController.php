@@ -221,7 +221,7 @@ class AgendaMasukDetailController extends Controller
     // Jika ada gambar baru yang diunggah
     if ($request->hasFile('gambar')) {
         $gambar = $request->file('gambar');
-        $gambarName = $gambar->hashName();
+        $gambarName = time() . '.' . $gambar->getClientOriginalExtension();                
         $gambar->storeAs('public/gambar', $gambarName);
 
         // Hapus gambar lama dari storage jika ada

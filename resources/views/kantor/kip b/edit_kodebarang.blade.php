@@ -79,7 +79,7 @@
                                             <div class="mb-3">
                                                 <label for="namaBarang" class="form-label">Kode Barang</label>
                                                 <input type="text" class="form-control" id="namaBarang" name="kode_barang"
-                                                    placeholder="Kode Barang" value="{{ old('kode_barang', $kode->kode_barang)}}" required>
+                                                    placeholder="Kode Barang" value="{{ old('kode_barang', $kode->kode_barang)}}" readonly>
                                             </div>
                                             <!-- Input untuk Lokasi -->
                                             <div class="mb-3">

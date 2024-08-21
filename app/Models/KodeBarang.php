@@ -11,7 +11,7 @@ class KodeBarang extends Model
 
     public function agendadetail()
     {
-        return $this->hasMany(AgendaMasukDetail::class, 'id');
+        return $this->hasMany(AgendaMasukDetail::class, 'kode_barang', 'kode_barang');
     }
 
         /**
